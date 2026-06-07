@@ -72,6 +72,11 @@
   to { transform: scaleX(1); }
 }
 
+@keyframes hk-kenburns {
+  from { transform: scale(1.12); }
+  to { transform: scale(1); }
+}
+
 /* ---------- Base ----------
    En @layer base para que las utilidades (text-white, etc.) ganen. */
 :root {
