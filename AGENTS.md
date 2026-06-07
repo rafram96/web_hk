@@ -18,6 +18,9 @@ preinversión, expedientes técnicos y supervisión de obras). Contenido derivad
   (IntersectionObserver) y `Counter` para cifras.
 
 ## Convenciones clave
+- **Diseño**: la vara de calidad visual está en [`docs/diseno.md`](docs/diseno.md)
+  (dirección editorial "monografía técnica", tipografía, color, movimiento,
+  robustez). Léela antes de cambios visuales.
 - **Datos**: todo el contenido vive en `src/lib/site.ts` (company, contact, stats,
   mision, vision, valores, services, sectors, experienceByType, whyChooseUs,
   howWeWork, projectCounts, featuredProjects, projects, certifications, nav).
