@@ -1,26 +1,189 @@
 @import "tailwindcss";
 
+/* ============================================================
+   HK CONSULTING — Sistema de diseño
+   Dirección: "Autoridad institucional de ingeniería".
+   Azul marino de mando (#04395B) + acento naranja (#E87A2C),
+   retícula técnica tipo plano, tipografía con carácter.
+   ============================================================ */
+
+@theme {
+  /* Marca — Azul marino */
+  --color-navy-50: #eef4f8;
+  --color-navy-100: #d3e2ed;
+  --color-navy-200: #a6c4da;
+  --color-navy-300: #6f9cbd;
+  --color-navy-400: #3d7299;
+  --color-navy-500: #0c537d;
+  --color-navy: #04395b;
+  --color-navy-700: #043551;
+  --color-navy-800: #032a43;
+  --color-navy-900: #021e30;
+  --color-navy-950: #01131f;
+
+  /* Marca — Naranja */
+  --color-orange-50: #fdf3ea;
+  --color-orange-100: #fbe1c9;
+  --color-orange-200: #f6c193;
+  --color-orange-300: #f1a05c;
+  --color-orange: #e87a2c;
+  --color-orange-600: #cf6916;
+  --color-orange-700: #a85312;
+  --color-orange-800: #813f11;
+
+  /* Neutros cálidos */
+  --color-ink: #14202b;
+  --color-slate-soft: #5b6b78;
+  --color-mist: #f4f6f8;
+  --color-line: #e2e8ee;
+
+  /* Tipografía (mapeada a next/font) */
+  --font-display: var(--font-archivo), "Archivo", system-ui, sans-serif;
+  --font-sans: var(--font-plex-sans), "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Sombras */
+  --shadow-card: 0 1px 2px rgba(2, 30, 48, 0.06), 0 12px 32px -12px rgba(2, 30, 48, 0.18);
+  --shadow-float: 0 24px 60px -20px rgba(2, 30, 48, 0.45);
+
+  /* Animaciones */
+  --animate-marquee: marquee 38s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes hk-reveal-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hk-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes hk-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ---------- Base ----------
+   IMPORTANTE: estos estilos van en @layer base para que las utilidades de
+   Tailwind (text-white, border-white/10, etc.) puedan sobrescribirlos.
+   Si se dejan sin capa, ganarían a TODAS las utilidades (regresión de color). */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: var(--color-ink);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-orange);
+    color: #fff;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.04;
+    color: var(--color-navy);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-track { background: var(--color-mist); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-navy-300);
+    border-radius: 999px;
+    border: 3px solid var(--color-mist);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-navy); }
+
+  /* Anclas con offset por navbar fijo */
+  :target {
+    scroll-margin-top: 6rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ---------- Utilidades de composición ---------- */
+@layer components {
+  .container-hk {
+    width: 100%;
+    max-width: 80rem; /* 1280px */
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    .container-hk { padding-inline: 2.5rem; }
+  }
+
+  /* Etiqueta técnica tipo "kicker" */
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  /* Retícula de plano técnico */
+  .blueprint-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 46px 46px;
+  }
+  .blueprint-grid-ink {
+    background-image:
+      linear-gradient(rgba(4, 57, 91, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(4, 57, 91, 0.06) 1px, transparent 1px);
+    background-size: 46px 46px;
+  }
+
+  /* Resalte del acento bajo títulos */
+  .accent-rule {
+    height: 4px;
+    width: 3.5rem;
+    background: var(--color-orange);
+    border-radius: 2px;
+  }
+}
+
+/* ---------- Animaciones de entrada (IntersectionObserver) ---------- */
+[data-reveal] {
+  opacity: 0;
+}
+[data-reveal].is-visible {
+  animation: hk-reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+[data-reveal].is-visible[data-reveal="fade"] {
+  animation-name: hk-fade;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal] { opacity: 1 !important; animation: none !important; }
+  .animate-\[marquee\] { animation: none !important; }
 }
