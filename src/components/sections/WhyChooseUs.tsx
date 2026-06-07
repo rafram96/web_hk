@@ -61,38 +61,33 @@ export function WhyChooseUs() {
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {whyChooseUs.map((reason, index) => (
             <Reveal key={reason.title} delay={index * 80} className="h-full">
-              <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white p-7 shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-float lg:p-8">
+              <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white p-8 shadow-card transition-all duration-300 hover:-translate-y-2 hover:border-orange/30 hover:shadow-float lg:p-10">
                 {/* Acento naranja superior que crece en hover. */}
                 <span
                   aria-hidden
                   className="absolute inset-x-0 top-0 h-1 origin-left scale-x-[0.22] bg-orange transition-transform duration-500 ease-out group-hover:scale-x-100"
                 />
 
-                {/* Numeral técnico + ícono geométrico. */}
-                <div className="flex items-center justify-between">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-line bg-mist text-navy transition-colors duration-300 group-hover:border-orange/40 group-hover:bg-orange-50 group-hover:text-orange-600">
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-6 w-6"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={1.8}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden
-                    >
-                      {icons[index]}
-                    </svg>
-                  </span>
-                  <span className="font-mono text-xs font-medium tracking-[0.2em] text-navy-300">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                </div>
+                {/* Ícono geométrico de marca (sólido, protagonista). */}
+                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-navy text-white shadow-[0_10px_24px_-10px_rgba(2,30,48,0.7)] transition-colors duration-300 group-hover:bg-orange">
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-8 w-8"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={1.8}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden
+                  >
+                    {icons[index]}
+                  </svg>
+                </span>
 
-                <h3 className="mt-6 font-display text-lg text-navy lg:text-xl">
+                <h3 className="mt-7 font-display text-xl font-bold leading-snug text-navy lg:text-2xl">
                   {reason.title}
                 </h3>
-                <p className="mt-2.5 text-[0.95rem] leading-relaxed text-slate-soft">
+                <p className="mt-3 text-base leading-relaxed text-slate-soft">
                   {reason.desc}
                 </p>
               </article>
