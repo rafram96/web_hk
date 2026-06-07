@@ -329,8 +329,17 @@ export const projects: Project[] = [
   },
 ];
 
-/** Proyectos destacados (con galería) para la home. */
+/** Proyectos destacados (con galería) para las páginas de proyectos. */
 export const featuredProjects: Project[] = projects.filter((p) => p.featured);
+
+/**
+ * Selección de 6 proyectos para la sección "Proyectos" de la home (teaser).
+ * La lista completa de los 51 vive en /proyectos. Orden = más impactantes primero.
+ */
+const HOME_HIGHLIGHT_SLUGS = ["281", "285", "284", "279", "280", "220"];
+export const homeHighlights: Project[] = HOME_HIGHLIGHT_SLUGS.map(
+  (slug) => projects.find((p) => p.slug === slug)!
+).filter(Boolean);
 
 /** Imágenes curadas para la sección "Galería de obras" de la home. */
 export type GalleryItem = { src: string; caption: string; sector: string };

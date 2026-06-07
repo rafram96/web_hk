@@ -9,7 +9,7 @@ import {
   type Project,
   experienceByType,
   projectCounts,
-  featuredProjects,
+  homeHighlights,
 } from "@/lib/site";
 
 /* ------------------------------------------------------------------ */
@@ -237,7 +237,7 @@ export function Projects() {
           </Reveal>
 
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
-            {featuredProjects.map((project, i) => (
+            {homeHighlights.map((project, i) => (
               <Reveal key={project.slug} delay={(i % 3) * 90} className="h-full">
                 <FeaturedCard project={project} />
               </Reveal>
@@ -249,7 +249,7 @@ export function Projects() {
         <Reveal delay={80} className="mt-14">
           <div className="flex justify-center">
             <Button href="/proyectos" variant="primary">
-              Ver los 51 proyectos
+              Ver más proyectos
             </Button>
           </div>
         </Reveal>
