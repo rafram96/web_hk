@@ -22,7 +22,7 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative isolate flex min-h-[680px] flex-col justify-end overflow-hidden bg-navy-950 pt-24 [min-height:93svh]"
+      className="relative isolate flex min-h-[760px] flex-col justify-end overflow-hidden bg-navy-950 pt-24 [min-height:100svh]"
     >
       {/* Imagen full-bleed en duotono navy (Ken Burns de carga) */}
       <Image
@@ -31,14 +31,19 @@ export function Hero() {
         fill
         priority
         sizes="100vw"
-        className="-z-30 object-cover object-[50%_32%] grayscale-[0.85] animate-[hk-kenburns_16s_ease-out_forwards] motion-reduce:animate-none"
+        className="-z-30 object-cover object-[50%_42%] grayscale-[0.4] brightness-105 animate-[hk-kenburns_20s_ease-out_forwards] motion-reduce:animate-none"
       />
 
       {/* Tinte navy de marca + scrim direccional (legibilidad abajo-izquierda) */}
-      <div aria-hidden className="absolute inset-0 -z-20 bg-navy-950/45" />
+      <div aria-hidden className="absolute inset-0 -z-20 bg-navy-950/25" />
       <div
         aria-hidden
-        className="absolute inset-0 -z-20 bg-gradient-to-tr from-navy-950 via-navy-950/80 to-navy-950/25"
+        className="absolute inset-0 -z-20 bg-gradient-to-tr from-navy-950 via-navy-950/55 to-navy-950/10"
+      />
+      {/* Scrim superior: mantiene legible la navbar sobre la imagen más brillante */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 -z-20 h-40 bg-gradient-to-b from-navy-950/80 to-transparent"
       />
       {/* Viñeta envolvente + resplandor naranja de precisión + retícula técnica */}
       <div
@@ -46,7 +51,7 @@ export function Hero() {
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(120% 90% at 50% 38%, transparent 40%, rgba(1,19,31,0.7) 100%)",
+            "radial-gradient(125% 95% at 50% 40%, transparent 46%, rgba(1,19,31,0.5) 100%)",
         }}
       />
       <div
