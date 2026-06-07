@@ -22,7 +22,7 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative isolate flex min-h-[760px] flex-col justify-end overflow-hidden bg-navy-950 pt-24 [min-height:100svh]"
+      className="relative isolate flex min-h-[760px] flex-col justify-center overflow-hidden bg-navy-950 pt-24 [min-height:100svh]"
     >
       {/* Imagen full-bleed en duotono navy (Ken Burns de carga) */}
       <Image
