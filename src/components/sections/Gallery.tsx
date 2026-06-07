@@ -17,6 +17,20 @@ const spanClass: Record<number, string> = {
   9: "lg:row-span-2",
 };
 
+/**
+ * `sizes` por celda: debe reflejar el ancho REAL que ocupa cada imagen para
+ * que next/image sirva una variante con suficiente resolución (si no, las
+ * celdas grandes se ven pixeladas al ampliar una miniatura pequeña).
+ * Móvil: 2 columnas (50vw). md: 3 columnas. lg: 4 columnas.
+ */
+const defaultSizes =
+  "(min-width: 1024px) 25vw, (min-width: 768px) 34vw, 50vw";
+const sizesByIndex: Record<number, string> = {
+  0: "(min-width: 1024px) 50vw, (min-width: 768px) 67vw, 50vw", // 2 col
+  3: "(min-width: 1024px) 50vw, (min-width: 768px) 34vw, 50vw", // 2 col en lg
+  6: "(min-width: 1024px) 50vw, (min-width: 768px) 67vw, 50vw", // 2 col
+};
+
 export function Gallery() {
   const [index, setIndex] = useState<number | null>(null);
 
@@ -58,7 +72,7 @@ export function Gallery() {
                   src={item.src}
                   alt={item.caption}
                   fill
-                  sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+                  sizes={sizesByIndex[i] ?? defaultSizes}
                   className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.07]"
                 />
 
