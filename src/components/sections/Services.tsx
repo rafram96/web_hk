@@ -44,7 +44,7 @@ export function Services() {
         <div className="mt-16 lg:mt-20">
           {services.map((s, i) => (
             <Reveal key={s.slug} delay={i * 90}>
-              <article className="group relative grid grid-cols-1 gap-x-10 gap-y-6 border-t border-line py-10 lg:grid-cols-[auto_minmax(0,1fr)_minmax(0,18rem)] lg:items-start lg:py-12 lg:last:border-b">
+              <article className="group relative grid grid-cols-1 gap-x-10 gap-y-6 border-t border-line py-10 lg:grid-cols-[auto_minmax(0,1fr)_minmax(0,18rem)] lg:items-center lg:py-12 lg:last:border-b">
                 {/* Numeral display gigante — protagonista de la fila */}
                 <div className="flex items-start gap-4 lg:block">
                   <span
@@ -59,7 +59,7 @@ export function Services() {
                 </div>
 
                 {/* Cuerpo: título + descripción */}
-                <div className="lg:pt-3">
+                <div>
                   <h3 className="font-display text-2xl leading-tight tracking-tight text-navy sm:text-3xl lg:text-[2rem]">
                     {s.title}
                   </h3>
@@ -88,7 +88,7 @@ export function Services() {
                 </div>
 
                 {/* Beneficios: lista técnica con marca de medida y checks finos */}
-                <div className="lg:pt-3">
+                <div>
                   <div className="spec-line mb-4 h-px w-full text-navy/20" aria-hidden />
                   <ul className="space-y-3">
                     {s.benefits.map((b) => (

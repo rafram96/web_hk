@@ -1,20 +1,43 @@
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import type { ReactNode } from "react";
 import { mision, vision, valores } from "@/lib/site";
 
 type Pillar = {
   /** Etiqueta corta (Misión / Visión). */
   label: string;
-  /** Numeral decorativo. */
-  numeral: string;
   /** Declaración principal. */
   body: string;
 };
 
 const pillars: Pillar[] = [
-  { label: "Misión", numeral: "01", body: mision },
-  { label: "Visión", numeral: "02", body: vision },
+  { label: "Misión", body: mision },
+  { label: "Visión", body: vision },
+];
+
+/** Íconos geométricos por valor (mismo orden que `valores`). */
+const valorIcons: ReactNode[] = [
+  // Solvencia técnica — diana de precisión
+  <>
+    <circle cx="12" cy="12" r="8.5" />
+    <circle cx="12" cy="12" r="3" />
+    <path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3" />
+  </>,
+  // Compromiso — reloj (plazos)
+  <>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 7v5l3.5 2" />
+  </>,
+  // Integridad — escudo con check (ética)
+  <>
+    <path d="M12 3 5 6v5c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6l-7-3Z" />
+    <path d="M9 11.5l2 2 4-4" />
+  </>,
+  // Excelencia — estrella (mejora continua)
+  <>
+    <path d="M12 3.2l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.4l5.9-.8L12 3.2Z" />
+  </>,
 ];
 
 /**
@@ -75,24 +98,19 @@ export function MissionVision() {
             {valores.map((valor, index) => (
               <Reveal key={valor.title} delay={index * 80} className="h-full">
                 <div className="group relative flex h-full flex-col bg-navy-900/60 p-7 transition-colors duration-300 hover:bg-navy-800/70">
-                  {/* Marcador geométrico + numeral. */}
-                  <div className="flex items-center gap-3">
-                    <svg
-                      viewBox="0 0 16 16"
-                      className="h-3.5 w-3.5 shrink-0 text-orange transition-transform duration-300 group-hover:rotate-45"
-                      aria-hidden
-                    >
-                      <rect
-                        x="1"
-                        y="1"
-                        width="14"
-                        height="14"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      />
-                    </svg>
-                  </div>
+                  {/* Ícono del valor */}
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-8 w-8 shrink-0 text-orange transition-transform duration-300 group-hover:scale-110"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={1.8}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden
+                  >
+                    {valorIcons[index]}
+                  </svg>
 
                   <h3 className="mt-5 font-display text-lg font-bold text-white">
                     {valor.title}
