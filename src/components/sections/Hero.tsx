@@ -138,18 +138,6 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Indicador de scroll sutil */}
-      <a
-        href="#nosotros"
-        aria-label="Desplazarse hacia abajo"
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-white/50 transition-colors hover:text-orange md:flex"
-      >
-        <span className="kicker text-[0.6rem]">Scroll</span>
-        <span aria-hidden className="flex h-9 w-5 items-start justify-center rounded-full border border-current p-1">
-          <span className="h-1.5 w-1 animate-bounce rounded-full bg-current" />
-        </span>
-      </a>
-
       {/* Franja decorativa inferior con retícula */}
       <div
         aria-hidden
