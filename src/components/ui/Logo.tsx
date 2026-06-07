@@ -15,10 +15,10 @@ export function Logo({ tone = "dark", className = "", href = "/" }: LogoProps) {
   const textSub = tone === "dark" ? "text-slate-soft" : "text-navy-200";
 
   const inner = (
-    <span className={`group inline-flex items-center gap-3 ${className}`}>
+    <span className={`group inline-flex items-center gap-3.5 ${className}`}>
       <svg
         viewBox="0 0 32 36"
-        className="h-9 w-auto shrink-0 transition-transform duration-500 group-hover:-translate-y-0.5"
+        className="h-11 w-auto shrink-0 transition-transform duration-500 group-hover:-translate-y-0.5"
         aria-hidden
       >
         {/* cara superior */}
@@ -30,12 +30,12 @@ export function Logo({ tone = "dark", className = "", href = "/" }: LogoProps) {
       </svg>
       <span className="flex flex-col leading-none">
         <span
-          className={`font-display text-xl font-extrabold tracking-tight ${textMain}`}
+          className={`font-display text-2xl font-extrabold tracking-tight ${textMain}`}
         >
           HK <span className="text-orange">Consulting</span>
         </span>
         <span
-          className={`kicker mt-1 text-[0.58rem] tracking-[0.32em] ${textSub}`}
+          className={`kicker mt-1 text-[0.64rem] tracking-[0.32em] ${textSub}`}
         >
           Ingeniería &amp; Consultoría
         </span>
