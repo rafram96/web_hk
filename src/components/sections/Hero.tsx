@@ -168,29 +168,11 @@ export function Hero() {
         </div>
       </div>
 
-      {/* ---------- Barra de credenciales ---------- */}
-      <Reveal variant="fade" delay={420} className="relative border-t border-white/10">
-        <div className="container-hk flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:gap-x-8">
-          <span className="kicker shrink-0 text-navy-300">Operamos bajo</span>
-          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            {company.normativa.map((item, i) => (
-              <li key={item} className="flex items-center gap-6">
-                {i > 0 && (
-                  <span aria-hidden className="h-3.5 w-px bg-white/15" />
-                )}
-                <span className="font-mono text-xs tracking-wide text-navy-100">
-                  {item}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        {/* Filete inferior de acento */}
-        <span
-          aria-hidden
-          className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-orange/70 via-orange/15 to-transparent"
-        />
-      </Reveal>
+      {/* Filete inferior de acento (cierre del hero) */}
+      <span
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-orange/60 via-orange/10 to-transparent"
+      />
     </section>
   );
 }
