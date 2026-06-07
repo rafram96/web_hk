@@ -63,7 +63,7 @@ export function Services() {
                   <h3 className="font-display text-2xl leading-tight tracking-tight text-navy sm:text-3xl lg:text-[2rem]">
                     {s.title}
                   </h3>
-                  <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-soft">
+                  <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-soft lg:min-h-[3.25rem]">
                     {s.short}
                   </p>
 
