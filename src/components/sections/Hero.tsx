@@ -31,7 +31,7 @@ export function Hero() {
         fill
         priority
         sizes="100vw"
-        className="-z-30 object-cover object-[50%_42%] grayscale-[0.4] brightness-105 animate-[hk-kenburns_20s_ease-out_forwards] motion-reduce:animate-none"
+        className="-z-30 object-cover object-[50%_56%] grayscale-[0.4] brightness-105 animate-[hk-kenburns_20s_ease-out_forwards] motion-reduce:animate-none"
       />
 
       {/* Tinte navy de marca + scrim direccional (legibilidad abajo-izquierda) */}
