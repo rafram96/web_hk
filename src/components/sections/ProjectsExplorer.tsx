@@ -234,6 +234,7 @@ export function ProjectsExplorer() {
   const [sector, setSector] = useState<string>("Todos");
   const [tipo, setTipo] = useState<string>("Todos");
   const [query, setQuery] = useState<string>("");
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -250,8 +251,12 @@ export function ProjectsExplorer() {
     });
   }, [ordered, estado, sector, tipo, query]);
 
-  const hasFilters =
-    estado !== "Todos" || sector !== "Todos" || tipo !== "Todos" || query.trim() !== "";
+  const activeCount =
+    (estado !== "Todos" ? 1 : 0) +
+    (sector !== "Todos" ? 1 : 0) +
+    (tipo !== "Todos" ? 1 : 0) +
+    (query.trim() !== "" ? 1 : 0);
+  const hasFilters = activeCount > 0;
 
   function clearFilters() {
     setEstado("Todos");
@@ -266,20 +271,77 @@ export function ProjectsExplorer() {
       <div className="container-hk relative">
         {/* Encabezado del explorador */}
         <Reveal>
-          <div className="flex items-end gap-3">
-            <span className="accent-rule mb-1.5" aria-hidden />
-            <div>
-              <span className="kicker text-orange-600">Portafolio · Explorador</span>
-              <h2 className="mt-2 font-display text-2xl font-bold text-navy lg:text-3xl">
-                Filtra los 51 proyectos
-              </h2>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="flex items-end gap-3">
+              <span className="accent-rule mb-1.5" aria-hidden />
+              <div>
+                <span className="kicker text-orange-600">
+                  Portafolio · Explorador
+                </span>
+                <h2 className="mt-2 font-display text-2xl font-bold text-navy lg:text-3xl">
+                  Filtra los proyectos
+                </h2>
+              </div>
             </div>
+
+            {/* Botón para desplegar/ocultar los filtros */}
+            <button
+              type="button"
+              onClick={() => setFiltersOpen((v) => !v)}
+              aria-expanded={filtersOpen}
+              aria-controls="panel-filtros"
+              className="group inline-flex shrink-0 items-center gap-2.5 self-start rounded-full border border-navy/15 bg-white px-5 py-2.5 font-mono text-xs font-medium tracking-[0.1em] text-navy shadow-card transition-colors duration-200 hover:border-navy hover:bg-navy hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange"
+            >
+              <svg
+                viewBox="0 0 20 20"
+                fill="none"
+                className="size-4"
+                aria-hidden
+              >
+                <path
+                  d="M3 5h14M6 10h8M9 15h2"
+                  stroke="currentColor"
+                  strokeWidth="1.7"
+                  strokeLinecap="round"
+                />
+              </svg>
+              {filtersOpen ? "Ocultar filtros" : "Filtrar proyectos"}
+              {activeCount > 0 && (
+                <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-orange px-1.5 text-[0.62rem] font-bold text-white">
+                  {activeCount}
+                </span>
+              )}
+              <svg
+                viewBox="0 0 20 20"
+                fill="none"
+                className={`size-4 transition-transform duration-300 ${
+                  filtersOpen ? "rotate-180" : ""
+                }`}
+                aria-hidden
+              >
+                <path
+                  d="m6 8 4 4 4-4"
+                  stroke="currentColor"
+                  strokeWidth="1.7"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
           </div>
         </Reveal>
 
-        {/* Controles de filtro */}
-        <Reveal delay={80} className="mt-8">
-          <div className="space-y-5 rounded-2xl border border-line bg-mist p-5 lg:p-6">
+        {/* Controles de filtro (desplegables) */}
+        <div
+          id="panel-filtros"
+          className={`grid transition-all duration-300 ease-out ${
+            filtersOpen
+              ? "mt-8 grid-rows-[1fr] opacity-100"
+              : "grid-rows-[0fr] opacity-0"
+          }`}
+        >
+          <div className="overflow-hidden">
+            <div className="space-y-5 rounded-2xl border border-line bg-mist p-5 lg:p-6">
             {/* Búsqueda por texto */}
             <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center">
               <label
@@ -339,8 +401,9 @@ export function ProjectsExplorer() {
               active={tipo}
               onSelect={setTipo}
             />
+            </div>
           </div>
-        </Reveal>
+        </div>
 
         {/* Contador de resultados + limpiar */}
         <div className="mt-6 flex items-center justify-between gap-3">
