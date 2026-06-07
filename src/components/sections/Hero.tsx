@@ -31,7 +31,7 @@ export function Hero() {
         fill
         priority
         sizes="100vw"
-        className="-z-30 scale-[0.96] object-cover object-[50%_42%] grayscale-[0.4] brightness-105 animate-[hk-kenburns_20s_ease-out_forwards] motion-reduce:animate-none"
+        className="-z-30 object-cover object-[50%_42%] grayscale-[0.4] brightness-105 animate-[hk-kenburns_20s_ease-out_forwards] motion-reduce:animate-none"
       />
 
       {/* Tinte navy de marca + scrim direccional (legibilidad abajo-izquierda) */}
@@ -51,7 +51,7 @@ export function Hero() {
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(130% 108% at 50% 42%, transparent 34%, rgba(1,19,31,0.42) 70%, rgba(1,19,31,0.94) 100%)",
+            "radial-gradient(125% 95% at 50% 40%, transparent 46%, rgba(1,19,31,0.5) 100%)",
         }}
       />
       <div

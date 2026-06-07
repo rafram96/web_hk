@@ -73,8 +73,8 @@
 }
 
 @keyframes hk-kenburns {
-  from { transform: scale(1.02); }
-  to { transform: scale(0.96); }
+  from { transform: scale(1.07); }
+  to { transform: scale(1); }
 }
 
 /* ---------- Base ----------
