@@ -5,6 +5,7 @@ import { Services } from "@/components/sections/Services";
 import { Process } from "@/components/sections/Process";
 import { Sectors } from "@/components/sections/Sectors";
 import { Projects } from "@/components/sections/Projects";
+import { Gallery } from "@/components/sections/Gallery";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { Certifications } from "@/components/sections/Certifications";
 import { Contact } from "@/components/sections/Contact";
@@ -19,6 +20,7 @@ export default function Home() {
       <Process />
       <Sectors />
       <Projects />
+      <Gallery />
       <WhyChooseUs />
       <Certifications />
       <Contact />

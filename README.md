@@ -33,6 +33,31 @@ npm run start    # servir el build
 npm run lint     # ESLint
 ```
 
+## Despliegue en Vercel
+
+El proyecto está listo para Vercel (Next.js se detecta automáticamente; ver
+[`vercel.json`](vercel.json) para framework, cabeceras de seguridad y caché de
+estáticos). Hay dos formas de desplegar:
+
+**A) Desde el repositorio (recomendado)**
+
+1. Sube el repositorio a GitHub/GitLab/Bitbucket.
+2. En [vercel.com](https://vercel.com) → *Add New… → Project* → importa el repo.
+3. Framework *Next.js* (autodetectado), *Build Command* `next build`, *Output*
+   por defecto. No se requieren variables de entorno. *Deploy*.
+
+**B) Con la CLI de Vercel (sin remoto)**
+
+```bash
+npm i -g vercel        # o usa: npx vercel
+vercel login           # autentícate con tu cuenta
+vercel                 # despliegue de previsualización
+vercel --prod          # despliegue a producción
+```
+
+Cada push a la rama principal genera un despliegue de producción; cada PR/rama,
+una previsualización. Las 51 fichas de proyecto se pre-renderizan como estáticas.
+
 ## Estructura del proyecto
 
 ```
