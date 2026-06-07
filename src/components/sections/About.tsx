@@ -37,24 +37,19 @@ export function About() {
               </p>
             </Reveal>
 
-            {/* Marco normativo como cotas técnicas */}
+            {/* Marco normativo como chips compactos */}
             <Reveal delay={260} className="mt-10">
               <div className="flex items-center gap-3">
                 <span className="kicker text-slate-soft">Marco normativo</span>
                 <span className="spec-line h-px flex-1 text-navy/20" aria-hidden />
               </div>
-              <ul className="mt-4 space-y-px">
-                {company.normativa.map((norma, i) => (
+              <ul className="mt-4 flex flex-wrap gap-2.5">
+                {company.normativa.map((norma) => (
                   <li
                     key={norma}
-                    className="group flex items-baseline gap-4 border-t border-line py-2.5 last:border-b"
+                    className="rounded-full border border-line bg-white px-3.5 py-1.5 font-mono text-xs font-medium tracking-tight text-navy"
                   >
-                    <span className="font-mono text-[0.7rem] tabular-nums text-orange">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="font-mono text-sm font-medium tracking-tight text-navy">
-                      {norma}
-                    </span>
+                    {norma}
                   </li>
                 ))}
               </ul>
