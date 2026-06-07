@@ -5,22 +5,22 @@ import { Button } from "@/components/ui/Button";
 import { company } from "@/lib/site";
 
 /**
- * Sección Hero — pantalla principal (above the fold).
- * Server Component. Composición split en lg (texto / imagen enmarcada),
- * y full-bleed con overlay navy en móvil. Dirección: autoridad
- * institucional de ingeniería (navy de mando + acento naranja, retícula
- * técnica tipo plano y detalles de coordenadas).
+ * Hero — primera impresión (above the fold). Server Component.
+ * Composición editorial sobre azul marino de mando: fondo atmosférico en capas
+ * (resplandor naranja + retícula técnica + viñeta), titular a gran escala,
+ * imagen enmarcada con detalle de cota, índice de servicios con hairlines y una
+ * barra de credenciales inferior. Full-bleed con overlay en móvil.
  */
 export function Hero() {
-  // Intro recortada (~1-2 líneas) a partir de company.intro.
   const introShort = company.intro.split(". ")[0] + ".";
+  const lineas = company.subtitle.split(" · ");
 
   return (
     <section
       id="inicio"
-      className="relative isolate flex min-h-[640px] items-center overflow-hidden bg-navy-950 pt-20 [min-height:90svh]"
+      className="relative isolate flex min-h-[680px] flex-col overflow-hidden bg-navy-950 pt-24 lg:pt-28 [min-height:94svh]"
     >
-      {/* Imagen de fondo full-bleed (protagonista en móvil) */}
+      {/* Imagen full-bleed (protagonista en móvil) */}
       <div className="absolute inset-0 -z-20 lg:hidden">
         <Image
           src="/images/hero-equipo-congreso.jpg"
@@ -30,39 +30,87 @@ export function Hero() {
           sizes="(min-width: 1024px) 1px, 100vw"
           className="object-cover object-center"
         />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/80 to-navy-950/55"
+        />
       </div>
 
-      {/* Capas de fondo (overlay + retícula técnica) */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-navy-950 via-navy-900/95 to-navy-900 lg:from-navy-950 lg:via-navy-900 lg:to-navy" />
+      {/* Capas de atmósfera (desktop) */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent lg:hidden"
+        className="absolute inset-0 -z-10 bg-gradient-to-br from-navy-950 via-navy-900 to-navy lg:to-navy-900"
       />
-      <div aria-hidden className="blueprint-grid absolute inset-0 -z-10 opacity-60" />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            "radial-gradient(72rem 52rem at 88% -8%, rgba(232,122,44,0.16), transparent 58%)",
+        }}
+      />
+      <div aria-hidden className="blueprint-grid absolute inset-0 -z-10 opacity-50" />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-950 via-transparent to-transparent"
+      />
 
-      <div className="container-hk relative w-full py-16 lg:py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-          {/* ---------- Bloque de texto ---------- */}
-          <div className="max-w-2xl">
-            <Reveal as="p" delay={0} className="kicker mb-5 flex items-center gap-3 text-orange">
-              <span aria-hidden className="h-px w-8 bg-orange" />
+      {/* ---------- Contenido principal ---------- */}
+      <div className="container-hk relative flex w-full flex-1 items-center py-14 lg:py-20">
+        <div className="grid w-full items-center gap-y-12 lg:grid-cols-12 lg:gap-x-16">
+          {/* Texto */}
+          <div className="lg:col-span-7">
+            <Reveal
+              as="p"
+              variant="fade"
+              delay={0}
+              className="kicker mb-6 flex items-center gap-3 text-orange"
+            >
+              <span aria-hidden className="h-px w-10 bg-orange" />
               Desde {company.foundedYear} &middot; Consultor&iacute;a en ingenier&iacute;a
             </Reveal>
 
-            <Reveal as="h1" delay={80} className="text-[2.7rem] leading-[0.98] text-white sm:text-6xl lg:text-[4.5rem]">
+            <Reveal
+              as="h1"
+              delay={90}
+              className="text-balance text-[2.75rem] font-extrabold leading-[0.95] text-white sm:text-6xl lg:text-[4.75rem]"
+            >
               Soluciones integrales en ingenier&iacute;a para{" "}
-              <span className="text-orange">el desarrollo del pa&iacute;s</span>
+              <span className="relative text-orange">el desarrollo del pa&iacute;s</span>
             </Reveal>
 
-            <Reveal as="p" delay={160} className="mt-6 font-display text-lg font-semibold text-navy-100 sm:text-xl">
-              {company.subtitle}
+            {/* Índice de servicios con hairlines */}
+            <Reveal delay={180} className="mt-8">
+              <ul className="flex flex-col gap-x-6 gap-y-2 border-t border-white/10 pt-5 font-display text-base font-semibold text-navy-100 sm:flex-row sm:flex-wrap sm:items-center">
+                {lineas.map((linea, i) => (
+                  <li key={linea} className="flex items-center gap-6">
+                    {i > 0 && (
+                      <span
+                        aria-hidden
+                        className="hidden h-4 w-px bg-white/20 sm:block"
+                      />
+                    )}
+                    <span className="flex items-center gap-2.5">
+                      <span
+                        aria-hidden
+                        className="h-1.5 w-1.5 rounded-[2px] bg-orange"
+                      />
+                      {linea}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </Reveal>
 
-            <Reveal as="p" delay={220} className="mt-4 max-w-xl text-base leading-relaxed text-navy-100/85">
+            <Reveal
+              as="p"
+              delay={240}
+              className="mt-7 max-w-xl text-base leading-relaxed text-navy-100/85 sm:text-lg"
+            >
               {introShort}
             </Reveal>
 
-            <Reveal delay={300} className="mt-8 flex flex-wrap items-center gap-4">
+            <Reveal delay={320} className="mt-9 flex flex-wrap items-center gap-4">
               <Button href="/servicios" variant="primary">
                 Nuestros servicios
               </Button>
@@ -70,69 +118,79 @@ export function Hero() {
                 Conversemos
               </Button>
             </Reveal>
-
-            {/* Chips de marco normativo */}
-            <Reveal delay={380} className="mt-10 flex flex-wrap gap-2.5">
-              {company.normativa.map((item) => (
-                <span
-                  key={item}
-                  className="kicker rounded-full border border-white/15 bg-white/[0.04] px-3 py-1.5 text-[0.62rem] tracking-[0.18em] text-navy-100/80 backdrop-blur-sm"
-                >
-                  {item}
-                </span>
-              ))}
-            </Reveal>
           </div>
 
-          {/* ---------- Imagen enmarcada (desktop) ---------- */}
-          <Reveal variant="fade" delay={240} className="relative hidden lg:block">
-            {/* Panel de retícula desplazado por detrás (overlap) */}
+          {/* Imagen enmarcada (desktop) */}
+          <Reveal variant="fade" delay={260} className="relative hidden lg:col-span-5 lg:block">
+            {/* Panel técnico desplazado por detrás (profundidad) */}
             <div
               aria-hidden
-              className="blueprint-grid absolute -right-6 -top-6 h-full w-full rounded-sm border border-white/10 bg-navy-800/40"
+              className="blueprint-grid absolute -right-7 -top-7 h-full w-full rounded-2xl border border-white/10 bg-navy-800/30"
             />
 
-            {/* Marco de la imagen */}
-            <div className="relative overflow-hidden rounded-sm shadow-float ring-1 ring-white/10">
-              <Image
-                src="/images/hero-equipo-congreso.jpg"
-                alt="Equipo de ingenieros de HK Consulting con cascos y chalecos azules frente al Congreso del Perú"
-                width={600}
-                height={450}
-                priority
-                sizes="(min-width: 1024px) 45vw, 100vw"
-                className="h-auto w-full object-cover"
-              />
-              {/* Velo navy sutil para integrar con la paleta */}
+            <figure className="relative overflow-hidden rounded-2xl shadow-float ring-1 ring-white/10">
+              <div className="relative aspect-[4/3] w-full">
+                <Image
+                  src="/images/hero-equipo-congreso.jpg"
+                  alt="Equipo de ingenieros de HK Consulting frente al Congreso del Perú"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 42vw, 100vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              {/* Velo navy inferior para integrar y dar legibilidad al rótulo */}
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-950/30 via-transparent to-transparent mix-blend-multiply"
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-950/75 via-navy-950/5 to-transparent"
               />
-            </div>
+              {/* Rótulo editorial */}
+              <figcaption className="absolute inset-x-5 bottom-4 flex items-end justify-between">
+                <span className="font-display text-lg font-bold text-white">
+                  Equipo HK
+                </span>
+                <span className="kicker text-[0.6rem] text-orange-200">
+                  Congreso · Lima
+                </span>
+              </figcaption>
+            </figure>
 
-            {/* Acento naranja en la esquina */}
+            {/* Cota técnica: corchete naranja en la esquina */}
             <div
               aria-hidden
-              className="absolute -bottom-4 -left-4 h-20 w-20 border-b-4 border-l-4 border-orange"
+              className="absolute -bottom-3 -left-3 h-16 w-16 rounded-bl-2xl border-b-2 border-l-2 border-orange"
             />
             <div
               aria-hidden
-              className="absolute -right-3 -top-3 h-3 w-3 rounded-full bg-orange shadow-[0_0_0_4px_rgba(232,122,44,0.25)]"
+              className="absolute -right-2 -top-2 h-2.5 w-2.5 rounded-full bg-orange shadow-[0_0_0_4px_rgba(232,122,44,0.25)]"
             />
-
-            {/* Etiqueta de la imagen */}
-            <span className="kicker absolute -bottom-4 right-2 bg-navy-950 px-2 py-1 text-[0.6rem] text-orange-200">
-              Equipo HK
-            </span>
           </Reveal>
         </div>
       </div>
 
-      {/* Franja decorativa inferior con retícula */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-orange/60 to-transparent"
-      />
+      {/* ---------- Barra de credenciales ---------- */}
+      <Reveal variant="fade" delay={420} className="relative border-t border-white/10">
+        <div className="container-hk flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:gap-x-8">
+          <span className="kicker shrink-0 text-navy-300">Operamos bajo</span>
+          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            {company.normativa.map((item, i) => (
+              <li key={item} className="flex items-center gap-6">
+                {i > 0 && (
+                  <span aria-hidden className="h-3.5 w-px bg-white/15" />
+                )}
+                <span className="font-mono text-xs tracking-wide text-navy-100">
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* Filete inferior de acento */}
+        <span
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-orange/70 via-orange/15 to-transparent"
+        />
+      </Reveal>
     </section>
   );
 }
