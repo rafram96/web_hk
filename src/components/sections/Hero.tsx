@@ -120,9 +120,9 @@ export function Hero() {
               className="absolute -right-3 -top-3 h-3 w-3 rounded-full bg-orange shadow-[0_0_0_4px_rgba(232,122,44,0.25)]"
             />
 
-            {/* Etiqueta tipo cota técnica */}
+            {/* Etiqueta de la imagen */}
             <span className="kicker absolute -bottom-4 right-2 bg-navy-950 px-2 py-1 text-[0.6rem] text-orange-200">
-              FIG.01 &mdash; Equipo HK
+              Equipo HK
             </span>
           </Reveal>
         </div>
