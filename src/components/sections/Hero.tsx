@@ -40,16 +40,6 @@ export function Hero() {
       />
       <div aria-hidden className="blueprint-grid absolute inset-0 -z-10 opacity-60" />
 
-      {/* Detalle gráfico: regla de coordenadas vertical (sutil, solo desktop) */}
-      <div
-        aria-hidden
-        className="absolute left-10 top-0 hidden h-full w-px bg-white/10 lg:block"
-      >
-        <span className="kicker absolute -left-1 top-32 -rotate-90 whitespace-nowrap text-white/30">
-          E 12&deg;02&prime;46&Prime; S
-        </span>
-      </div>
-
       <div className="container-hk relative w-full py-16 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           {/* ---------- Bloque de texto ---------- */}
