@@ -50,14 +50,6 @@ export function MissionVision() {
           {pillars.map((pillar, index) => (
             <Reveal key={pillar.label} delay={index * 80}>
               <article className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-navy-800/50 p-8 transition-colors duration-300 hover:border-white/20 lg:p-10">
-                {/* Numeral decorativo en marca de agua. */}
-                <span
-                  className="pointer-events-none absolute -right-2 -top-6 select-none font-display text-[7rem] font-extrabold leading-none text-white/[0.04] lg:text-[9rem]"
-                  aria-hidden
-                >
-                  {pillar.numeral}
-                </span>
-
                 <div className="relative">
                   <span className="accent-rule block" aria-hidden />
                   <p className="kicker mt-5 text-orange-300">{pillar.label}</p>
@@ -100,9 +92,6 @@ export function MissionVision() {
                         strokeWidth="2"
                       />
                     </svg>
-                    <span className="font-mono text-xs font-medium tracking-[0.2em] text-orange-300">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
                   </div>
 
                   <h3 className="mt-5 font-display text-lg font-bold text-white">
