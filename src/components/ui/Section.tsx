@@ -11,7 +11,7 @@ type SectionProps = {
 };
 
 const toneClass: Record<NonNullable<SectionProps["tone"]>, string> = {
-  light: "bg-white text-ink",
+  light: "bg-paper text-ink",
   mist: "bg-mist text-ink",
   navy: "bg-navy text-white",
   "navy-deep": "bg-navy-900 text-white",

@@ -5,15 +5,15 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { services } from "@/lib/site";
 
-/** Icono de check inline (acento naranja). */
+/** Icono de check inline (acento naranja, trazo fino). */
 function CheckIcon() {
   return (
     <svg
       viewBox="0 0 20 20"
-      className="mt-0.5 h-4 w-4 flex-none text-orange"
+      className="mt-[0.15rem] h-3.5 w-3.5 flex-none text-orange"
       fill="none"
       stroke="currentColor"
-      strokeWidth={2.4}
+      strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden
@@ -25,56 +25,72 @@ function CheckIcon() {
 
 /**
  * Sección "Servicios" para la home: resumen de las tres etapas del ciclo
- * de inversión que cubre HK Consulting, con tarjetas técnicas distintivas.
+ * de inversión que cubre HK Consulting. Composición editorial —numerales
+ * gigantes como protagonistas, filas asimétricas con línea de medida en
+ * vez de tarjetas idénticas.
  */
 export function Services() {
   return (
     <Section id="servicios" tone="mist">
       <div className="container-hk">
         <SectionHeading
-          align="center"
+          align="left"
           kicker="Nuestros servicios"
           title="Acompañamos todo el ciclo de inversión"
           intro="Desde la idea inicial hasta la culminación de la obra, integramos las tres etapas críticas bajo un solo equipo."
         />
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3 lg:gap-7">
+        {/* Listado editorial: filas con numeral display gigante y divisores técnicos. */}
+        <div className="mt-16 lg:mt-20">
           {services.map((s, i) => (
-            <Reveal key={s.slug} delay={i * 90} className="h-full">
-              <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-float">
-                {/* Acento naranja superior que crece en hover */}
-                <span
-                  aria-hidden
-                  className="absolute inset-x-0 top-0 h-1 origin-left scale-x-[0.22] bg-orange transition-transform duration-500 ease-out group-hover:scale-x-100"
-                />
+            <Reveal key={s.slug} delay={i * 90}>
+              <article className="group relative grid grid-cols-1 gap-x-10 gap-y-6 border-t border-line py-10 lg:grid-cols-[auto_minmax(0,1fr)_minmax(0,18rem)] lg:items-start lg:py-12 lg:last:border-b">
+                {/* Numeral display gigante — protagonista de la fila */}
+                <div className="flex items-start gap-4 lg:block">
+                  <span
+                    aria-hidden
+                    className="display-index select-none text-[4.5rem] text-navy/12 transition-colors duration-500 group-hover:text-orange/70 sm:text-[5.5rem] lg:text-[7.5rem]"
+                  >
+                    {s.num}
+                  </span>
+                  <span className="kicker mt-2 hidden text-navy-300 lg:block">
+                    Etapa
+                  </span>
+                </div>
 
-                {/* Retícula técnica sutil en la esquina superior derecha */}
-                <span
-                  aria-hidden
-                  className="blueprint-grid-ink pointer-events-none absolute -right-6 -top-6 h-28 w-28 opacity-60 [mask-image:radial-gradient(circle_at_top_right,black,transparent_72%)]"
-                />
-
-                <div className="relative flex flex-1 flex-col p-7 lg:p-8">
-                  {/* Número decorativo + etiqueta de etapa */}
-                  <div className="flex items-baseline justify-between">
-                    <span
-                      aria-hidden
-                      className="font-display text-6xl font-extrabold leading-none tracking-tight text-orange/15 transition-colors duration-300 group-hover:text-orange/30"
-                    >
-                      {s.num}
-                    </span>
-                    <span className="kicker text-navy-300">Etapa</span>
-                  </div>
-
-                  <h3 className="mt-5 font-display text-xl text-navy lg:text-[1.4rem]">
+                {/* Cuerpo: título + descripción */}
+                <div className="lg:pt-3">
+                  <h3 className="font-display text-2xl leading-tight tracking-tight text-navy sm:text-3xl lg:text-[2rem]">
                     {s.title}
                   </h3>
-
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-slate-soft">
+                  <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-soft">
                     {s.short}
                   </p>
 
-                  <ul className="mt-6 space-y-2.5 border-t border-line pt-6">
+                  <Link
+                    href={`/servicios#${s.slug}`}
+                    className="group/link mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-navy transition-colors duration-300 hover:text-orange-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange"
+                  >
+                    <span className="relative">
+                      Ver detalle
+                      <span
+                        aria-hidden
+                        className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-orange transition-transform duration-300 group-hover/link:scale-x-100"
+                      />
+                    </span>
+                    <span
+                      aria-hidden
+                      className="transition-transform duration-300 group-hover/link:translate-x-1"
+                    >
+                      →
+                    </span>
+                  </Link>
+                </div>
+
+                {/* Beneficios: lista técnica con marca de medida y checks finos */}
+                <div className="lg:pt-3">
+                  <div className="spec-line mb-4 h-px w-full text-navy/20" aria-hidden />
+                  <ul className="space-y-3">
                     {s.benefits.map((b) => (
                       <li
                         key={b}
@@ -85,26 +101,13 @@ export function Services() {
                       </li>
                     ))}
                   </ul>
-
-                  <Link
-                    href={`/servicios#${s.slug}`}
-                    className="group/link mt-7 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-navy transition-colors duration-300 hover:text-orange-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange"
-                  >
-                    Ver detalle
-                    <span
-                      aria-hidden
-                      className="transition-transform duration-300 group-hover/link:translate-x-1"
-                    >
-                      →
-                    </span>
-                  </Link>
                 </div>
               </article>
             </Reveal>
           ))}
         </div>
 
-        <Reveal delay={services.length * 90} className="mt-12 flex justify-center">
+        <Reveal delay={services.length * 90} className="mt-14 flex">
           <Button href="/servicios" variant="primary">
             Ver todos los servicios
           </Button>

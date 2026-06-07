@@ -1,24 +1,27 @@
 import type { Metadata } from "next";
-import { Archivo, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { company } from "@/lib/site";
 
-const archivo = Archivo({
-  variable: "--font-archivo",
+// Display con carácter (editorial técnico).
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const plexSans = IBM_Plex_Sans({
-  variable: "--font-plex-sans",
+// Cuerpo: grotesca cálida y muy legible.
+const hanken = Hanken_Grotesk({
+  variable: "--font-hanken",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
+// Mono para cotas/etiquetas técnicas.
 const plexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",
   subsets: ["latin"],
@@ -66,9 +69,9 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${archivo.variable} ${plexSans.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${hanken.variable} ${plexMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white text-ink">
+      <body className="min-h-full flex flex-col bg-paper text-ink">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

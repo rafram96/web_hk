@@ -24,7 +24,7 @@ export function SectionHeading({
   const isCenter = align === "center";
   return (
     <div
-      className={`${isCenter ? "mx-auto max-w-3xl text-center" : "max-w-2xl"} ${className}`}
+      className={`${isCenter ? "mx-auto max-w-3xl text-center" : "max-w-[46rem]"} ${className}`}
     >
       {kicker && (
         <Reveal variant="fade">
@@ -42,7 +42,7 @@ export function SectionHeading({
       )}
       <Reveal delay={60}>
         <h2
-          className={`mt-4 text-3xl sm:text-4xl lg:text-[2.75rem] ${
+          className={`mt-5 text-[2.15rem] leading-[1.03] sm:text-[2.6rem] lg:text-[3.25rem] ${
             tone === "dark" ? "text-white" : "text-navy"
           }`}
         >
@@ -52,7 +52,7 @@ export function SectionHeading({
       {intro && (
         <Reveal delay={120}>
           <p
-            className={`mt-5 text-lg leading-relaxed ${
+            className={`mt-6 text-lg leading-relaxed lg:text-xl ${
               tone === "dark" ? "text-navy-100" : "text-slate-soft"
             }`}
           >

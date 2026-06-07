@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 /* ============================================================
-   HK CONSULTING — Sistema de diseño
-   Dirección: "Autoridad institucional de ingeniería".
-   Azul marino de mando (#04395B) + acento naranja (#E87A2C),
-   retícula técnica tipo plano, tipografía con carácter.
+   HK CONSULTING — Sistema de diseño v2
+   Dirección: "Monografía técnica / editorial de ingeniería".
+   Base papel cálido + grano, azul marino de mando (#04395B) y
+   naranja de precisión (#E87A2C). Tipografía con carácter.
    ============================================================ */
 
 @theme {
@@ -31,23 +31,25 @@
   --color-orange-700: #a85312;
   --color-orange-800: #813f11;
 
-  /* Neutros cálidos */
-  --color-ink: #14202b;
-  --color-slate-soft: #5b6b78;
-  --color-mist: #f4f6f8;
-  --color-line: #e2e8ee;
+  /* Neutros cálidos (papel) */
+  --color-paper: #f6f3ec;
+  --color-paper-deep: #efe9dd;
+  --color-ink: #1a2129;
+  --color-slate-soft: #5d6770;
+  --color-mist: #efe9dd;
+  --color-line: #e4ddcf;
 
   /* Tipografía (mapeada a next/font) */
-  --font-display: var(--font-archivo), "Archivo", system-ui, sans-serif;
-  --font-sans: var(--font-plex-sans), "IBM Plex Sans", system-ui, sans-serif;
+  --font-display: var(--font-bricolage), "Bricolage Grotesque", system-ui, sans-serif;
+  --font-sans: var(--font-hanken), "Hanken Grotesk", system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
 
-  /* Sombras */
-  --shadow-card: 0 1px 2px rgba(2, 30, 48, 0.06), 0 12px 32px -12px rgba(2, 30, 48, 0.18);
-  --shadow-float: 0 24px 60px -20px rgba(2, 30, 48, 0.45);
+  /* Sombras refinadas */
+  --shadow-card: 0 1px 2px rgba(26, 33, 41, 0.04), 0 18px 40px -24px rgba(26, 33, 41, 0.22);
+  --shadow-float: 0 30px 70px -28px rgba(2, 30, 48, 0.45);
 
   /* Animaciones */
-  --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee: marquee 40s linear infinite;
 }
 
 @keyframes marquee {
@@ -56,7 +58,7 @@
 }
 
 @keyframes hk-reveal-up {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -65,17 +67,15 @@
   to { opacity: 1; }
 }
 
-@keyframes hk-grow {
+@keyframes hk-grow-x {
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
 }
 
 /* ---------- Base ----------
-   IMPORTANTE: estos estilos van en @layer base para que las utilidades de
-   Tailwind (text-white, border-white/10, etc.) puedan sobrescribirlos.
-   Si se dejan sin capa, ganarían a TODAS las utilidades (regresión de color). */
+   En @layer base para que las utilidades (text-white, etc.) ganen. */
 :root {
-  --background: #ffffff;
+  --background: var(--color-paper);
   --foreground: var(--color-ink);
 }
 
@@ -90,12 +90,26 @@
   }
 
   body {
+    position: relative;
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv01";
+    letter-spacing: -0.005em;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+  }
+
+  /* Grano sutil global para textura (no intercepta clics). */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.4;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
   }
 
   ::selection {
@@ -105,23 +119,22 @@
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.04;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
     color: var(--color-navy);
   }
 
   /* Scrollbar */
-  ::-webkit-scrollbar { width: 11px; height: 11px; }
-  ::-webkit-scrollbar-track { background: var(--color-mist); }
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: var(--color-paper-deep); }
   ::-webkit-scrollbar-thumb {
     background: var(--color-navy-300);
     border-radius: 999px;
-    border: 3px solid var(--color-mist);
+    border: 3px solid var(--color-paper-deep);
   }
   ::-webkit-scrollbar-thumb:hover { background: var(--color-navy); }
 
-  /* Anclas con offset por navbar fijo */
   :target {
     scroll-margin-top: 6rem;
   }
@@ -131,7 +144,7 @@
 @layer components {
   .container-hk {
     width: 100%;
-    max-width: 80rem; /* 1280px */
+    max-width: 80rem;
     margin-inline: auto;
     padding-inline: 1.5rem;
   }
@@ -139,13 +152,40 @@
     .container-hk { padding-inline: 2.5rem; }
   }
 
-  /* Etiqueta técnica tipo "kicker" */
+  /* Etiqueta técnica tipo cota / "spec" */
   .kicker {
     font-family: var(--font-mono);
     font-size: 0.72rem;
     font-weight: 500;
-    letter-spacing: 0.28em;
+    letter-spacing: 0.26em;
     text-transform: uppercase;
+  }
+
+  /* Resalte del acento */
+  .accent-rule {
+    height: 3px;
+    width: 3.25rem;
+    background: var(--color-orange);
+    border-radius: 2px;
+  }
+
+  /* Cifra/índice display de gran escala (editorial). */
+  .display-index {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.85;
+  }
+
+  /* Línea técnica de medida (divisor con marcas). */
+  .spec-line {
+    background-image: repeating-linear-gradient(
+      to right,
+      currentColor 0,
+      currentColor 1px,
+      transparent 1px,
+      transparent 8px
+    );
   }
 
   /* Retícula de plano técnico */
@@ -153,21 +193,13 @@
     background-image:
       linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 46px 46px;
+    background-size: 48px 48px;
   }
   .blueprint-grid-ink {
     background-image:
-      linear-gradient(rgba(4, 57, 91, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(4, 57, 91, 0.06) 1px, transparent 1px);
-    background-size: 46px 46px;
-  }
-
-  /* Resalte del acento bajo títulos */
-  .accent-rule {
-    height: 4px;
-    width: 3.5rem;
-    background: var(--color-orange);
-    border-radius: 2px;
+      linear-gradient(rgba(4, 57, 91, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(4, 57, 91, 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
   }
 }
 
@@ -176,7 +208,7 @@
   opacity: 0;
 }
 [data-reveal].is-visible {
-  animation: hk-reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: hk-reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 [data-reveal].is-visible[data-reveal="fade"] {
   animation-name: hk-fade;
@@ -185,5 +217,5 @@
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   [data-reveal] { opacity: 1 !important; animation: none !important; }
-  .animate-\[marquee\] { animation: none !important; }
+  body::before { display: none; }
 }

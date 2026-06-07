@@ -13,10 +13,10 @@ export function About() {
   return (
     <Section id="nosotros" tone="light">
       <div className="container-hk">
-        {/* Encabezado + composición a 2 columnas */}
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        {/* Composición editorial asimétrica: texto (5) / imagen (7) */}
+        <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Columna texto */}
-          <div className="lg:col-span-6">
+          <div className="lg:col-span-5">
             <SectionHeading
               kicker="Quiénes somos"
               title={
@@ -28,67 +28,96 @@ export function About() {
               intro={company.intro}
             />
 
-            {/* Chips de marco normativo */}
-            <Reveal delay={180} className="mt-8">
-              <p className="kicker text-slate-soft">Marco de trabajo</p>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {company.normativa.map((norma) => (
-                  <li
-                    key={norma}
-                    className="rounded-md border border-line bg-mist px-3 py-1.5 font-mono text-xs font-medium tracking-tight text-navy"
-                  >
-                    {norma}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-
-            {/* Frase de apoyo */}
-            <Reveal delay={240} className="mt-8">
-              <p className="border-l-2 border-orange pl-4 text-base leading-relaxed text-ink">
+            {/* Frase de apoyo — cita técnica */}
+            <Reveal delay={200} className="mt-9">
+              <p className="border-l-2 border-orange pl-5 font-display text-xl leading-snug tracking-tight text-navy">
                 Acompañamos cada inversión en sus tres etapas críticas
                 —preinversión, expediente técnico y supervisión— con un solo
                 equipo técnico responsable de principio a fin.
               </p>
             </Reveal>
+
+            {/* Marco normativo como cotas técnicas */}
+            <Reveal delay={260} className="mt-10">
+              <div className="flex items-center gap-3">
+                <span className="kicker text-slate-soft">Marco normativo</span>
+                <span className="spec-line h-px flex-1 text-navy/20" aria-hidden />
+              </div>
+              <ul className="mt-4 space-y-px">
+                {company.normativa.map((norma, i) => (
+                  <li
+                    key={norma}
+                    className="group flex items-baseline gap-4 border-t border-line py-2.5 last:border-b"
+                  >
+                    <span className="font-mono text-[0.7rem] tabular-nums text-orange">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="font-mono text-sm font-medium tracking-tight text-navy">
+                      {norma}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           </div>
 
-          {/* Columna imagen */}
-          <div className="lg:col-span-6">
+          {/* Columna imagen — marco cuidado con overlap navy + cota */}
+          <div className="lg:col-span-7 lg:pl-8">
             <Reveal variant="fade" delay={120}>
               <figure className="relative">
+                {/* Índice editorial gigante de fondo */}
+                <span
+                  aria-hidden
+                  className="display-index pointer-events-none absolute -left-4 -top-12 -z-10 hidden select-none text-[8rem] text-navy/[0.06] sm:block lg:-left-10 lg:text-[11rem]"
+                >
+                  01
+                </span>
+
                 {/* Retícula técnica de fondo (esquina superior derecha) */}
                 <div
                   aria-hidden
-                  className="blueprint-grid-ink absolute -right-4 -top-4 -z-10 hidden h-40 w-40 rounded-tr-2xl sm:block"
+                  className="blueprint-grid-ink absolute -right-5 -top-5 -z-10 hidden h-44 w-44 rounded-tr-3xl sm:block"
                 />
                 {/* Bloque de acento navy en la esquina inferior izquierda */}
                 <div
                   aria-hidden
-                  className="absolute -bottom-5 -left-5 -z-10 hidden h-32 w-32 rounded-2xl bg-navy sm:block"
+                  className="absolute -bottom-6 -left-6 -z-10 hidden h-40 w-40 rounded-3xl bg-navy sm:block"
                 />
+                {/* Cota naranja vertical sobre el flanco derecho */}
+                <div
+                  aria-hidden
+                  className="absolute -right-3 top-8 bottom-8 hidden w-px bg-orange/60 lg:block"
+                >
+                  <span className="absolute -top-1 -left-[3px] h-[7px] w-[7px] rounded-full bg-orange" />
+                  <span className="absolute -bottom-1 -left-[3px] h-[7px] w-[7px] rounded-full bg-orange" />
+                </div>
 
-                <div className="relative overflow-hidden rounded-2xl shadow-[var(--shadow-card)] ring-1 ring-navy-900/10">
+                <div className="relative overflow-hidden rounded-3xl shadow-[var(--shadow-float)] ring-1 ring-navy-900/10">
                   <Image
                     src="/images/equipo-completo.jpg"
                     alt="Equipo de ingenieros de HK Consulting frente al Congreso del Perú"
-                    width={720}
-                    height={540}
-                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    width={840}
+                    height={560}
+                    sizes="(min-width: 1024px) 55vw, 100vw"
                     className="h-auto w-full object-cover"
                   />
                   {/* Velo navy inferior para legibilidad del badge */}
                   <div
                     aria-hidden
-                    className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-navy-950/55 to-transparent"
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-navy-950/65 to-transparent"
                   />
+                  {/* Cota técnica superpuesta */}
+                  <span className="absolute right-5 top-5 rounded-md bg-navy-950/70 px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-white backdrop-blur-sm">
+                    Lima · Perú
+                  </span>
                 </div>
 
                 {/* Badge flotante "Desde 2006" */}
-                <figcaption className="absolute -bottom-4 left-6 flex items-center gap-3 rounded-xl bg-navy px-4 py-3 text-white shadow-[var(--shadow-float)]">
-                  <span className="font-display text-2xl font-extrabold leading-none text-orange">
+                <figcaption className="absolute -bottom-5 left-7 flex items-center gap-3.5 rounded-2xl bg-navy px-5 py-4 text-white shadow-[var(--shadow-float)]">
+                  <span className="display-index text-[2.6rem] text-orange">
                     2006
                   </span>
+                  <span className="spec-line h-9 w-px text-white/25" aria-hidden />
                   <span className="kicker leading-tight text-navy-100">
                     Trayectoria
                     <br />
@@ -100,22 +129,41 @@ export function About() {
           </div>
         </div>
 
-        {/* Banda de estadísticas sobre panel navy */}
-        <Reveal delay={120} className="mt-20 lg:mt-24">
-          <div className="blueprint-grid relative overflow-hidden rounded-2xl bg-navy px-6 py-10 shadow-[var(--shadow-card)] sm:px-10 lg:py-12">
-            <dl className="grid grid-cols-2 gap-y-10 gap-x-6 lg:grid-cols-4">
+        {/* Banda de estadísticas sobre panel navy — máxima presencia */}
+        <Reveal delay={120} className="mt-24 lg:mt-32">
+          <div className="blueprint-grid relative overflow-hidden rounded-3xl bg-navy px-7 py-12 shadow-[var(--shadow-float)] sm:px-12 lg:py-16">
+            {/* Acento naranja superior */}
+            <span
+              aria-hidden
+              className="absolute left-0 top-0 h-1.5 w-28 rounded-br-lg bg-orange"
+            />
+
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <p className="kicker text-orange-300">HK en cifras</p>
+              <span
+                className="spec-line hidden h-px flex-1 text-white/15 sm:ml-8 sm:block"
+                aria-hidden
+              />
+            </div>
+
+            <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4 lg:gap-x-4">
               {stats.map((stat, i) => (
                 <Reveal key={stat.label} variant="up" delay={i * 90}>
-                  <div className="border-l-2 border-orange/70 pl-5 lg:border-l lg:border-navy-400/40">
+                  <div className="relative pl-6 lg:pl-7">
+                    {/* Hairline/cota vertical de inicio de cada cifra */}
+                    <span
+                      aria-hidden
+                      className="absolute left-0 top-1 bottom-2 w-px bg-orange/70 lg:bg-white/15"
+                    />
                     <dt className="sr-only">{stat.label}</dt>
                     <Counter
                       value={stat.value}
                       prefix={stat.prefix}
                       suffix={stat.suffix}
                       isYear={"isYear" in stat ? stat.isYear : false}
-                      className="font-display text-4xl font-extrabold tracking-tight text-orange tabular-nums sm:text-5xl"
+                      className="display-index block text-[3.4rem] text-orange tabular-nums sm:text-6xl lg:text-[4.25rem]"
                     />
-                    <p className="mt-2 font-mono text-xs uppercase tracking-[0.16em] text-navy-100">
+                    <p className="mt-3 max-w-[10rem] font-mono text-[0.7rem] uppercase leading-snug tracking-[0.18em] text-navy-100">
                       {stat.label}
                     </p>
                   </div>

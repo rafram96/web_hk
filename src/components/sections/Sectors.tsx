@@ -5,9 +5,10 @@ import { sectors } from "@/lib/site";
 
 /**
  * Sección "Sectores atendidos" — los 14 sectores estratégicos.
- * Server Component sobre fondo navy muy oscuro con retícula técnica
- * tipo plano. Cada sector se presenta como una celda densa pero elegante
- * con numeral en marca de agua y marcador geométrico de acento.
+ * Server Component sobre navy muy oscuro. Composición editorial tipo
+ * "índice de una monografía técnica": numerales mono a la vista, nombres
+ * en gran escala display y filas con hairlines/spec-line en lugar de
+ * 14 cajitas idénticas. Retícula blueprint de fondo para dar carácter de plano.
  */
 export function Sectors() {
   return (
@@ -28,63 +29,105 @@ export function Sectors() {
       />
 
       <div className="container-hk relative">
-        <SectionHeading
-          tone="dark"
-          kicker="Sectores"
-          title="14 sectores estratégicos del desarrollo nacional"
-          intro="Atendemos proyectos en sectores estratégicos del desarrollo nacional, de la salud a la infraestructura portuaria."
-        />
+        {/* Cabecera editorial: encabezado + cifra-índice gigante en contrapunto. */}
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+          <SectionHeading
+            tone="dark"
+            kicker="Sectores"
+            title="14 sectores estratégicos del desarrollo nacional"
+            intro="Atendemos proyectos en sectores estratégicos del desarrollo nacional, de la salud a la infraestructura portuaria."
+          />
 
-        {/* Retícula de 14 sectores: 2 col móvil · 3 tablet · 4 desktop. */}
-        <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:mt-16 lg:grid-cols-4 lg:gap-5">
-          {sectors.map((sector, index) => (
-            <Reveal
-              key={sector.num}
-              delay={(index % 4) * 60}
-              className="h-full"
+          <Reveal
+            variant="fade"
+            delay={120}
+            className="hidden shrink-0 select-none text-right lg:block"
+          >
+            <span
+              className="display-index block text-[8rem] text-white/[0.07] xl:text-[10rem]"
+              aria-hidden
             >
-              <article className="group relative h-full overflow-hidden rounded-xl border border-white/10 bg-navy-800/40 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-orange hover:bg-navy-800/70 hover:shadow-float lg:p-6">
-                {/* Numeral en marca de agua. */}
-                <span
-                  className="pointer-events-none absolute -right-1 -top-3 select-none font-display text-[4.5rem] font-extrabold leading-none text-white/[0.04] transition-colors duration-300 group-hover:text-white/[0.07] lg:text-[5.5rem]"
-                  aria-hidden
-                >
-                  {sector.num}
-                </span>
+              14
+            </span>
+            <span className="kicker -mt-3 block text-navy-300">
+              Campos de práctica
+            </span>
+          </Reveal>
+        </div>
 
-                <div className="relative">
-                  {/* Marcador geométrico + numeral en mono naranja. */}
-                  <div className="flex items-center gap-2.5">
-                    <svg
-                      viewBox="0 0 16 16"
-                      className="h-3 w-3 shrink-0 text-orange transition-transform duration-300 group-hover:rotate-45"
-                      aria-hidden
-                    >
-                      <rect
-                        x="1"
-                        y="1"
-                        width="14"
-                        height="14"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      />
-                    </svg>
-                    <span className="font-mono text-xs font-medium tracking-[0.22em] text-orange-300">
-                      {sector.num}
-                    </span>
-                  </div>
+        {/* Índice técnico: cabecera de tabla + 14 filas con hairlines. */}
+        <div className="mt-14 lg:mt-20">
+          {/* Fila de encabezado tipo tabla de especificación. */}
+          <Reveal variant="fade">
+            <div className="flex items-center gap-4 border-b border-white/15 pb-3">
+              <span className="kicker w-10 shrink-0 text-orange-300">N°</span>
+              <span className="kicker flex-1 text-navy-300">Sector</span>
+              <span className="kicker hidden flex-1 text-navy-300 sm:block">
+                Alcance
+              </span>
+            </div>
+          </Reveal>
 
-                  <h3 className="mt-4 font-display text-base font-bold leading-tight text-white lg:text-lg">
+          {/* Filas del índice — densidad de monografía, no rejilla de tarjetas. */}
+          <ul className="border-b border-white/10">
+            {sectors.map((sector, index) => (
+              <Reveal
+                key={sector.num}
+                as="li"
+                delay={(index % 4) * 60}
+                className="group border-t border-white/10 transition-colors duration-300 first:border-t-0 hover:bg-white/[0.03]"
+              >
+                <div className="relative flex items-center gap-4 py-5 lg:py-6">
+                  {/* Acento naranja de cota que crece en hover. */}
+                  <span
+                    className="absolute left-0 top-1/2 h-8 w-[3px] -translate-y-1/2 scale-y-0 rounded-full bg-orange transition-transform duration-300 group-hover:scale-y-100"
+                    aria-hidden
+                  />
+
+                  {/* Numeral mono a la vista, alineado a reticula. */}
+                  <span className="w-10 shrink-0 font-mono text-sm font-medium tracking-[0.18em] text-orange-300 transition-colors duration-300 group-hover:text-orange tabular-nums">
+                    {sector.num}
+                  </span>
+
+                  {/* Nombre del sector en gran escala display. */}
+                  <h3 className="flex-1 font-display text-2xl font-bold leading-none tracking-tight text-white transition-transform duration-300 group-hover:translate-x-1 sm:text-[1.7rem] lg:text-3xl">
                     {sector.name}
                   </h3>
-                  <p className="mt-1.5 text-xs leading-relaxed text-navy-200">
+
+                  {/* Alcance: en columna propia en >=sm, debajo en móvil. */}
+                  <p className="hidden flex-1 text-sm leading-relaxed text-navy-200 sm:block">
                     {sector.desc}
                   </p>
+
+                  {/* Índice de orden (i/14) como cota fina al margen derecho. */}
+                  <span
+                    className="hidden shrink-0 font-mono text-[0.7rem] tracking-[0.18em] text-white/25 lg:block tabular-nums"
+                    aria-hidden
+                  >
+                    {String(index + 1).padStart(2, "0")}/14
+                  </span>
                 </div>
-              </article>
-            </Reveal>
-          ))}
+
+                {/* Descripción en móvil (la columna Alcance se oculta <sm). */}
+                <p className="-mt-1 pb-5 pl-14 pr-2 text-xs leading-relaxed text-navy-200 sm:hidden">
+                  {sector.desc}
+                </p>
+              </Reveal>
+            ))}
+          </ul>
+
+          {/* Cierre: línea técnica de medida tipo cota. */}
+          <Reveal variant="fade" delay={80}>
+            <div className="mt-5 flex items-center gap-4">
+              <span
+                className="spec-line h-px flex-1 text-white/15"
+                aria-hidden
+              />
+              <span className="kicker shrink-0 text-navy-300">
+                Cobertura integral
+              </span>
+            </div>
+          </Reveal>
         </div>
       </div>
     </Section>

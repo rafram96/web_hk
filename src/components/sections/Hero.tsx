@@ -49,7 +49,7 @@ export function Hero() {
               Desde {company.foundedYear} &middot; Consultor&iacute;a en ingenier&iacute;a
             </Reveal>
 
-            <Reveal as="h1" delay={80} className="text-4xl text-white sm:text-5xl lg:text-6xl">
+            <Reveal as="h1" delay={80} className="text-[2.7rem] leading-[0.98] text-white sm:text-6xl lg:text-[4.5rem]">
               Soluciones integrales en ingenier&iacute;a para{" "}
               <span className="text-orange">el desarrollo del pa&iacute;s</span>
             </Reveal>
