@@ -17,7 +17,9 @@ export function Footer() {
           <p className="mt-6 max-w-xs text-sm leading-relaxed text-navy-200">
             {company.tagline}. {company.claim}.
           </p>
-          <p className="mt-5 kicker text-orange-300">RUC {company.ruc}</p>
+          <p className="mt-5 kicker text-orange-300">
+            {company.legalName} · RUC {company.ruc}
+          </p>
         </div>
 
         {/* Navegación */}
