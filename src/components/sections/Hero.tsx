@@ -1,5 +1,4 @@
-import Image from "next/image";
-
+import { HeroCarousel, type HeroSlide } from "./HeroCarousel";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { company } from "@/lib/site";
@@ -18,21 +17,28 @@ const ciclo = [
   { n: "03", label: "Obra" },
 ];
 
+/** Imágenes del carrusel del hero (alternan cada 15s). */
+const heroSlides: HeroSlide[] = [
+  {
+    src: "/images/hero-equipo-congreso.jpg",
+    alt: "Equipo de ingenieros de HK Consulting con cascos frente al Congreso de la República del Perú",
+    position: "50% 56%",
+  },
+  {
+    src: "/images/equipo-completo.jpg",
+    alt: "Equipo de HK Consulting frente al Palacio Legislativo del Perú en Lima",
+    position: "50% 54%",
+  },
+];
+
 export function Hero() {
   return (
     <section
       id="inicio"
       className="relative isolate flex min-h-[760px] flex-col overflow-hidden bg-navy-950 pt-24 [min-height:100svh]"
     >
-      {/* Imagen full-bleed en duotono navy (Ken Burns de carga) */}
-      <Image
-        src="/images/hero-equipo-congreso.jpg"
-        alt="Equipo de ingenieros de HK Consulting con cascos frente al Congreso de la República del Perú"
-        fill
-        priority
-        sizes="100vw"
-        className="-z-30 object-cover object-[50%_56%] grayscale-[0.4] brightness-105 animate-[hk-kenburns_20s_ease-out_forwards] motion-reduce:animate-none"
-      />
+      {/* Fondo: carrusel de imágenes (crossfade cada 15s) en duotono navy */}
+      <HeroCarousel slides={heroSlides} />
 
       {/* Tinte navy de marca + scrim direccional (legibilidad abajo-izquierda) */}
       <div aria-hidden className="absolute inset-0 -z-20 bg-navy-950/25" />
