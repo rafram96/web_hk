@@ -17,23 +17,23 @@ const ciclo = [
   { n: "03", label: "Obra" },
 ];
 
-/** Imágenes del carrusel del hero (alternan cada 15s). */
+/** Imágenes definitivas del carrusel del hero (alternan cada 10s). */
 const heroSlides: HeroSlide[] = [
   {
-    src: "/images/hero-equipo-congreso.jpg",
-    alt: "Equipo de ingenieros de HK Consulting con cascos frente al Congreso de la República del Perú",
-    position: "50% 56%",
+    src: "/images/hero-congreso-fila.jpg",
+    alt: "Equipo de ingenieros de HK Consulting frente al Congreso de la República del Perú",
+    position: "50% 50%",
+  },
+  {
+    src: "/images/hero-congreso-front.jpg",
+    alt: "Ingeniero de HK Consulting frente al Congreso de la República del Perú",
+    position: "50% 42%",
+    fixed: true,
   },
   {
     src: "/images/equipo-completo.jpg",
     alt: "Equipo de HK Consulting frente al Palacio Legislativo del Perú en Lima",
     position: "50% 54%",
-  },
-  {
-    src: "/images/hero-congreso-3.jpg",
-    alt: "Equipo de ingenieros de HK Consulting frente al Congreso de la República del Perú",
-    position: "50% 42%",
-    fixed: true,
   },
 ];
 
