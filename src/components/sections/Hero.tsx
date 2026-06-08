@@ -22,7 +22,7 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative isolate flex min-h-[760px] flex-col justify-center overflow-hidden bg-navy-950 pt-24 [min-height:100svh]"
+      className="relative isolate flex min-h-[760px] flex-col overflow-hidden bg-navy-950 pt-24 [min-height:100svh]"
     >
       {/* Imagen full-bleed en duotono navy (Ken Burns de carga) */}
       <Image
@@ -75,8 +75,9 @@ export function Hero() {
         <span className="absolute bottom-0 right-0 h-9 w-9 border-b-2 border-r-2 border-orange/70" />
       </div>
 
-      {/* ---------- Contenido anclado abajo-izquierda ---------- */}
-      <div className="container-hk relative w-full pb-14 lg:pb-20">
+      {/* ---------- Contenido: título arriba · ciclo + CTAs abajo ---------- */}
+      <div className="container-hk relative flex w-full flex-1 flex-col justify-between pb-14 pt-6 lg:pb-20 lg:pt-10">
+        {/* Arriba: kicker + título */}
         <div className="max-w-3xl">
           <Reveal as="p" variant="fade" delay={0} className="kicker flex items-center gap-3 text-orange">
             <span aria-hidden className="h-px w-10 bg-orange" />
@@ -95,9 +96,12 @@ export function Hero() {
               se construye
             </span>
           </Reveal>
+        </div>
 
+        {/* Abajo: ciclo + CTAs */}
+        <div className="max-w-3xl">
           {/* Ciclo de inversión referenciado de forma simbólica */}
-          <Reveal delay={300} className="mt-10 border-t border-white/15 pt-5">
+          <Reveal delay={300} className="border-t border-white/15 pt-5">
             <ul className="flex flex-wrap items-center gap-x-5 gap-y-3 sm:gap-x-7">
               {ciclo.map((etapa, i) => (
                 <li key={etapa.n} className="flex items-center gap-5 sm:gap-7">
