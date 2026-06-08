@@ -29,6 +29,12 @@ const heroSlides: HeroSlide[] = [
     alt: "Equipo de HK Consulting frente al Palacio Legislativo del Perú en Lima",
     position: "50% 54%",
   },
+  {
+    src: "/images/hero-congreso-3.jpg",
+    alt: "Equipo de ingenieros de HK Consulting frente al Congreso de la República del Perú",
+    position: "50% 42%",
+    fixed: true,
+  },
 ];
 
 export function Hero() {
@@ -37,8 +43,8 @@ export function Hero() {
       id="inicio"
       className="relative isolate flex min-h-[760px] flex-col overflow-hidden bg-navy-950 pt-24 [min-height:100svh]"
     >
-      {/* Fondo: carrusel de imágenes (crossfade cada 15s) en duotono navy */}
-      <HeroCarousel slides={heroSlides} />
+      {/* Fondo: carrusel de imágenes (crossfade cada 10s) en duotono navy */}
+      <HeroCarousel slides={heroSlides} intervalMs={10000} />
 
       {/* Tinte navy de marca + scrim direccional (legibilidad abajo-izquierda) */}
       <div aria-hidden className="absolute inset-0 -z-20 bg-navy-950/25" />

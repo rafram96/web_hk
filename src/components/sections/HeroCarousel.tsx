@@ -8,6 +8,8 @@ export type HeroSlide = {
   alt: string;
   /** object-position CSS, p. ej. "50% 56%" */
   position?: string;
+  /** Si true, el slide no se mueve (solo crossfade, sin zoom/Ken Burns). */
+  fixed?: boolean;
 };
 
 /**
@@ -35,20 +37,29 @@ export function HeroCarousel({
 
   return (
     <div className="absolute inset-0 -z-30 overflow-hidden bg-navy-950">
-      {slides.map((slide, i) => (
-        <Image
-          key={slide.src}
-          src={slide.src}
-          alt={i === 0 ? slide.alt : ""}
-          fill
-          priority={i === 0}
-          sizes="100vw"
-          style={{ objectPosition: slide.position ?? "50% 56%" }}
-          className={`object-cover grayscale-[0.4] brightness-105 transition-[opacity,transform] duration-[1400ms] ease-out motion-reduce:transition-opacity ${
-            i === active ? "scale-100 opacity-100" : "scale-[1.05] opacity-0"
-          }`}
-        />
-      ))}
+      {slides.map((slide, i) => {
+        const visible = i === active;
+        // Slides "fixed" solo hacen crossfade (sin zoom); el resto añade un leve zoom.
+        const motion = slide.fixed
+          ? visible
+            ? "opacity-100"
+            : "opacity-0"
+          : visible
+            ? "scale-100 opacity-100"
+            : "scale-[1.05] opacity-0";
+        return (
+          <Image
+            key={slide.src}
+            src={slide.src}
+            alt={i === 0 ? slide.alt : ""}
+            fill
+            priority={i === 0}
+            sizes="100vw"
+            style={{ objectPosition: slide.position ?? "50% 56%" }}
+            className={`object-cover grayscale-[0.4] brightness-105 transition-[opacity,transform] duration-[1400ms] ease-out motion-reduce:transition-opacity ${motion}`}
+          />
+        );
+      })}
     </div>
   );
 }
