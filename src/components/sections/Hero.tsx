@@ -76,18 +76,13 @@ export function Hero() {
       </div>
 
       {/* ---------- Contenido: título arriba · ciclo + CTAs abajo ---------- */}
-      <div className="container-hk relative flex w-full flex-1 flex-col justify-between pb-14 pt-6 lg:pb-20 lg:pt-10">
-        {/* Arriba: kicker + título */}
+      <div className="container-hk relative flex w-full flex-1 flex-col justify-between pb-8 pt-3 lg:pb-10 lg:pt-5">
+        {/* Arriba: título + kicker debajo */}
         <div className="max-w-3xl">
-          <Reveal as="p" variant="fade" delay={0} className="kicker flex items-center gap-3 text-orange">
-            <span aria-hidden className="h-px w-10 bg-orange" />
-            HK Consulting &middot; Desde {company.foundedYear} &middot; Lima
-          </Reveal>
-
           <Reveal
             as="h1"
-            delay={120}
-            className="mt-7 font-extrabold leading-[0.92] text-white"
+            delay={0}
+            className="font-extrabold leading-[0.92] text-white"
           >
             <span className="block text-[clamp(2.6rem,7.5vw,6rem)]">
               Donde el pa&iacute;s
@@ -95,6 +90,11 @@ export function Hero() {
             <span className="block text-[clamp(2.6rem,7.5vw,6rem)] text-orange">
               se construye
             </span>
+          </Reveal>
+
+          <Reveal as="p" variant="fade" delay={140} className="kicker mt-6 flex items-center gap-3 text-orange">
+            <span aria-hidden className="h-px w-10 bg-orange" />
+            HK Consulting &middot; Desde {company.foundedYear} &middot; Lima
           </Reveal>
         </div>
 
