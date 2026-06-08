@@ -70,6 +70,7 @@ export default function RootLayout({
     <html
       lang="es"
       className={`${bricolage.variable} ${hanken.variable} ${plexMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <Navbar />
