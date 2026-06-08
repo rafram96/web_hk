@@ -33,6 +33,9 @@ export function Logo({ tone = "dark", className = "", href = "/" }: LogoProps) {
           className={`font-display text-2xl font-extrabold tracking-tight ${textMain}`}
         >
           HK <span className="text-orange">Consulting</span>
+          <span className="ml-1 align-baseline text-[0.62em] font-bold tracking-normal opacity-70">
+            S.A.C.
+          </span>
         </span>
         <span
           className={`kicker mt-1 text-[0.64rem] tracking-[0.32em] ${textSub}`}

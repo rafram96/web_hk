@@ -106,7 +106,7 @@ export function Hero() {
 
           <Reveal as="p" variant="fade" delay={140} className="kicker mt-6 flex items-center gap-3 text-orange">
             <span aria-hidden className="h-px w-10 bg-orange" />
-            HK Consulting &middot; Desde {company.foundedYear} &middot; Lima
+            {company.legalName} &middot; Desde {company.foundedYear} &middot; Lima
           </Reveal>
         </div>
 
