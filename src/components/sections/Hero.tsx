@@ -41,7 +41,7 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative isolate flex min-h-[760px] flex-col overflow-hidden bg-navy-950 pt-24 [min-height:100svh]"
+      className="relative isolate flex min-h-[max(760px,100svh)] flex-col overflow-hidden bg-navy-950 pt-24"
     >
       {/* Fondo: carrusel de imágenes (crossfade cada 10s) en duotono navy */}
       <HeroCarousel slides={heroSlides} intervalMs={10000} />
