@@ -387,6 +387,7 @@ export const certifications: Certification[] = [
     standard: "45001:2018",
     scope: "Seguridad y Salud en el Trabajo",
     code: "ICO-SSGSST-092025-3227-PE",
+    image: "/certs/iso-45001.png",
   },
   {
     name: "ISO 37001",
