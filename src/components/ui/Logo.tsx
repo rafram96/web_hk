@@ -21,12 +21,12 @@ export function Logo({ tone = "dark", className = "", href = "/" }: LogoProps) {
         className="h-11 w-auto shrink-0 transition-transform duration-500 group-hover:-translate-y-0.5"
         aria-hidden
       >
-        {/* cara superior */}
-        <polygon points="16,2 30,10 16,18 2,10" fill="#e87a2c" />
-        {/* cara izquierda */}
-        <polygon points="2,10 16,18 16,34 2,26" fill="#04395b" />
-        {/* cara derecha */}
-        <polygon points="30,10 16,18 16,34 30,26" fill="#0c537d" />
+        {/* cara superior (negro, como el logo real) */}
+        <polygon points="16,2 30,10 16,18 2,10" fill="#1f242b" />
+        {/* cara izquierda (azul) */}
+        <polygon points="2,10 16,18 16,34 2,26" fill="#1e3c90" />
+        {/* cara derecha (gris claro) */}
+        <polygon points="30,10 16,18 16,34 30,26" fill="#d8d8d8" />
       </svg>
       <span className="flex flex-col leading-none">
         <span

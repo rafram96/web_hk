@@ -22,7 +22,7 @@ export const contact = {
   phoneHref: "+51989067242",
   whatsapp: "51989067242",
   email: "hkconsultora@gmail.com",
-  address: "Jr. Monterosa N.º 233 Int. 407 – Santiago de Surco – Lima",
+  address: "Jr. Huáscar N.º 1768 Dpto. D – Jesús María – Lima",
   city: "Lima, Perú",
   ruc: "20512925023",
 } as const;
