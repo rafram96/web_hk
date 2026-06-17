@@ -42,3 +42,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# fuentes de imágenes sin optimizar (las versiones finales viven en public/images)
+/public/proyectos_restantes/
