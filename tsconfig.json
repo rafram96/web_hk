@@ -30,5 +30,12 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "**/*.stories.tsx",
+    "src/components/ui/_ds",
+    "src/components/ui/index.ts",
+    ".storybook",
+    ".design-sync"
+  ]
 }

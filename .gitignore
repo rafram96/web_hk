@@ -45,3 +45,24 @@ next-env.d.ts
 
 # fuentes de imágenes sin optimizar (las versiones finales viven en public/images)
 /public/proyectos_restantes/
+
+# Storybook / design-sync (herramientas locales, fuera del build del sitio)
+.storybook/
+.design-sync/
+tsconfig.ds.json
+/src/components/ui/*.stories.tsx
+/src/components/ui/_ds/
+/src/components/ui/index.ts
+
+# Storybook — salida de build y logs (la config .storybook/ y las *.stories.tsx SÍ se versionan)
+storybook-static/
+*storybook.log
+build-storybook.log
+
+# design-sync — artefactos transitorios (la config, NOTES.md, previews/ y overrides/ SÍ se versionan)
+.ds-sync/
+ds-bundle/
+.design-sync/sb-reference/
+.design-sync/learnings/
+.design-sync/.cache/
+.design-sync/node_modules
