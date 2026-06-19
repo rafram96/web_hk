@@ -1,4 +1,4 @@
-import { Hero } from "@/components/sections/Hero";
+import { HeroNuevo } from "@/components/sections/HeroNuevo";
 import { About } from "@/components/sections/About";
 import { MissionVision } from "@/components/sections/MissionVision";
 import { Services } from "@/components/sections/Services";
@@ -13,7 +13,7 @@ import { Contact } from "@/components/sections/Contact";
 export default function Home() {
   return (
     <>
-      <Hero />
+      <HeroNuevo />
       <About />
       <MissionVision />
       <Services />

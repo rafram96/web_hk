@@ -109,29 +109,9 @@
   justify-content: center;
   width: 100%;
   max-width: 62%;
-  padding: clamp(40px, 7vh, 96px) clamp(32px, 6vw, 96px);
-  /* margen extra arriba para no chocar con la navbar fija */
-  padding-top: clamp(104px, 13vh, 168px);
+  /* top: holgura para la navbar fija; el sub se ancla abajo (margin-top:auto) */
+  padding: clamp(92px, 11vh, 140px) clamp(32px, 6vw, 96px) clamp(48px, 7vh, 88px);
 }
-
-.badge {
-  display: inline-flex;
-  align-self: flex-start;
-  align-items: center;
-  gap: 9px;
-  margin-bottom: 2.8vh;
-  padding: 9px 15px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 100px;
-  background: rgba(2, 21, 31, 0.25);
-  backdrop-filter: blur(6px);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #fff;
-}
-.badge .dot1 { width: 7px; height: 7px; border-radius: 50%; background: var(--color-orange); }
 
 .topkick { display: flex; align-items: center; gap: 14px; margin-bottom: 3vh; color: var(--color-orange-300); }
 .topkick .rule { width: 54px; height: 1px; background: var(--color-orange-300); }
@@ -152,7 +132,7 @@
 .stat .num .pre, .stat .num .suf { color: var(--color-orange); }
 .stat .lab { margin-top: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #9fb6c4; }
 
-.sub { max-width: 42ch; margin-top: 4vh; font-size: clamp(15px, 1.15vw, 19px); line-height: 1.6; color: #cddae3; }
+.sub { max-width: 42ch; margin-top: auto; padding-top: 3vh; font-size: clamp(15px, 1.15vw, 19px); line-height: 1.6; color: #cddae3; }
 
 /* ---------- Controles del carrusel ---------- */
 .controls {

@@ -37,7 +37,6 @@ export function HeroNuevo() {
   const heroRef = useRef<HTMLElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
   const [shown, setShown] = useState(false);
   const [counts, setCounts] = useState<number[]>(STATS.map(() => 0));
 
@@ -83,13 +82,13 @@ export function HeroNuevo() {
     return () => cancelAnimationFrame(raf);
   }, [shown]);
 
-  /* Auto-avance del carrusel: se reinicia con cada cambio (manual o auto). */
+  /* Auto-avance por tiempo (siempre, como el hero anterior): se reinicia con
+     cada cambio. El crossfade es suave; el zoom Ken Burns sí se desactiva bajo
+     prefers-reduced-motion vía CSS. */
   useEffect(() => {
-    if (paused) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = window.setTimeout(next, DELAY);
     return () => window.clearTimeout(t);
-  }, [active, paused, next]);
+  }, [active, next]);
 
   /* Glow naranja con parallax de puntero. */
   useEffect(() => {
@@ -126,8 +125,6 @@ export function HeroNuevo() {
       ref={heroRef}
       className={`${styles.hero} ${shown ? styles.in : ""}`}
       aria-label="HK Consulting — donde el país se construye"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
     >
       {/* Carrusel de fondo */}
       <div className={styles.carousel}>
@@ -157,13 +154,7 @@ export function HeroNuevo() {
 
       {/* Contenido */}
       <div className={styles.inner}>
-        <span className={`${styles.badge} ${styles.rv}`}>
-          Consultora de Ingeniería
-          <span className={styles.dot1} aria-hidden />
-          Perú
-        </span>
-
-        <div className={`${styles.topkick} ${styles.rv} ${styles.d1}`}>
+        <div className={`${styles.topkick} ${styles.rv}`}>
           <span className={styles.rule} aria-hidden />
           <span className={styles.kicker}>
             Preinversión · Expediente · Supervisión
