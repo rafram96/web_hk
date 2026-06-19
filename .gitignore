@@ -46,6 +46,9 @@ next-env.d.ts
 # fuentes de imágenes sin optimizar (las versiones finales viven en public/images)
 /public/proyectos_restantes/
 
+# prototipo del hero (referencia; ya portado a HeroNuevo.tsx)
+/nuevo_diseño/
+
 # Storybook / design-sync (herramientas locales, fuera del build del sitio)
 .storybook/
 .design-sync/
