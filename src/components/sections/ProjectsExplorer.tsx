@@ -202,9 +202,12 @@ function codeToNumber(code: string): number {
 }
 
 export function ProjectsExplorer() {
-  /* Orden por defecto: código descendente (recientes primero), estable. */
+  /* Orden por defecto: con imagen primero (código descendente, recientes
+     primero); los proyectos sin imagen quedan al final del listado. */
   const ordered = useMemo<Project[]>(() => {
     return [...projects].sort((a, b) => {
+      const imgDiff = (a.image ? 0 : 1) - (b.image ? 0 : 1);
+      if (imgDiff !== 0) return imgDiff;
       const diff = codeToNumber(b.code) - codeToNumber(a.code);
       if (diff !== 0) return diff;
       return a.slug.localeCompare(b.slug, "es");
