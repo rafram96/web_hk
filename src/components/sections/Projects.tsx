@@ -52,12 +52,20 @@ function StatusBadge({
    portada con zoom + overlay navy, estado, código mono, título
    display, entidad, sector y monto. Flecha "Ver ficha →" en hover.   */
 /* ------------------------------------------------------------------ */
-function FeaturedCard({ project }: { project: Project }) {
+function FeaturedCard({
+  project,
+  wide = false,
+}: {
+  project: Project;
+  wide?: boolean;
+}) {
   const hasImage = Boolean(project.image);
   return (
     <Link
       href={`/proyectos/${project.slug}`}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-float focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange"
+      className={`group relative h-full overflow-hidden rounded-2xl border border-line bg-white shadow-card transition-all duration-500 hover:-translate-y-1.5 hover:shadow-float focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange ${
+        wide ? "flex flex-col lg:grid lg:grid-cols-[1.25fr_0.75fr]" : "flex flex-col"
+      }`}
     >
       {/* Acento naranja superior que crece en hover */}
       <span
@@ -66,7 +74,11 @@ function FeaturedCard({ project }: { project: Project }) {
       />
 
       {hasImage ? (
-        <div className="relative aspect-[4/3] w-full overflow-hidden bg-navy-900">
+        <div
+          className={`relative w-full overflow-hidden bg-navy-900 ${
+            wide ? "aspect-[16/10] lg:aspect-auto lg:min-h-[29rem]" : "aspect-[4/3]"
+          }`}
+        >
           <Image
             src={project.image as string}
             alt={project.title}
@@ -118,12 +130,24 @@ function FeaturedCard({ project }: { project: Project }) {
         </div>
       )}
 
-      <div className="flex flex-1 flex-col p-6">
-        <h4 className="font-display text-lg font-bold leading-snug text-navy">
+      <div className={`relative flex flex-1 flex-col ${wide ? "p-7 lg:p-9" : "p-6"}`}>
+        {wide && (
+          <span
+            aria-hidden
+            className="pointer-events-none absolute -right-3 top-1 select-none font-display text-[6.5rem] font-black leading-none text-navy/[0.045]"
+          >
+            {project.code}
+          </span>
+        )}
+        <h4
+          className={`relative font-display font-bold leading-snug text-navy ${
+            wide ? "text-xl lg:text-3xl" : "text-lg"
+          }`}
+        >
           {project.title}
         </h4>
 
-        <p className="mt-2.5 text-sm leading-relaxed text-slate-soft">
+        <p className={`relative mt-2.5 leading-relaxed text-slate-soft ${wide ? "text-base" : "text-sm"}`}>
           {project.entity}
         </p>
 
@@ -164,27 +188,42 @@ export function Projects() {
 
         {/* 2) Experiencia por tipo de servicio */}
         <Reveal delay={80} className="mt-14">
-          <div className="overflow-hidden rounded-2xl border border-line bg-mist">
-            <div className="border-b border-line px-6 py-4">
-              <span className="kicker text-navy-300">
+          <div className="blueprint-grid relative overflow-hidden rounded-2xl border border-navy-800 bg-navy-900 text-white shadow-[var(--shadow-float)]">
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -right-6 -top-16 select-none font-display text-[13rem] font-black leading-none text-white/[0.035]"
+            >
+              50
+            </span>
+            <div className="relative flex items-center justify-between border-b border-white/10 px-6 py-4">
+              <span className="kicker text-orange-300">
                 Experiencia por tipo de servicio
               </span>
+              <span className="hidden font-mono text-[0.62rem] tracking-[0.18em] text-navy-300 uppercase sm:block">
+                Cobertura nacional
+              </span>
             </div>
-            <div className="grid grid-cols-2 divide-line lg:grid-cols-4 lg:divide-x">
+            <div className="relative grid grid-cols-2 lg:grid-cols-4">
               {experienceByType.map((item, i) => (
                 <div
                   key={item.title}
-                  className={`relative p-6 lg:p-7 ${
-                    i < 2 ? "border-b border-line lg:border-b-0" : ""
-                  } ${i % 2 === 1 ? "border-l border-line lg:border-l-0" : ""}`}
+                  className={`group/stat relative p-6 transition-colors duration-500 hover:bg-white/[0.045] lg:p-7 ${
+                    i < 2 ? "border-b border-white/10 lg:border-b-0" : ""
+                  } ${i % 2 === 1 ? "border-l border-white/10 lg:border-l-0" : ""} ${
+                    i > 0 ? "lg:border-l lg:border-white/10" : ""
+                  }`}
                 >
+                  <span
+                    aria-hidden
+                    className="absolute inset-x-0 bottom-0 h-[2px] origin-left scale-x-0 bg-orange transition-transform duration-500 group-hover/stat:scale-x-100"
+                  />
                   <span className="block font-display text-4xl font-extrabold leading-none text-orange lg:text-5xl">
                     <Counter value={item.count} />
                   </span>
-                  <h3 className="mt-3 font-display text-base font-bold leading-tight text-navy">
+                  <h3 className="mt-3 font-display text-base font-bold leading-tight text-white">
                     {item.title}
                   </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-slate-soft">
+                  <p className="mt-1.5 text-sm leading-relaxed text-navy-200">
                     {item.desc}
                   </p>
                 </div>
@@ -238,8 +277,21 @@ export function Projects() {
 
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
             {homeHighlights.map((project, i) => (
-              <Reveal key={project.slug} delay={(i % 3) * 90} className="h-full">
-                <FeaturedCard project={project} />
+              <Reveal
+                key={project.slug}
+                delay={(i % 3) * 90}
+                className={`h-full ${
+                  i === 0
+                    ? "md:col-span-2 lg:col-span-2"
+                    : i === homeHighlights.length - 1
+                      ? "md:col-span-2 lg:col-span-3"
+                      : ""
+                }`}
+              >
+                <FeaturedCard
+                  project={project}
+                  wide={i === 0 || i === homeHighlights.length - 1}
+                />
               </Reveal>
             ))}
           </div>

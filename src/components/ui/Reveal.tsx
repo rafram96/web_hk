@@ -29,6 +29,10 @@ export function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (!("IntersectionObserver" in window)) {
+      const fallbackFrame = requestAnimationFrame(() => setVisible(true));
+      return () => cancelAnimationFrame(fallbackFrame);
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

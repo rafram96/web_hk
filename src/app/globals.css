@@ -219,8 +219,61 @@
   animation-name: hk-fade;
 }
 
+/* ---------- Secuencias narrativas dentro de un Reveal ---------- */
+.hk-sequence-line,
+.hk-row-draw,
+.hk-process-line-x {
+  transform: scaleX(0);
+  transition: transform 1.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hk-sequence-line { transition-delay: 100ms; }
+.hk-row-draw { transition-delay: 180ms; }
+.hk-process-line-x { transition-delay: 240ms; }
+
+.hk-process-line-y {
+  transform: scaleY(0);
+  transition: transform 1.25s cubic-bezier(0.16, 1, 0.3, 1) 240ms;
+}
+
+.hk-sequence-item,
+.hk-process-step {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-reveal].is-visible .hk-sequence-line,
+[data-reveal].is-visible .hk-row-draw,
+[data-reveal].is-visible .hk-process-line-x {
+  transform: scaleX(1);
+}
+
+[data-reveal].is-visible .hk-process-line-y {
+  transform: scaleY(1);
+}
+
+[data-reveal].is-visible .hk-sequence-item,
+[data-reveal].is-visible .hk-process-step {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   [data-reveal] { opacity: 1 !important; animation: none !important; }
+  .hk-sequence-line,
+  .hk-row-draw,
+  .hk-process-line-x,
+  .hk-process-line-y,
+  .hk-sequence-item,
+  .hk-process-step {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .animate-ping { animation: none !important; }
   body::before { display: none; }
 }

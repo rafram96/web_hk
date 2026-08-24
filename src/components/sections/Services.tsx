@@ -40,11 +40,42 @@ export function Services() {
           intro="Desde la idea inicial hasta la culminación de la obra, integramos las tres etapas críticas bajo un solo equipo."
         />
 
+        {/* Regla de secuencia: anticipa visualmente el recorrido completo. */}
+        <Reveal delay={180} className="mt-12 lg:mt-16">
+          <div className="relative overflow-hidden border-y border-navy/10 bg-paper/65 px-1 py-7 sm:px-5">
+            <span
+              aria-hidden
+              className="hk-sequence-line absolute left-[8%] right-[8%] top-[2.65rem] h-px origin-left bg-gradient-to-r from-orange via-orange to-navy-200"
+            />
+            <div className="relative grid grid-cols-3 gap-2 sm:gap-8">
+              {services.map((service, index) => (
+                <Link
+                  key={service.slug}
+                  href={`/servicios#${service.slug}`}
+                  className="hk-sequence-item group/phase min-w-0 text-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
+                  style={{ transitionDelay: `${220 + index * 140}ms` }}
+                >
+                  <span className="mx-auto flex size-8 items-center justify-center rounded-full border border-navy/20 bg-paper font-mono text-[0.65rem] font-semibold text-orange shadow-card transition-all duration-300 group-hover/phase:-translate-y-1 group-hover/phase:border-orange group-hover/phase:bg-orange group-hover/phase:text-white sm:size-10">
+                    {service.num}
+                  </span>
+                  <span className="mt-3 block min-h-10 text-balance font-display text-[0.68rem] font-bold leading-tight text-navy transition-colors group-hover/phase:text-orange-700 sm:min-h-0 sm:text-base">
+                    {service.title}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
         {/* Listado editorial: filas con numeral display gigante y divisores técnicos. */}
-        <div className="mt-16 lg:mt-20">
+        <div className="mt-10 lg:mt-14">
           {services.map((s, i) => (
             <Reveal key={s.slug} delay={i * 90}>
-              <article className="group relative grid grid-cols-1 gap-x-10 gap-y-6 border-t border-line py-10 lg:grid-cols-[auto_minmax(0,1fr)_minmax(0,18rem)] lg:items-start lg:py-12 lg:last:border-b">
+              <article className="group relative grid grid-cols-1 gap-x-10 gap-y-6 overflow-hidden border-t border-line px-2 py-10 transition-colors duration-500 hover:bg-paper/70 sm:px-4 lg:grid-cols-[auto_minmax(0,1fr)_minmax(0,18rem)] lg:items-start lg:px-6 lg:py-12 lg:last:border-b">
+                <span
+                  aria-hidden
+                  className="hk-row-draw absolute inset-x-0 top-0 h-[2px] origin-left bg-gradient-to-r from-orange via-orange/70 to-transparent"
+                />
                 {/* Numeral display gigante — protagonista de la fila */}
                 <div className="flex items-start gap-4 lg:block">
                   <span
@@ -60,7 +91,7 @@ export function Services() {
 
                 {/* Cuerpo: título + descripción */}
                 <div>
-                  <h3 className="font-display text-2xl leading-tight tracking-tight text-navy sm:text-3xl lg:text-[2rem]">
+                  <h3 className="font-display text-2xl leading-tight tracking-tight text-navy transition-transform duration-500 group-hover:translate-x-1.5 sm:text-3xl lg:text-[2rem]">
                     {s.title}
                   </h3>
                   <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-soft lg:min-h-[3.25rem]">

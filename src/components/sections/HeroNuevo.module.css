@@ -25,7 +25,7 @@
   opacity: 0.05;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: grainShift 0.5s steps(3) infinite;
+  animation: grainShift 0.9s steps(3) infinite paused;
 }
 @keyframes grainShift {
   0% { transform: translate(0, 0); }
@@ -38,8 +38,12 @@
 .carousel { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
 .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.3s ease; }
 .slideActive { opacity: 1; }
-.slideImg { object-fit: cover; transform: scale(1.04); }
-.slideActive .slideImg { animation: kenburns 8s ease-out forwards; will-change: transform; }
+.slideImg {
+  object-fit: cover;
+  object-position: var(--slide-position, 50% 50%);
+  transform: scale(1.04);
+}
+.slideActive .slideImg { animation: kenburns 8s ease-out forwards paused; will-change: transform; }
 @keyframes kenburns {
   from { transform: scale(1.04); }
   to { transform: scale(1.14); }
@@ -56,7 +60,7 @@
   border-radius: 50%;
   filter: blur(20px);
   background: radial-gradient(circle, rgba(232, 122, 44, 0.46), transparent 62%);
-  animation: glowBreath 9s ease-in-out infinite;
+  animation: glowBreath 9s ease-in-out infinite paused;
 }
 @keyframes glowBreath {
   0%, 100% { transform: scale(1); opacity: 0.8; }
@@ -157,24 +161,42 @@
 .dot {
   position: relative;
   width: 40px;
-  height: 3px;
+  height: 34px;
   padding: 0;
   border: none;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.25);
+  background: transparent;
   cursor: pointer;
   overflow: hidden;
 }
-.dot::after { content: ""; position: absolute; inset: 0; width: 0; border-radius: 3px; background: var(--color-orange); }
-.dotActive::after { animation: dotFill 5s linear forwards; }
+.dot::before,
+.dot::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 3px;
+  border-radius: 3px;
+  transform: translateY(-50%);
+}
+.dot::before { width: 100%; background: rgba(255, 255, 255, 0.25); }
+.dot::after { width: 0; background: var(--color-orange); }
+.dotActive::after { animation: dotFill 5s linear forwards paused; }
 @keyframes dotFill { from { width: 0; } to { width: 100%; } }
+
+/* Pausa el trabajo continuo cuando el hero sale del viewport. */
+.motionActive .grain,
+.motionActive .slideActive .slideImg,
+.motionActive .glow,
+.motionActive .dotActive::after {
+  animation-play-state: running;
+}
 
 .navbtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   background: rgba(2, 21, 31, 0.3);
@@ -188,15 +210,23 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 820px) {
-  .inner { max-width: 100%; }
+  .inner {
+    max-width: 100%;
+    padding: 92px clamp(24px, 8vw, 34px) 112px;
+  }
+  .slideImg { object-position: var(--slide-position-mobile, 50% 50%); }
   .scrim { background: linear-gradient(0deg, rgba(2,17,26,0.96) 20%, rgba(2,17,26,0.55) 54%, rgba(2,17,26,0.3)); }
-  .controls { left: clamp(32px, 6vw, 96px); right: auto; bottom: 18px; }
+  .controls { left: clamp(24px, 8vw, 34px); right: auto; bottom: 18px; gap: 10px; }
   .caption { display: none; }
+  .topkick { align-items: flex-start; }
+  .topkick .rule { margin-top: 0.45rem; width: 38px; }
+  .stats { gap: clamp(18px, 7vw, 30px); }
+  .sub { max-width: 34ch; padding-top: 2.5vh; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .rv, .wmask > span { opacity: 1 !important; transform: none !important; filter: none !important; transition: opacity 0.4s; }
   .grain, .slideActive .slideImg, .glow, .dotActive::after { animation: none !important; }
   .slideActive .slideImg { transform: scale(1.06); }
-  .dotActive { background: var(--color-orange); }
+  .dotActive::before { background: var(--color-orange); }
 }

@@ -1,26 +1,35 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import styles from "./HeroNuevo.module.css";
 
-type Slide = { src: string; alt: string; pos: string };
+type Slide = { src: string; alt: string; pos: string; mobilePos: string };
 
 const SLIDES: Slide[] = [
   {
     src: "/images/hero-congreso-front.jpg",
     alt: "Líder de HK Consulting frente al Congreso de la República",
     pos: "72% 50%",
+    mobilePos: "96% 50%",
   },
   {
     src: "/images/hero-congreso-fila.jpg",
     alt: "Equipo de HK Consulting en fila frente al Congreso",
     pos: "50% 52%",
+    mobilePos: "52% 52%",
   },
   {
     src: "/images/equipo-completo.jpg",
     alt: "Equipo completo de HK Consulting en la plaza del Congreso",
     pos: "46% 66%",
+    mobilePos: "50% 66%",
   },
 ];
 
@@ -38,6 +47,7 @@ export function HeroNuevo() {
   const glowRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [shown, setShown] = useState(false);
+  const [inViewport, setInViewport] = useState(true);
   const [counts, setCounts] = useState<number[]>(STATS.map(() => 0));
 
   const next = useCallback(() => setActive((i) => (i + 1) % SLIDES.length), []);
@@ -51,8 +61,12 @@ export function HeroNuevo() {
     const el = heroRef.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && setShown(true)),
-      { threshold: 0.2 },
+      (entries) =>
+        entries.forEach((entry) => {
+          setInViewport(entry.isIntersecting);
+          if (entry.isIntersecting) setShown(true);
+        }),
+      { threshold: 0.08 },
     );
     io.observe(el);
     const t = window.setTimeout(() => setShown(true), 1500);
@@ -88,12 +102,14 @@ export function HeroNuevo() {
      cada cambio. El crossfade es suave; el zoom Ken Burns sí se desactiva bajo
      prefers-reduced-motion vía CSS. */
   useEffect(() => {
+    if (!inViewport) return;
     const t = window.setTimeout(next, DELAY);
     return () => window.clearTimeout(t);
-  }, [active, next]);
+  }, [active, inViewport, next]);
 
   /* Glow naranja con parallax de puntero. */
   useEffect(() => {
+    if (!inViewport) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (!window.matchMedia("(pointer: fine)").matches) return;
     let tx = 0;
@@ -104,6 +120,7 @@ export function HeroNuevo() {
     const onMove = (e: PointerEvent) => {
       tx = e.clientX / window.innerWidth - 0.5;
       ty = e.clientY / window.innerHeight - 0.5;
+      if (!raf) raf = requestAnimationFrame(loop);
     };
     const loop = () => {
       cx += (tx - cx) * 0.06;
@@ -112,20 +129,22 @@ export function HeroNuevo() {
       if (glowRef.current) {
         glowRef.current.style.transform = `translate3d(${(cx * depth).toFixed(2)}px,${(cy * depth).toFixed(2)}px,0)`;
       }
-      raf = requestAnimationFrame(loop);
+      const moving = Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001;
+      raf = moving ? requestAnimationFrame(loop) : 0;
     };
     window.addEventListener("pointermove", onMove, { passive: true });
-    raf = requestAnimationFrame(loop);
     return () => {
       window.removeEventListener("pointermove", onMove);
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [inViewport]);
 
   return (
     <section
       ref={heroRef}
-      className={`${styles.hero} ${shown ? styles.in : ""}`}
+      className={`${styles.hero} ${shown ? styles.in : ""} ${
+        inViewport ? styles.motionActive : ""
+      }`}
       aria-label="HK Consulting — donde el país se construye"
     >
       {/* Carrusel de fondo */}
@@ -134,6 +153,12 @@ export function HeroNuevo() {
           <div
             key={s.src}
             className={`${styles.slide} ${idx === active ? styles.slideActive : ""}`}
+            style={
+              {
+                "--slide-position": s.pos,
+                "--slide-position-mobile": s.mobilePos,
+              } as CSSProperties
+            }
           >
             <Image
               src={s.src}
@@ -142,7 +167,6 @@ export function HeroNuevo() {
               priority={idx === 0}
               sizes="100vw"
               className={styles.slideImg}
-              style={{ objectPosition: s.pos }}
             />
           </div>
         ))}
