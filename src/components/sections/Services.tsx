@@ -70,7 +70,11 @@ export function Services() {
         {/* Listado editorial: filas con numeral display gigante y divisores técnicos. */}
         <div className="mt-10 lg:mt-14">
           {services.map((s, i) => (
-            <Reveal key={s.slug} delay={i * 90}>
+            <Reveal
+              key={s.slug}
+              variant={i % 2 === 0 ? "left" : "right"}
+              delay={i * 110}
+            >
               <article className="group relative grid grid-cols-1 gap-x-10 gap-y-6 overflow-hidden border-t border-line px-2 py-10 transition-colors duration-500 hover:bg-paper/70 sm:px-4 lg:grid-cols-[auto_minmax(0,1fr)_minmax(0,18rem)] lg:items-start lg:px-6 lg:py-12 lg:last:border-b">
                 <span
                   aria-hidden

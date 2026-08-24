@@ -58,8 +58,8 @@ export function About() {
 
           {/* Columna imagen — marco cuidado con overlap navy + cota */}
           <div className="lg:col-span-7 lg:pl-8">
-            <Reveal variant="fade" delay={120}>
-              <figure className="relative">
+            <Reveal variant="zoom" delay={120}>
+              <figure className="relative" data-parallax="54">
                 {/* Índice editorial gigante de fondo */}
                 <span
                   aria-hidden
@@ -125,7 +125,7 @@ export function About() {
         </div>
 
         {/* Banda de estadísticas sobre panel navy — máxima presencia */}
-        <Reveal delay={120} className="mt-24 lg:mt-32">
+        <Reveal variant="zoom" delay={120} className="mt-24 lg:mt-32">
           <div className="blueprint-grid relative overflow-hidden rounded-3xl bg-navy px-7 py-12 shadow-[var(--shadow-float)] sm:px-12 lg:py-16">
             {/* Acento naranja superior */}
             <span

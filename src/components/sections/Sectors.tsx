@@ -44,6 +44,7 @@ export function Sectors() {
             className="hidden shrink-0 select-none text-right lg:block"
           >
             <span
+              data-parallax="86"
               className="display-index block text-[8rem] text-white/[0.07] xl:text-[10rem]"
               aria-hidden
             >
@@ -74,6 +75,7 @@ export function Sectors() {
               <Reveal
                 key={sector.num}
                 as="li"
+                variant={index % 2 === 0 ? "left" : "right"}
                 delay={(index % 4) * 60}
                 className="group border-t border-white/10 transition-colors duration-300 first:border-t-0 hover:bg-white/[0.03]"
               >

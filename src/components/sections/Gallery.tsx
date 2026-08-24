@@ -58,11 +58,12 @@ export function Gallery() {
           {galleryShowcase.map((item, i) => (
             <Reveal
               key={item.src}
-              variant="fade"
-              delay={(i % 4) * 70}
+              variant="zoom"
+              delay={(i % 4) * 110}
               className={`${spanClass[i] ?? ""} h-full`}
             >
               <button
+                data-parallax={i % 3 === 0 ? "26" : i % 3 === 1 ? "-18" : "12"}
                 type="button"
                 onClick={() => setIndex(i)}
                 aria-label={`Ampliar imagen: ${item.caption}`}

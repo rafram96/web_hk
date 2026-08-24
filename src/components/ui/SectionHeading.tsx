@@ -24,10 +24,10 @@ export function SectionHeading({
   const isCenter = align === "center";
   return (
     <div
-      className={`${isCenter ? "mx-auto max-w-3xl text-center" : "max-w-[46rem]"} ${className}`}
+      className={`${isCenter ? "mx-auto max-w-4xl text-center" : "max-w-[54rem]"} ${className}`}
     >
       {kicker && (
-        <Reveal variant="fade">
+        <Reveal variant="wipe">
           <div
             className={`flex items-center gap-3 ${isCenter ? "justify-center" : ""}`}
           >
@@ -40,9 +40,9 @@ export function SectionHeading({
           </div>
         </Reveal>
       )}
-      <Reveal delay={60}>
+      <Reveal variant="headline" delay={80}>
         <h2
-          className={`mt-5 text-[2.15rem] leading-[1.03] sm:text-[2.6rem] lg:text-[3.25rem] ${
+          className={`mt-5 text-[2.35rem] leading-[0.98] sm:text-[3rem] lg:text-[4.15rem] ${
             tone === "dark" ? "text-white" : "text-navy"
           }`}
         >
@@ -50,7 +50,7 @@ export function SectionHeading({
         </h2>
       </Reveal>
       {intro && (
-        <Reveal delay={120}>
+        <Reveal delay={180}>
           <p
             className={`mt-6 text-lg leading-relaxed lg:text-xl ${
               tone === "dark" ? "text-navy-100" : "text-slate-soft"

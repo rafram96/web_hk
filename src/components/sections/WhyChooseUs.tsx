@@ -58,7 +58,7 @@ export function WhyChooseUs() {
         />
 
         {/* Matriz de hairlines: 1px cálido entre celdas (gap-px sobre bg-line). */}
-        <Reveal delay={80} className="mt-12">
+        <Reveal variant="zoom" delay={80} className="mt-12">
           <div className="grid overflow-hidden rounded-3xl border border-line bg-line shadow-card sm:grid-cols-2 lg:grid-cols-3 gap-px">
             {whyChooseUs.map((reason, i) => (
               <article

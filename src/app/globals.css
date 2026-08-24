@@ -77,6 +77,58 @@
   to { transform: scale(1); }
 }
 
+@keyframes hk-reveal-headline {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(5.5rem) rotate(1.2deg);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0) rotate(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes hk-reveal-left {
+  from { opacity: 0; transform: translateX(-7rem) rotate(-1.5deg); }
+  to { opacity: 1; transform: translateX(0) rotate(0); }
+}
+
+@keyframes hk-reveal-right {
+  from { opacity: 0; transform: translateX(7rem) rotate(1.5deg); }
+  to { opacity: 1; transform: translateX(0) rotate(0); }
+}
+
+@keyframes hk-reveal-zoom {
+  from {
+    opacity: 0;
+    clip-path: inset(12% 10% 12% 10% round 2rem);
+    transform: scale(0.84) rotate(-1.25deg);
+    filter: saturate(0.55);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0 round 0);
+    transform: scale(1) rotate(0);
+    filter: saturate(1);
+  }
+}
+
+@keyframes hk-reveal-wipe {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+
+@keyframes hk-scene-sweep {
+  0% { opacity: 0; transform: translate3d(-145%, 0, 0) skewX(-10deg); }
+  18% { opacity: 0.95; }
+  72% { opacity: 0.75; }
+  100% { opacity: 0; transform: translate3d(390%, 0, 0) skewX(-10deg); }
+}
+
 /* ---------- Base ----------
    En @layer base para que las utilidades (text-white, etc.) ganen. */
 :root {
@@ -219,6 +271,105 @@
   animation-name: hk-fade;
 }
 
+[data-reveal].is-visible[data-reveal="headline"] {
+  animation: hk-reveal-headline 1.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+[data-reveal].is-visible[data-reveal="left"] {
+  animation: hk-reveal-left 1.05s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+[data-reveal].is-visible[data-reveal="right"] {
+  animation: hk-reveal-right 1.05s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+[data-reveal].is-visible[data-reveal="zoom"] {
+  animation: hk-reveal-zoom 1.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+[data-reveal].is-visible[data-reveal="wipe"] {
+  animation: hk-reveal-wipe 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ---------- Dirección de scroll: barrido, profundidad y progreso ---------- */
+.hk-scene-sweep,
+.hk-page-progress {
+  display: none;
+}
+
+.hk-scroll-enabled [data-scroll-scene] {
+  overflow: clip;
+  isolation: isolate;
+}
+
+.hk-scroll-enabled .hk-scene-sweep {
+  position: absolute;
+  z-index: 45;
+  inset-block: 0;
+  left: 0;
+  display: block;
+  width: min(42rem, 48vw);
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(232, 122, 44, 0.12) 18%,
+    rgba(232, 122, 44, 0.92) 47%,
+    rgba(255, 255, 255, 0.82) 50%,
+    rgba(232, 122, 44, 0.24) 54%,
+    transparent 100%
+  );
+  box-shadow: 0 0 5rem rgba(232, 122, 44, 0.2);
+}
+
+.hk-scroll-enabled [data-scroll-scene].is-scroll-active > .hk-scene-sweep {
+  animation: hk-scene-sweep 1.15s cubic-bezier(0.45, 0, 0.2, 1) both;
+}
+
+.hk-scroll-enabled [data-parallax] {
+  transform: translate3d(0, var(--parallax-y, 0), 0);
+  will-change: transform;
+}
+
+.hk-scroll-enabled .hk-page-progress {
+  position: fixed;
+  z-index: 55;
+  right: 1.1rem;
+  top: 50%;
+  display: none;
+  height: 30vh;
+  min-height: 11rem;
+  width: 1px;
+  transform: translateY(-50%);
+  background: rgba(4, 57, 91, 0.18);
+  pointer-events: none;
+}
+
+.hk-page-progress > span {
+  position: absolute;
+  inset: 0;
+  background: var(--color-orange);
+  transform: scaleY(var(--page-progress, 0));
+  transform-origin: top;
+  box-shadow: 0 0 1rem rgba(232, 122, 44, 0.45);
+}
+
+.hk-page-progress > small {
+  position: absolute;
+  left: -0.36rem;
+  top: -3.25rem;
+  color: var(--color-navy-400);
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  writing-mode: vertical-rl;
+}
+
+@media (min-width: 1280px) {
+  .hk-scroll-enabled .hk-page-progress { display: block; }
+}
+
 /* ---------- Secuencias narrativas dentro de un Reveal ---------- */
 .hk-sequence-line,
 .hk-row-draw,
@@ -264,6 +415,12 @@
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   [data-reveal] { opacity: 1 !important; animation: none !important; }
+  .hk-scene-sweep,
+  .hk-page-progress { display: none !important; }
+  [data-parallax] {
+    transform: none !important;
+    will-change: auto !important;
+  }
   .hk-sequence-line,
   .hk-row-draw,
   .hk-process-line-x,

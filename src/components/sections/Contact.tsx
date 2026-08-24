@@ -176,7 +176,7 @@ export function Contact() {
 
         <div className="mt-14 grid gap-8 lg:mt-16 lg:grid-cols-[0.85fr_1fr] lg:gap-12">
           {/* ---------- IZQUIERDA: datos de contacto ---------- */}
-          <Reveal className="h-full">
+          <Reveal variant="left" className="h-full">
             <div className="flex h-full flex-col gap-4">
               <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
                 {infoRows.map((row) => {
@@ -249,7 +249,7 @@ export function Contact() {
           </Reveal>
 
           {/* ---------- DERECHA: formulario ---------- */}
-          <Reveal delay={120} className="h-full">
+          <Reveal variant="right" delay={120} className="h-full">
             <form
               onSubmit={handleSubmit}
               noValidate

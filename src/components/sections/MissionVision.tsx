@@ -71,7 +71,11 @@ export function MissionVision() {
         {/* Dos paneles institucionales lado a lado. */}
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:gap-8">
           {pillars.map((pillar, index) => (
-            <Reveal key={pillar.label} delay={index * 80}>
+            <Reveal
+              key={pillar.label}
+              variant={index === 0 ? "left" : "right"}
+              delay={index * 120}
+            >
               <article className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-navy-800/50 p-8 transition-colors duration-300 hover:border-white/20 lg:p-10">
                 <div className="relative">
                   <span className="accent-rule block" aria-hidden />
@@ -96,7 +100,12 @@ export function MissionVision() {
 
           <div className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
             {valores.map((valor, index) => (
-              <Reveal key={valor.title} delay={index * 80} className="h-full">
+              <Reveal
+                key={valor.title}
+                variant="zoom"
+                delay={index * 100}
+                className="h-full"
+              >
                 <div className="group relative flex h-full flex-col bg-navy-900/60 p-7 transition-colors duration-300 hover:bg-navy-800/70">
                   {/* Ícono del valor */}
                   <svg

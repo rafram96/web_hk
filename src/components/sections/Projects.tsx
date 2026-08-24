@@ -187,7 +187,7 @@ export function Projects() {
         />
 
         {/* 2) Experiencia por tipo de servicio */}
-        <Reveal delay={80} className="mt-14">
+        <Reveal variant="zoom" delay={80} className="mt-14">
           <div className="blueprint-grid relative overflow-hidden rounded-2xl border border-navy-800 bg-navy-900 text-white shadow-[var(--shadow-float)]">
             <span
               aria-hidden
@@ -279,6 +279,7 @@ export function Projects() {
             {homeHighlights.map((project, i) => (
               <Reveal
                 key={project.slug}
+                variant={i % 2 === 0 ? "left" : "right"}
                 delay={(i % 3) * 90}
                 className={`h-full ${
                   i === 0

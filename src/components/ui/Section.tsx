@@ -27,8 +27,10 @@ export function Section({
   return (
     <section
       id={id}
+      data-scroll-scene
       className={`relative ${flush ? "" : "py-20 lg:py-28"} ${toneClass[tone]} ${className}`}
     >
+      <span className="hk-scene-sweep" aria-hidden />
       {children}
     </section>
   );

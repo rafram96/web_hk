@@ -7,7 +7,7 @@ type RevealProps = {
   /** Retraso de la animación en ms (para escalonar). */
   delay?: number;
   /** Variante de animación. */
-  variant?: "up" | "fade";
+  variant?: "up" | "fade" | "headline" | "left" | "right" | "zoom" | "wipe";
   as?: ElementType;
   className?: string;
 };

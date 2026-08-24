@@ -9,10 +9,12 @@ import { Gallery } from "@/components/sections/Gallery";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { Certifications } from "@/components/sections/Certifications";
 import { Contact } from "@/components/sections/Contact";
+import { ScrollDirector } from "@/components/ui/ScrollDirector";
 
 export default function Home() {
   return (
     <>
+      <ScrollDirector />
       <HeroNuevo />
       <About />
       <MissionVision />

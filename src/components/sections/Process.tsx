@@ -14,6 +14,7 @@ export function Process() {
     <Section id="metodologia" tone="light" className="overflow-hidden">
       <span
         aria-hidden
+        data-parallax="100"
         className="pointer-events-none absolute -right-8 top-8 select-none font-display text-[18rem] font-black leading-none text-navy/[0.025] lg:text-[28rem]"
       >
         04
@@ -25,7 +26,7 @@ export function Process() {
           intro="Trabajamos en campo, levantamos información directa y documentamos cada hallazgo."
         />
 
-        <Reveal delay={180} className="mt-16 lg:mt-20">
+        <Reveal variant="zoom" delay={180} className="mt-16 lg:mt-20">
           <div className="blueprint-grid relative overflow-hidden rounded-[2rem] bg-navy-900 px-6 py-8 shadow-[var(--shadow-float)] sm:px-9 lg:px-12 lg:py-11">
             <span
               aria-hidden
