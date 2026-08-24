@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { HeroCarousel, type HeroSlide } from "./HeroCarousel";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
@@ -140,7 +141,7 @@ export function Hero() {
             <Button href="/servicios" variant="primary">
               Nuestros servicios
             </Button>
-            <a
+            <Link
               href="/#contacto"
               className="group inline-flex items-center gap-2 text-sm font-semibold text-white/85 transition-colors hover:text-white"
             >
@@ -148,7 +149,7 @@ export function Hero() {
               <span aria-hidden className="text-orange transition-transform duration-300 group-hover:translate-x-1">
                 &rarr;
               </span>
-            </a>
+            </Link>
           </Reveal>
         </div>
       </div>

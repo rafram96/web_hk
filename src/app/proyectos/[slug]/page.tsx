@@ -134,24 +134,6 @@ function buildDescription(project: Project): string {
 }
 
 /* ================================================================
-   Fila de la ficha técnica (etiqueta mono + valor).
-   ================================================================ */
-function FichaRow({
-  label,
-  value,
-}: {
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="flex flex-col gap-1 border-b border-line py-3.5 last:border-b-0 sm:flex-row sm:items-baseline sm:gap-4">
-      <dt className="kicker shrink-0 text-navy-300 sm:w-40">{label}</dt>
-      <dd className="font-medium text-ink">{value}</dd>
-    </div>
-  );
-}
-
-/* ================================================================
    Tarjeta de proyecto relacionado.
    ================================================================ */
 function RelatedCard({ project }: { project: Project }) {

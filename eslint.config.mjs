@@ -12,6 +12,17 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local tooling and generated design-system artifacts:
+    ".claude/**",
+    ".storybook/**",
+    ".design-sync/**",
+    ".ds-sync/**",
+    "storybook-static/**",
+    "ds-bundle/**",
+    "nuevo_diseño/**",
+    "src/components/ui/*.stories.tsx",
+    "src/components/ui/_ds/**",
+    "src/components/ui/index.ts",
   ]),
 ]);
 

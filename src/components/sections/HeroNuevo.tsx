@@ -66,8 +66,10 @@ export function HeroNuevo() {
   useEffect(() => {
     if (!shown) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setCounts(STATS.map((s) => s.value));
-      return;
+      const reducedMotionFrame = requestAnimationFrame(() => {
+        setCounts(STATS.map((s) => s.value));
+      });
+      return () => cancelAnimationFrame(reducedMotionFrame);
     }
     const dur = 1600;
     const start = performance.now();
