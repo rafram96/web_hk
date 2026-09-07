@@ -25,6 +25,9 @@ preinversión, expedientes técnicos y supervisión de obras). Contenido derivad
   mision, vision, valores, services, sectors, experienceByType, whyChooseUs,
   howWeWork, projectCounts, featuredProjects, projects, certifications, nav).
   Editar ahí actualiza toda la web.
+- **Dominio**: `siteUrl` en `src/lib/site.ts` es el único lugar donde vive la URL
+  base (metadata, sitemap, robots y JSON-LD la importan de ahí); se puede
+  sobrescribir con la variable de entorno `NEXT_PUBLIC_SITE_URL`.
 - **Tokens de marca** (en `@theme`): `navy` (#04395B, +escala 50–950), `orange`
   (#E87A2C, +escala), `mist`, `ink`, `slate-soft`, `line`. Fuentes: `font-display`
   (Archivo), `font-sans` (IBM Plex Sans), `font-mono` (IBM Plex Mono).

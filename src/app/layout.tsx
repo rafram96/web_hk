@@ -3,7 +3,7 @@ import { Bricolage_Grotesque, Hanken_Grotesk, IBM_Plex_Mono } from "next/font/go
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { company, projectsHeadline, regionsCovered } from "@/lib/site";
+import { company, projectsHeadline, regionsCovered, siteUrl } from "@/lib/site";
 
 // Display con carácter (editorial técnico).
 const bricolage = Bricolage_Grotesque({
@@ -28,8 +28,6 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500", "600"],
   display: "swap",
 });
-
-const siteUrl = "https://hkconsulting.pe";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

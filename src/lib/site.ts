@@ -3,6 +3,14 @@
  * Extraído del "Brochure HK Consulting 2026". Editar aquí actualiza toda la web.
  */
 
+/**
+ * URL base del sitio. ÚNICO lugar donde se define el dominio: metadata,
+ * sitemap, robots y JSON-LD lo importan de aquí. Para cambiarlo basta con
+ * editar esta línea (o definir NEXT_PUBLIC_SITE_URL en el entorno).
+ */
+export const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://hkconsulting.pe";
+
 export const company = {
   legalName: "HK Consulting S.A.C.",
   shortName: "HK Consulting",
@@ -25,6 +33,18 @@ export const contact = {
   address: "Jr. Huáscar N.º 1768 Dpto. D – Jesús María – Lima",
   city: "Lima, Perú",
   ruc: "20512925023",
+} as const;
+
+/**
+ * La misma dirección de `contact.address`, desglosada en los campos que
+ * schema.org/PostalAddress necesita para el JSON-LD. No añade información:
+ * solo separa lo que ya está en `contact.address`.
+ */
+export const postalAddress = {
+  streetAddress: "Jr. Huáscar N.º 1768 Dpto. D",
+  addressLocality: "Jesús María",
+  addressRegion: "Lima",
+  addressCountry: "PE",
 } as const;
 
 /* ------------------------------------------------------------------
