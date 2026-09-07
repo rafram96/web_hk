@@ -47,6 +47,8 @@ preinversión, expedientes técnicos y supervisión de obras). Contenido derivad
 - `src/app/servicios/page.tsx` — página de servicios detallada.
 - `src/app/layout.tsx` — fuentes, metadata SEO, Navbar + Footer.
 - `public/images`, `public/certs`, `public/logo.jpg` — assets de marca.
+- **Material crudo**: las 21 fotos de obra sin procesar (51 MB) ya no viven en
+  `public/`; están en `../Web_HK_material/proyectos_restantes`, fuera del repo.
 
 ## Comandos
 - `npm run dev` — desarrollo (http://localhost:3000)

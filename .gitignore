@@ -43,7 +43,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# fuentes de imágenes sin optimizar (las versiones finales viven en public/images)
+# fuentes de imágenes sin optimizar. El material crudo se movió fuera del repo,
+# a ../Web_HK_material/proyectos_restantes; la regla queda por si reaparece.
 /public/proyectos_restantes/
 
 # prototipo del hero (referencia; ya portado a HeroNuevo.tsx)
