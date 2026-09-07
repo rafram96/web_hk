@@ -38,6 +38,16 @@
   100% { transform: translate(-1%, 1%); }
 }
 
+/* ---------- Fondo en vídeo (opcional, prop videoSrc) ---------- */
+.video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* ---------- Carrusel ---------- */
 .carousel { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
 .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.3s ease; }
@@ -72,13 +82,17 @@
 }
 
 /* ---------- Scrim direccional (legibilidad izquierda) ---------- */
+/* Las tomas aereas son mucho mas claras que las fotos anteriores, asi que
+   el degradado sube de densidad y se anade un velo base para que el titular
+   blanco mantenga contraste sobre cualquier zona de la imagen. */
 .scrim {
   position: absolute;
   inset: 0;
   z-index: 2;
   background:
-    linear-gradient(95deg, rgba(2,17,26,0.93) 0%, rgba(2,17,26,0.72) 32%, rgba(2,17,26,0.2) 58%, transparent 74%),
-    linear-gradient(0deg, rgba(2,17,26,0.62), transparent 36%);
+    linear-gradient(95deg, rgba(2,17,26,0.96) 0%, rgba(2,17,26,0.88) 30%, rgba(2,17,26,0.52) 58%, rgba(2,17,26,0.22) 80%),
+    linear-gradient(0deg, rgba(2,17,26,0.78), transparent 44%),
+    linear-gradient(rgba(2,17,26,0.28), rgba(2,17,26,0.28));
 }
 
 /* ---------- Reveals ---------- */
@@ -140,7 +154,53 @@
 .stat .num .pre, .stat .num .suf { color: var(--color-orange); }
 .stat .lab { margin-top: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #9fb6c4; }
 
-.sub { max-width: 42ch; margin-top: auto; padding-top: 3vh; font-size: clamp(15px, 1.15vw, 19px); line-height: 1.6; color: #cddae3; }
+.foot { margin-top: auto; padding-top: 3vh; }
+.sub {
+  max-width: 42ch;
+  font-size: clamp(15px, 1.15vw, 19px);
+  line-height: 1.6;
+  color: #dbe6ee;
+}
+
+/* ---------- Llamadas a la accion ---------- */
+.ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 26px; }
+
+.ctaPrimary,
+.ctaGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  padding: 14px 26px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: background 0.3s, border-color 0.3s, color 0.3s, transform 0.3s;
+}
+.ctaPrimary:focus-visible,
+.ctaGhost:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 3px;
+}
+
+.ctaPrimary {
+  background: var(--color-orange);
+  color: #fff;
+  box-shadow: 0 14px 34px -14px rgba(232, 122, 44, 0.85);
+}
+.ctaPrimary:hover { background: var(--color-orange-600); transform: translateY(-2px); }
+.ctaPrimary span { transition: transform 0.3s; }
+.ctaPrimary:hover span { transform: translateX(4px); }
+
+.ctaGhost {
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  background: rgba(2, 21, 31, 0.32);
+  color: #fff;
+}
+.ctaGhost:hover { border-color: #fff; background: rgba(2, 21, 31, 0.6); transform: translateY(-2px); }
+.ctaGhost svg { width: 18px; height: 18px; }
 
 /* ---------- Controles del carrusel ---------- */
 .controls {
@@ -225,12 +285,19 @@
   .topkick { align-items: flex-start; }
   .topkick .rule { margin-top: 0.45rem; width: 38px; }
   .stats { gap: clamp(18px, 7vw, 30px); }
-  .sub { max-width: 34ch; padding-top: 2.5vh; }
+  .foot { padding-top: 2.5vh; }
+  .sub { max-width: 34ch; }
+  .ctas { gap: 10px; margin-top: 20px; }
+  .ctaPrimary,
+  .ctaGhost { flex: 1 1 auto; justify-content: center; padding: 13px 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .rv, .wmask > span { opacity: 1 !important; transform: none !important; filter: none !important; transition: opacity 0.4s; }
   .grain, .slideActive .slideImg, .glow, .dotActive::after { animation: none !important; }
   .slideActive .slideImg { transform: scale(1.06); }
+  .ctaPrimary:hover,
+  .ctaGhost:hover,
+  .ctaPrimary:hover span { transform: none; }
   .dotActive::before { background: var(--color-orange); }
 }
