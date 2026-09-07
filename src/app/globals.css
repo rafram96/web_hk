@@ -199,6 +199,13 @@
 
 /* ---------- Utilidades de composición ---------- */
 @layer components {
+  /* Cinta de entidades: bordes desvanecidos y ritmo lento. */
+  .hk-tape {
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+  .hk-tape-track { animation-duration: 110s; }
   .container-hk {
     width: 100%;
     max-width: 80rem;
@@ -414,6 +421,10 @@
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  /* Sin movimiento: la cinta se desplaza a mano, con la barra oculta. */
+  .hk-tape { overflow-x: auto; scrollbar-width: none; }
+  .hk-tape::-webkit-scrollbar { display: none; }
+  .hk-tape-track { animation: none; }
   [data-reveal] { opacity: 1 !important; animation: none !important; }
   .hk-scene-sweep,
   .hk-page-progress { display: none !important; }

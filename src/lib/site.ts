@@ -417,46 +417,111 @@ export const supervisedInvestment = (() => {
 export type TrustedEntity = {
   /** Nombre exacto tal como consta en `projects`. */
   entity: string;
-  /** Nombre corto para el sello: el oficial no cabe en una línea. */
+  /** Nombre corto para la cinta: el oficial no siempre cabe. */
   short: string;
   /** Proyectos de esa entidad en el portafolio (se cuenta, no se escribe). */
   count: number;
+  /** Tipo de entidad, derivado del nombre (segunda línea de la tarjeta). */
+  kind: string;
+  /** Siglas para el monograma mientras no haya logotipo. */
+  monogram: string;
   /** Ruta al logotipo, cuando el cliente entregue los archivos. */
   logo?: string;
 };
 
 /**
- * Las ocho entidades de la franja, en orden de reconocimiento público.
- * El orden es una decisión editorial —no un ranking— porque doce entidades
- * empatan a dos proyectos y ordenarlas alfabéticamente dejaría fuera a las
- * más reconocibles. Lo que sí sale del dato es la lista de candidatas y el
- * conteo: los nombres se validan contra `projects` más abajo.
- * Se excluyen "Estado peruano" y "Gobierno Regional" por genéricos.
+ * Entidades genéricas del portafolio: constan así en `projects` porque no
+ * se registró cuál fue la entidad concreta. No son prueba social.
  */
-const TRUSTED_ENTITY_LABELS: Array<[entity: string, short: string]> = [
-  ["Autoridad Portuaria Nacional", "Autoridad Portuaria Nacional"],
-  ["Poder Judicial", "Poder Judicial"],
-  ["Ministerio del Interior", "Ministerio del Interior"],
-  ["SEDAPAL", "SEDAPAL"],
-  ["INPE", "INPE"],
-  ["PRONIED", "PRONIED"],
-  ["Gobierno Regional del Cusco", "Gob. Regional del Cusco"],
-  ["Cuerpo General de Bomberos Voluntarios del Perú", "Cuerpo General de Bomberos"],
-];
+const GENERIC_ENTITIES = new Set(["Estado peruano", "Gobierno Regional"]);
 
-export const trustedEntities: TrustedEntity[] = TRUSTED_ENTITY_LABELS.map(
-  ([entity, short]) => {
-    const count = projects.filter((p) => p.entity === entity).length;
-    if (count === 0) {
-      // Si alguien renombra una entidad en `projects`, la franja mostraría
-      // "0 proyectos" en silencio. Mejor romper el build.
-      throw new Error(
-        `trustedEntities: "${entity}" no aparece en projects. Revisa el nombre.`
-      );
-    }
-    return { entity, short, count };
+/** Nombres cortos solo donde el oficial no cabe en la cinta. */
+const ENTITY_SHORT_NAMES: Record<string, string> = {
+  "Cuerpo General de Bomberos Voluntarios del Perú": "Cuerpo General de Bomberos",
+  "Unidad Ejecutora — Bicameralidad del Poder Legislativo": "Poder Legislativo · Bicameralidad",
+  "Proyecto Especial Juegos Panamericanos 2019": "Juegos Panamericanos 2019",
+  "Protransporte – Municipalidad de Lima": "Protransporte · Lima",
+  "Ministerio de Vivienda, Construcción y Saneamiento": "Ministerio de Vivienda",
+  "Autoridad para la Reconstrucción con Cambios": "Reconstrucción con Cambios",
+};
+
+/** Tipo de entidad a partir del nombre oficial. */
+function entityKind(entity: string): string {
+  if (/^Gobierno Regional/.test(entity)) return "Gobierno regional";
+  if (/^Ministerio (?!Público)/.test(entity)) return "Ministerio";
+  if (/^Municipalidad|^Protransporte/.test(entity)) return "Gobierno local";
+  if (/Poder Judicial|Poder Legislativo|Ministerio Público/.test(entity))
+    return "Poder del Estado";
+  if (/^(SEDAPAL|EsSalud|PROINVERSIÓN)$/.test(entity)) return "Empresa pública";
+  return "Organismo público";
+}
+
+/**
+ * Siglas del monograma (mientras no haya logotipo). Reglas pensadas para que
+ * no colisionen entre sí: los gobiernos regionales llevan "GR" + región, los
+ * ministerios "M" + dos letras de la cartera, y los nombres de una sola
+ * palabra su esqueleto consonántico (PRONIED → PRND, PRONIS → PRNS).
+ */
+function entityMonogram(short: string): string {
+  const stop = new Set(["de", "del", "la", "las", "los", "y", "con", "para", "el"]);
+  const words = short
+    .replace(/[·—–]/g, " ")
+    .split(/\s+/)
+    .filter((w) => w && !stop.has(w.toLowerCase()) && !/^\d+$/.test(w));
+  const initials = (ws: string[]) => ws.map((w) => w[0]).join("").toUpperCase();
+
+  if (/^Gob(\.|ierno)$/i.test(words[0] ?? "") && /^Regional$/i.test(words[1] ?? "")) {
+    const region = words.slice(2);
+    const tail = region.length >= 2 ? initials(region) : (region[0] ?? "").slice(0, 2);
+    return `GR${tail.toUpperCase()}`;
   }
-);
+  if (/^Ministerio$/i.test(words[0] ?? "") && words[1]) {
+    return `M${words[1].slice(0, 2).toUpperCase()}`;
+  }
+  if (words.length === 1) {
+    const w = words[0].toUpperCase();
+    return (w[0] + w.slice(1).replace(/[AEIOUÁÉÍÓÚ]/g, "")).slice(0, 4);
+  }
+  return initials(words.slice(0, 3));
+}
+
+/**
+ * Todas las entidades contratantes del portafolio (menos las genéricas),
+ * ordenadas por número de proyectos y luego por nombre. Se calcula desde
+ * `projects`: si una entidad se renombra allí, aquí cambia sola.
+ */
+export const trustedEntities: TrustedEntity[] = (() => {
+  const counts = new Map<string, number>();
+  for (const p of projects) {
+    if (GENERIC_ENTITIES.has(p.entity)) continue;
+    counts.set(p.entity, (counts.get(p.entity) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "es"))
+    .map(([entity, count]) => {
+      const short = ENTITY_SHORT_NAMES[entity] ?? entity;
+      return {
+        entity,
+        short,
+        count,
+        kind: entityKind(entity),
+        monogram: entityMonogram(short),
+      };
+    });
+})();
+
+/** Cifras agregadas de la franja de entidades: todas derivadas. */
+export const entityStats = {
+  entidades: trustedEntities.length,
+  gobiernosRegionales: trustedEntities.filter((e) =>
+    /^Gobierno Regional/.test(e.entity)
+  ).length,
+  // "Ministerio Público" es la Fiscalía, no un ministerio del Ejecutivo.
+  ministerios: trustedEntities.filter((e) =>
+    /^Ministerio (?!Público)/.test(e.entity)
+  ).length,
+};
+
 
 /**
  * Tres proyectos para la sección "Proyectos" de la home. Son tres y no seis
