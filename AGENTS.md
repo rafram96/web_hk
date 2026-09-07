@@ -46,7 +46,7 @@ preinversión, expedientes técnicos y supervisión de obras). Contenido derivad
 - `src/app/page.tsx` — home (ensambla las secciones en orden).
 - `src/app/servicios/page.tsx` — página de servicios detallada.
 - `src/app/layout.tsx` — fuentes, metadata SEO, Navbar + Footer.
-- `public/images`, `public/certs`, `public/logo.jpg` — assets de marca.
+- `public/images`, `public/certs`, `public/favicon.svg` — assets de marca. El logo es un SVG inline en `src/components/ui/Logo.tsx` (no hay `logo.jpg`); el material crudo de fotos vive fuera del repo, en `../Web_HK_material/`.
 - **Material crudo**: las 21 fotos de obra sin procesar (51 MB) ya no viven en
   `public/`; están en `../Web_HK_material/proyectos_restantes`, fuera del repo.
 
