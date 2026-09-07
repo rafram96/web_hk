@@ -185,11 +185,14 @@ export default function ServiciosPage() {
           01 · HERO DE PÁGINA
           ============================================================ */}
       <section className="relative overflow-hidden bg-navy text-white">
-        {/* Imagen de fondo + overlay */}
+        {/* Imagen de fondo + overlay. Es decorativa: al 25 % de opacidad bajo
+            dos degradados, no aporta informacion que el texto no diga. Va
+            marcada como tal (aria-hidden) en vez de con un alt inventado. */}
         <div className="absolute inset-0" aria-hidden>
           <Image
             src="/images/hero-equipo-congreso.webp"
             alt=""
+            aria-hidden
             fill
             priority
             sizes="100vw"
