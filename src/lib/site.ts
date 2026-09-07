@@ -365,6 +365,32 @@ export const projects: Project[] = [
 export const featuredProjects: Project[] = projects.filter((p) => p.featured);
 
 /* ------------------------------------------------------------------
+   INVERSIÓN SUPERVISADA — se calcula en build time sobre `projects`.
+   ------------------------------------------------------------------ */
+
+/**
+ * Suma de los contratos que traen monto. Solo 29 de los 51 proyectos lo
+ * consignan; los otros 22 tienen "—" porque el brochure no lo registra.
+ * Por eso el copy debe decir siempre "en los proyectos con monto
+ * registrado": la cifra es un piso verificable, no el total de la
+ * trayectoria de la empresa.
+ */
+export const supervisedInvestment = (() => {
+  const withAmount = projects.filter((p) => p.amount.startsWith("S/"));
+  const total = withAmount.reduce(
+    (sum, p) => sum + Number(p.amount.replace(/[^0-9.]/g, "")),
+    0
+  );
+  return {
+    total,
+    /** Cuántos contratos entran en la suma. */
+    contracts: withAmount.length,
+    /** Redondeado a millones hacia abajo, para poder decir "más de". */
+    millions: Math.floor(total / 1_000_000),
+  };
+})();
+
+/* ------------------------------------------------------------------
    PRUEBA SOCIAL — entidades contratantes.
    ------------------------------------------------------------------ */
 

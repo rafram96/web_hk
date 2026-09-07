@@ -2,6 +2,7 @@ import { HeroNuevo } from "@/components/sections/HeroNuevo";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { Services } from "@/components/sections/Services";
 import { Projects } from "@/components/sections/Projects";
+import { Investment } from "@/components/sections/Investment";
 import { Stats } from "@/components/sections/Stats";
 import { Certifications } from "@/components/sections/Certifications";
 import { Contact } from "@/components/sections/Contact";
@@ -20,6 +21,7 @@ export default function Home() {
       <TrustedBy />
       <Services />
       <Projects />
+      <Investment />
       <Stats />
       <Certifications />
       <Contact />
