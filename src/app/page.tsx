@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { HeroNuevo } from "@/components/sections/HeroNuevo";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { Services } from "@/components/sections/Services";
@@ -13,6 +15,11 @@ import { ScrollDirector } from "@/components/ui/ScrollDirector";
  * todas repitiendo la misma formula (kicker, H2 enorme, parrafo, panel navy).
  * Proposito, metodologia, sectores, razones y galeria se mudaron a /nosotros.
  */
+
+/* Solo el canonical: titulo, descripcion y OG los hereda del layout. */
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 export default function Home() {
   return (
     <>

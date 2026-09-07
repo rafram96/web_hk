@@ -55,7 +55,11 @@ export const metadata: Metadata = {
     title: "HK Consulting S.A.C. — Consultoría integral en ingeniería",
     description:
       "Soluciones integrales en ingeniería para el desarrollo del país. Preinversión, expedientes técnicos y supervisión de obras.",
-    images: [{ url: "/images/hero-equipo-congreso.webp", width: 1200, height: 630 }],
+    /* La imagen la aporta `src/app/opengraph-image.tsx` (1200×630 generada). */
+  },
+  /* Sin título ni descripción propios: así cada página aporta los suyos. */
+  twitter: {
+    card: "summary_large_image",
   },
   icons: {
     icon: "/favicon.svg",
