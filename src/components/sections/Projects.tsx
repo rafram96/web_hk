@@ -9,6 +9,7 @@ import {
   type Project,
   experienceByType,
   projectCounts,
+  projectsHeadline,
   homeHighlights,
 } from "@/lib/site";
 
@@ -186,7 +187,7 @@ export function Projects() {
         {/* 1) Encabezado */}
         <SectionHeading
           kicker="Trayectoria"
-          title={`${projectCounts.total} proyectos a lo largo del Perú`}
+          title={`Más de ${projectsHeadline.value} proyectos a lo largo del Perú`}
           intro="Experiencia comprobada en todo el ciclo de inversión pública y privada, de Tumbes a Tacna."
         />
 
@@ -197,7 +198,7 @@ export function Projects() {
               aria-hidden
               className="pointer-events-none absolute -right-6 -top-16 select-none font-display text-[13rem] font-black leading-none text-white/[0.035]"
             >
-              {projectCounts.total}
+              {projectsHeadline.value}
             </span>
             <div className="relative flex items-center justify-between border-b border-white/10 px-6 py-4">
               <span className="kicker text-orange-300">
@@ -257,7 +258,11 @@ export function Projects() {
             <span className="inline-flex items-center gap-2.5 rounded-full border border-navy bg-navy px-4 py-2">
               <span aria-hidden className="h-2 w-2 rounded-full bg-orange" />
               <span className="font-mono text-sm font-semibold text-white">
-                <Counter value={projectCounts.total} /> Total
+                <Counter
+                  value={projectsHeadline.value}
+                  prefix={projectsHeadline.prefix}
+                />{" "}
+                Total
               </span>
             </span>
           </div>

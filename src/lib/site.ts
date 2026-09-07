@@ -48,6 +48,14 @@ export const regionsCovered = 24;
 /** Conteo oficial del portafolio (44 terminados + 7 en ejecución). */
 export const projectCounts = { terminados: 44, enEjecucion: 7, total: 51 };
 
+/**
+ * Cifra comercial para titulares y hero: el cliente prefiere el redondeo
+ * "+50" al conteo exacto. El desglose real (44 + 7 = 51) vive en
+ * `projectCounts` y es el que usa /proyectos, donde sí se listan las fichas.
+ * Si algún día se decide mostrar el número exacto, se cambia aquí y punto.
+ */
+export const projectsHeadline = { value: 50, prefix: "+" } as const;
+
 export const mision =
   "Brindar consultoría técnica especializada que contribuya al desarrollo sostenible del país, mediante la formulación, evaluación y supervisión de proyectos, garantizando calidad, eficiencia y cumplimiento normativo.";
 
@@ -145,7 +153,11 @@ export type Stat = {
 /** Banda "HK en cifras". Todas las métricas salen de las constantes de arriba. */
 export const stats: Stat[] = [
   { value: yearsOfExperience, label: "Años de trayectoria" },
-  { value: projectCounts.total, label: "Proyectos desarrollados" },
+  {
+    value: projectsHeadline.value,
+    prefix: projectsHeadline.prefix,
+    label: "Proyectos desarrollados",
+  },
   { value: sectors.length, label: "Sectores atendidos" },
   { value: regionsCovered, label: "Regiones del Perú" },
 ];
@@ -176,7 +188,7 @@ export const experienceByType = [
 export const whyChooseUs = [
   {
     title: "Experiencia comprobada",
-    desc: `${projectCounts.total} proyectos ejecutados en todo el Perú.`,
+    desc: `Más de ${projectsHeadline.value} proyectos ejecutados en todo el Perú.`,
   },
   {
     title: "Equipo multidisciplinario",
