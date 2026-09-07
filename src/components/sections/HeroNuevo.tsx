@@ -21,7 +21,7 @@ import styles from "./HeroNuevo.module.css";
    que el hero muestra la foto desenfocada en vez de un rectángulo negro
    mientras carga. */
 import obraHuanta from "../../../public/images/proyecto-aereo-hospital.webp";
-import equipoFachada from "../../../public/images/equipo-completo.webp";
+import equipoFrente from "../../../public/images/hero-congreso-front.webp";
 import equipoCongreso from "../../../public/images/hero-congreso-fila.webp";
 
 type Slide = {
@@ -47,11 +47,11 @@ const SLIDES: Slide[] = [
     mobilePos: "56% 46%",
   },
   {
-    src: equipoFachada,
-    alt: "Equipo de HK Consulting frente a la fachada del Congreso de la República, Lima",
+    src: equipoFrente,
+    alt: "Equipo de HK Consulting frente al Congreso de la República, Lima",
     caption: "Equipo HK · Congreso de la República · Lima",
-    pos: "55% 62%",
-    mobilePos: "52% 64%",
+    pos: "50% 42%",
+    mobilePos: "58% 45%",
   },
   {
     src: equipoCongreso,
