@@ -12,13 +12,6 @@ import { howWeWork } from "@/lib/site";
 export function Process() {
   return (
     <Section id="metodologia" tone="light" className="overflow-hidden">
-      <span
-        aria-hidden
-        data-parallax="100"
-        className="pointer-events-none absolute -right-8 top-8 select-none font-display text-[18rem] font-black leading-none text-navy/[0.025] lg:text-[28rem]"
-      >
-        04
-      </span>
       <div className="container-hk">
         <SectionHeading
           kicker="Metodología"
