@@ -42,16 +42,16 @@ const serviceImages: Record<
   { src: string; alt: string }
 > = {
   "estudios-de-preinversion": {
-    src: "/images/equipo-completo.webp",
-    alt: "Equipo de HK Consulting analizando estudios de preinversión",
+    src: "/images/proyectos/image44.webp",
+    alt: "Laboratorio de Calidad de Agua de SEDAPAL, La Atarjea, proyecto estudiado por HK Consulting",
   },
   "expedientes-tecnicos": {
     src: "/images/proyecto-aereo-hospital.webp",
     alt: "Vista aérea de proyecto hospitalario con expediente técnico de HK Consulting",
   },
   "supervision-de-obras": {
-    src: "/images/hero-congreso-fila.webp",
-    alt: "Equipo de supervisión de HK Consulting frente al Congreso de la República",
+    src: "/images/proyectos/image75.webp",
+    alt: "Vista aérea de la I.E. Ciencias del Cusco, obra supervisada por HK Consulting",
   },
 };
 
@@ -190,7 +190,7 @@ export default function ServiciosPage() {
             marcada como tal (aria-hidden) en vez de con un alt inventado. */}
         <div className="absolute inset-0" aria-hidden>
           <Image
-            src="/images/hero-congreso-fila.webp"
+            src="/images/proyecto-aereo-hospital.webp"
             alt=""
             aria-hidden
             fill
