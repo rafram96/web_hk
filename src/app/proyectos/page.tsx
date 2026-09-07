@@ -5,17 +5,21 @@ import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { ProjectsExplorer } from "@/components/sections/ProjectsExplorer";
-import { company, contact, projectCounts } from "@/lib/site";
+import {
+  company,
+  contact,
+  projectCounts,
+  regionsCovered,
+  yearsOfExperience,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Proyectos",
-  description:
-    "Portafolio completo de HK Consulting S.A.C.: 51 proyectos de ingeniería —44 terminados y 7 en ejecución— desarrollados en 24 regiones del Perú. Estudios de preinversión, expedientes técnicos y supervisión de obras en salud, educación, portuario, vial, saneamiento y más.",
+  description: `Portafolio completo de ${company.legalName}: ${projectCounts.total} proyectos de ingeniería —${projectCounts.terminados} terminados y ${projectCounts.enEjecucion} en ejecución— desarrollados en ${regionsCovered} regiones del Perú. Estudios de preinversión, expedientes técnicos y supervisión de obras en salud, educación, portuario, vial, saneamiento y más.`,
   alternates: { canonical: "/proyectos" },
   openGraph: {
     title: "Proyectos · HK Consulting S.A.C.",
-    description:
-      "51 proyectos de ingeniería en 24 regiones del Perú: preinversión, expedientes técnicos y supervisión de obras.",
+    description: `${projectCounts.total} proyectos de ingeniería en ${regionsCovered} regiones del Perú: preinversión, expedientes técnicos y supervisión de obras.`,
     images: [
       { url: "/images/proyecto-aereo-hospital.jpg", width: 1200, height: 630 },
     ],
@@ -41,7 +45,7 @@ export default function ProyectosPage() {
           aria-hidden
           className="pointer-events-none absolute -right-6 bottom-0 select-none font-display text-[28vw] font-black leading-none text-white/[0.04] lg:text-[20rem]"
         >
-          51
+          {projectCounts.total}
         </span>
 
         <div className="container-hk relative flex min-h-[45vh] flex-col justify-center pb-16 pt-32 lg:pb-20 lg:pt-40">
@@ -89,7 +93,10 @@ export default function ProyectosPage() {
               </strong>{" "}
               de ingeniería —{projectCounts.terminados} terminados y{" "}
               {projectCounts.enEjecucion} en ejecución— desarrollados a lo largo
-              de <strong className="font-semibold text-white">24 regiones</strong>{" "}
+              de{" "}
+              <strong className="font-semibold text-white">
+                {regionsCovered} regiones
+              </strong>{" "}
               del Perú, en todo el ciclo de inversión pública y privada.
             </p>
           </Reveal>
@@ -163,8 +170,7 @@ export default function ProyectosPage() {
               <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-navy-100">
                 Cuéntenos su proyecto. Acompañamos cada inversión con la
                 solvencia técnica de {company.shortName} y más de{" "}
-                {new Date().getFullYear() - company.foundedYear} años de
-                experiencia al servicio del Perú.
+                {yearsOfExperience} años de experiencia al servicio del Perú.
               </p>
             </Reveal>
 

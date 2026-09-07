@@ -21,7 +21,7 @@ export function About() {
               kicker="Quiénes somos"
               title={
                 <>
-                  Desde 2006 impulsando{" "}
+                  Desde {company.foundedYear} impulsando{" "}
                   <span className="text-orange">el desarrollo del Perú</span>
                 </>
               }
@@ -107,10 +107,10 @@ export function About() {
                   </span>
                 </div>
 
-                {/* Badge flotante "Desde 2006" */}
+                {/* Badge flotante con el año de fundación */}
                 <figcaption className="absolute -bottom-5 left-7 flex items-center gap-3.5 rounded-2xl bg-navy px-5 py-4 text-white shadow-[var(--shadow-float)]">
                   <span className="display-index text-[2.6rem] text-orange">
-                    2006
+                    {company.foundedYear}
                   </span>
                   <span className="spec-line h-9 w-px text-white/25" aria-hidden />
                   <span className="kicker leading-tight text-navy-100">

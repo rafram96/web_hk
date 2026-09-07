@@ -3,7 +3,7 @@ import { Bricolage_Grotesque, Hanken_Grotesk, IBM_Plex_Mono } from "next/font/go
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { company } from "@/lib/site";
+import { company, projectCounts, regionsCovered } from "@/lib/site";
 
 // Display con carácter (editorial técnico).
 const bricolage = Bricolage_Grotesque({
@@ -37,8 +37,7 @@ export const metadata: Metadata = {
     default: "HK Consulting S.A.C. — Consultoría integral en ingeniería",
     template: "%s · HK Consulting S.A.C.",
   },
-  description:
-    "Consultora peruana especializada en Estudios de Preinversión, Expedientes Técnicos y Supervisión de Obras bajo el marco Invierte.pe. Desde 2006 impulsando el desarrollo del Perú.",
+  description: `Consultora peruana especializada en Estudios de Preinversión, Expedientes Técnicos y Supervisión de Obras bajo el marco Invierte.pe. ${projectCounts.total} proyectos en ${regionsCovered} regiones desde ${company.foundedYear}.`,
   keywords: [
     "consultoría ingeniería Perú",
     "estudios de preinversión",

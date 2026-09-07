@@ -34,7 +34,7 @@ export function Sectors() {
           <SectionHeading
             tone="dark"
             kicker="Sectores"
-            title="14 sectores estratégicos del desarrollo nacional"
+            title={`${sectors.length} sectores estratégicos del desarrollo nacional`}
             intro="Atendemos proyectos en sectores estratégicos del desarrollo nacional, de la salud a la infraestructura portuaria."
           />
 
@@ -48,7 +48,7 @@ export function Sectors() {
               className="display-index block text-[8rem] text-white/[0.07] xl:text-[10rem]"
               aria-hidden
             >
-              14
+              {sectors.length}
             </span>
             <span className="kicker -mt-3 block text-navy-300">
               Campos de práctica
@@ -106,7 +106,7 @@ export function Sectors() {
                     className="hidden shrink-0 font-mono text-[0.7rem] tracking-[0.18em] text-white/25 lg:block tabular-nums"
                     aria-hidden
                   >
-                    {String(index + 1).padStart(2, "0")}/14
+                    {String(index + 1).padStart(2, "0")}/{sectors.length}
                   </span>
                 </div>
 

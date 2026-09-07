@@ -27,20 +27,26 @@ export const contact = {
   ruc: "20512925023",
 } as const;
 
-export type Stat = {
-  value: number;
-  prefix?: string;
-  suffix?: string;
-  label: string;
-  isYear?: boolean;
-};
+/* ------------------------------------------------------------------
+   CIFRAS — fuente única.
+   Toda cifra visible (hero, secciones, metadata SEO) se lee de aquí.
+   Regla: ningún componente escribe un número a mano.
+   ------------------------------------------------------------------ */
 
-export const stats: Stat[] = [
-  { value: 2006, label: "Desde", isYear: true },
-  { value: 50, prefix: "+", label: "Proyectos desarrollados" },
-  { value: 14, label: "Sectores atendidos" },
-  { value: 24, label: "Regiones del Perú" },
-];
+/** Año de referencia. Se recalcula en cada build. */
+export const currentYear = new Date().getFullYear();
+
+/** Años de trayectoria desde la fundación (2006). */
+export const yearsOfExperience = currentYear - company.foundedYear;
+
+/**
+ * Regiones del Perú con proyectos ejecutados. Dato del brochure 2026: no se
+ * deriva de `projects` porque las fichas no registran la región.
+ */
+export const regionsCovered = 24;
+
+/** Conteo oficial del portafolio (44 terminados + 7 en ejecución). */
+export const projectCounts = { terminados: 44, enEjecucion: 7, total: 51 };
 
 export const mision =
   "Brindar consultoría técnica especializada que contribuya al desarrollo sostenible del país, mediante la formulación, evaluación y supervisión de proyectos, garantizando calidad, eficiencia y cumplimiento normativo.";
@@ -128,6 +134,22 @@ export const sectors: Sector[] = [
   { num: "14", name: "Represas", desc: "Embalses, presas, obras hidráulicas" },
 ];
 
+export type Stat = {
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  label: string;
+  isYear?: boolean;
+};
+
+/** Banda "HK en cifras". Todas las métricas salen de las constantes de arriba. */
+export const stats: Stat[] = [
+  { value: yearsOfExperience, label: "Años de trayectoria" },
+  { value: projectCounts.total, label: "Proyectos desarrollados" },
+  { value: sectors.length, label: "Sectores atendidos" },
+  { value: regionsCovered, label: "Regiones del Perú" },
+];
+
 export const experienceByType = [
   {
     count: 16,
@@ -154,7 +176,7 @@ export const experienceByType = [
 export const whyChooseUs = [
   {
     title: "Experiencia comprobada",
-    desc: "Más de 50 proyectos en todo el Perú.",
+    desc: `${projectCounts.total} proyectos ejecutados en todo el Perú.`,
   },
   {
     title: "Equipo multidisciplinario",
@@ -176,7 +198,7 @@ export const whyChooseUs = [
     title: "Reducción de riesgos",
     desc: "Minimizamos riesgos técnicos y contractuales.",
   },
-] as const;
+];
 
 export const howWeWork = [
   { num: "01", title: "Estudiamos", desc: "Análisis exhaustivo del contexto." },
@@ -196,8 +218,6 @@ export const howWeWork = [
     desc: "Entrega de resultados sólidos y trazables.",
   },
 ] as const;
-
-export const projectCounts = { terminados: 44, enEjecucion: 7, total: 51 };
 
 export type ProjectStatus = "Terminado" | "En ejecución";
 

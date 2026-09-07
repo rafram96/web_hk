@@ -8,6 +8,7 @@ import {
   useState,
   type CSSProperties,
 } from "react";
+import { projectCounts, regionsCovered, yearsOfExperience } from "@/lib/site";
 import styles from "./HeroNuevo.module.css";
 
 type Slide = { src: string; alt: string; pos: string; mobilePos: string };
@@ -33,10 +34,12 @@ const SLIDES: Slide[] = [
   },
 ];
 
+/* Cifras del hero: se leen de site.ts para que nunca contradigan a la
+   sección "HK en cifras" ni al portafolio de /proyectos. */
 const STATS = [
-  { pre: "+", value: 280, label: "Proyectos" },
-  { value: 24, label: "Regiones" },
-  { value: 19, label: "Años" },
+  { value: projectCounts.total, label: "Proyectos" },
+  { value: regionsCovered, label: "Regiones" },
+  { value: yearsOfExperience, label: "Años" },
 ] as const;
 
 const DELAY = 5000;
@@ -205,9 +208,6 @@ export function HeroNuevo() {
               }`}
             >
               <div className={styles.num}>
-                {"pre" in s && s.pre ? (
-                  <span className={styles.pre}>{s.pre}</span>
-                ) : null}
                 <span>{fmt(counts[idx] ?? 0)}</span>
               </div>
               <div className={styles.lab}>{s.label}</div>

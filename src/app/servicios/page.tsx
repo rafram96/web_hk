@@ -16,6 +16,7 @@ import {
   howWeWork,
   certifications,
   experienceByType,
+  yearsOfExperience,
 } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -492,7 +493,7 @@ export default function ServiciosPage() {
         <div className="blueprint-grid absolute inset-0" aria-hidden />
         <div className="container-hk relative">
           <SectionHeading
-            kicker="Cobertura · 14 sectores"
+            kicker={`Cobertura · ${sectors.length} sectores`}
             tone="dark"
             title={
               <>
@@ -623,9 +624,8 @@ export default function ServiciosPage() {
               <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-navy-100">
                 Cuéntenos su proyecto. Nuestro equipo lo acompaña desde la
                 viabilidad hasta la entrega de la obra, con la solvencia técnica
-                de {company.shortName} y más de {new Date().getFullYear() -
-                  company.foundedYear}{" "}
-                años de experiencia al servicio del Perú.
+                de {company.shortName} y {yearsOfExperience} años de
+                experiencia al servicio del Perú.
               </p>
             </Reveal>
 
