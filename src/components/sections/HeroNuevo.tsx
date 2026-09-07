@@ -22,6 +22,7 @@ import styles from "./HeroNuevo.module.css";
    mientras carga. */
 import obraHuanta from "../../../public/images/proyecto-aereo-hospital.webp";
 import obraCusco from "../../../public/images/proyectos/image75.webp";
+import equipoCongreso from "../../../public/images/hero-congreso-fila.webp";
 
 type Slide = {
   src: StaticImageData;
@@ -33,10 +34,10 @@ type Slide = {
 };
 
 /**
- * Fotos de obra, no de equipo posando. Las dos son tomas aéreas de
- * proyectos supervisados por HK que constan en `projects` (220 y 285), y
- * también las dos únicas del archivo con resolución suficiente para un
- * fondo a pantalla completa.
+ * Dos tomas aéreas de obras supervisadas por HK (proyectos 220 y 285) y la
+ * foto real del equipo frente al Congreso de la República. Las tres son las
+ * únicas del archivo con resolución suficiente para un fondo a pantalla
+ * completa (la del equipo se escala con Upscayl cuando haga falta).
  */
 const SLIDES: Slide[] = [
   {
@@ -52,6 +53,13 @@ const SLIDES: Slide[] = [
     caption: "I.E. Ciencias · Cusco",
     pos: "58% 50%",
     mobilePos: "62% 50%",
+  },
+  {
+    src: equipoCongreso,
+    alt: "Equipo de ingenieros de HK Consulting frente al Congreso de la República, Lima",
+    caption: "Equipo HK · Congreso de la República · Lima",
+    pos: "62% 58%",
+    mobilePos: "66% 60%",
   },
 ];
 
