@@ -64,11 +64,11 @@
 
 ## 4b. Hallazgos del inventario de imágenes (2026-09-07)
 
-- [ ] **`proyecto-represa.webp` NO es una represa**: es el equipo posando frente a un
+- [x] (2026-09-07, /servicios usa ahora `hero-congreso-fila`) **`proyecto-represa.webp` NO es una represa**: es el equipo posando frente a un
       muro de piedra oscura (misma foto que `proyectos/image20.webp`). En
       `src/app/servicios/page.tsx` tiene alt "Obra de represa supervisada por HK
       Consulting" → alt falso. Corregir alt o cambiar la foto.
-- [ ] **`hero-equipo-congreso` y `hero-congreso-front` (2390 px) son generadas con
+- [x] (2026-09-07: retirada de /servicios; los archivos siguen en public/, borrar cuando nada los use) **`hero-equipo-congreso` y `hero-congreso-front` (2390 px) son generadas con
       Gemini** a partir de la foto real `hero-congreso-fila` (1448×1086), según el
       commit del 07-jun ("2 Gemini limpias + equipo real"). `hero-equipo-congreso`
       conserva la **marca de agua de Gemini** (estrella abajo a la derecha) y se usa

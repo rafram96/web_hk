@@ -50,8 +50,8 @@ const serviceImages: Record<
     alt: "Vista aérea de proyecto hospitalario con expediente técnico de HK Consulting",
   },
   "supervision-de-obras": {
-    src: "/images/proyecto-represa.webp",
-    alt: "Obra de represa supervisada por HK Consulting",
+    src: "/images/hero-congreso-fila.webp",
+    alt: "Equipo de supervisión de HK Consulting frente al Congreso de la República",
   },
 };
 
@@ -190,7 +190,7 @@ export default function ServiciosPage() {
             marcada como tal (aria-hidden) en vez de con un alt inventado. */}
         <div className="absolute inset-0" aria-hidden>
           <Image
-            src="/images/hero-equipo-congreso.webp"
+            src="/images/hero-congreso-fila.webp"
             alt=""
             aria-hidden
             fill
