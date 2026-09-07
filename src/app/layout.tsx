@@ -3,6 +3,8 @@ import { Bricolage_Grotesque, Hanken_Grotesk, IBM_Plex_Mono } from "next/font/go
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationJsonLd } from "@/lib/jsonLd";
 import { company, projectsHeadline, regionsCovered, siteUrl } from "@/lib/site";
 
 // Display con carácter (editorial técnico).
@@ -70,6 +72,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
+        <JsonLd data={organizationJsonLd()} />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

@@ -7,6 +7,8 @@ import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { ProjectGallery } from "@/components/sections/ProjectGallery";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { projectBreadcrumbJsonLd } from "@/lib/jsonLd";
 import { type Project, type ProjectStatus, projects, company } from "@/lib/site";
 
 /* ================================================================
@@ -238,6 +240,8 @@ export default async function ProjectDetailPage({
 
   return (
     <>
+      <JsonLd data={projectBreadcrumbJsonLd(project)} />
+
       {/* ============================================================
           CABECERA — fondo navy con retícula + ficha técnica
           ============================================================ */}

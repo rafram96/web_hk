@@ -7,6 +7,8 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { servicesJsonLd } from "@/lib/jsonLd";
 import {
   company,
   contact,
@@ -177,6 +179,8 @@ function CheckIcon({ className = "" }: IconProps) {
 export default function ServiciosPage() {
   return (
     <>
+      <JsonLd data={servicesJsonLd()} />
+
       {/* ============================================================
           01 · HERO DE PÁGINA
           ============================================================ */}
