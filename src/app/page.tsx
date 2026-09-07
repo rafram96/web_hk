@@ -1,4 +1,5 @@
 import { HeroNuevo } from "@/components/sections/HeroNuevo";
+import { TrustedBy } from "@/components/sections/TrustedBy";
 import { About } from "@/components/sections/About";
 import { MissionVision } from "@/components/sections/MissionVision";
 import { Services } from "@/components/sections/Services";
@@ -16,6 +17,7 @@ export default function Home() {
     <>
       <ScrollDirector />
       <HeroNuevo />
+      <TrustedBy />
       <About />
       <MissionVision />
       <Services />

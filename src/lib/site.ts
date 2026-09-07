@@ -364,6 +364,54 @@ export const projects: Project[] = [
 /** Proyectos destacados (con galería) para las páginas de proyectos. */
 export const featuredProjects: Project[] = projects.filter((p) => p.featured);
 
+/* ------------------------------------------------------------------
+   PRUEBA SOCIAL — entidades contratantes.
+   ------------------------------------------------------------------ */
+
+export type TrustedEntity = {
+  /** Nombre exacto tal como consta en `projects`. */
+  entity: string;
+  /** Nombre corto para el sello: el oficial no cabe en una línea. */
+  short: string;
+  /** Proyectos de esa entidad en el portafolio (se cuenta, no se escribe). */
+  count: number;
+  /** Ruta al logotipo, cuando el cliente entregue los archivos. */
+  logo?: string;
+};
+
+/**
+ * Las ocho entidades de la franja, en orden de reconocimiento público.
+ * El orden es una decisión editorial —no un ranking— porque doce entidades
+ * empatan a dos proyectos y ordenarlas alfabéticamente dejaría fuera a las
+ * más reconocibles. Lo que sí sale del dato es la lista de candidatas y el
+ * conteo: los nombres se validan contra `projects` más abajo.
+ * Se excluyen "Estado peruano" y "Gobierno Regional" por genéricos.
+ */
+const TRUSTED_ENTITY_LABELS: Array<[entity: string, short: string]> = [
+  ["Autoridad Portuaria Nacional", "Autoridad Portuaria Nacional"],
+  ["Poder Judicial", "Poder Judicial"],
+  ["Ministerio del Interior", "Ministerio del Interior"],
+  ["SEDAPAL", "SEDAPAL"],
+  ["INPE", "INPE"],
+  ["PRONIED", "PRONIED"],
+  ["Gobierno Regional del Cusco", "Gob. Regional del Cusco"],
+  ["Cuerpo General de Bomberos Voluntarios del Perú", "Cuerpo General de Bomberos"],
+];
+
+export const trustedEntities: TrustedEntity[] = TRUSTED_ENTITY_LABELS.map(
+  ([entity, short]) => {
+    const count = projects.filter((p) => p.entity === entity).length;
+    if (count === 0) {
+      // Si alguien renombra una entidad en `projects`, la franja mostraría
+      // "0 proyectos" en silencio. Mejor romper el build.
+      throw new Error(
+        `trustedEntities: "${entity}" no aparece en projects. Revisa el nombre.`
+      );
+    }
+    return { entity, short, count };
+  }
+);
+
 /**
  * Selección de 6 proyectos para la sección "Proyectos" de la home (teaser).
  * La lista completa de los 51 vive en /proyectos. Orden = más impactantes primero.
