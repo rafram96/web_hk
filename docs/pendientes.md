@@ -64,26 +64,27 @@
 
 ## 4b. Hallazgos del inventario de imágenes (2026-09-07)
 
-- [ ] ** NO es una represa**: es el equipo posando frente a un
-      muro de piedra oscura (misma foto que ). En
-       tiene alt "Obra de represa supervisada por HK
+- [ ] **`proyecto-represa.webp` NO es una represa**: es el equipo posando frente a un
+      muro de piedra oscura (misma foto que `proyectos/image20.webp`). En
+      `src/app/servicios/page.tsx` tiene alt "Obra de represa supervisada por HK
       Consulting" → alt falso. Corregir alt o cambiar la foto.
-- [ ] ** y  (2390 px) son generadas con
-      Gemini** a partir de la foto real  (1448×1086), según el
-      commit del 07-jun ("2 Gemini limpias + equipo real").       conserva la **marca de agua de Gemini** (estrella abajo a la derecha) y se usa
+- [ ] **`hero-equipo-congreso` y `hero-congreso-front` (2390 px) son generadas con
+      Gemini** a partir de la foto real `hero-congreso-fila` (1448×1086), según el
+      commit del 07-jun ("2 Gemini limpias + equipo real"). `hero-equipo-congreso`
+      conserva la **marca de agua de Gemini** (estrella abajo a la derecha) y se usa
       como fondo en /servicios. Quitar la marca o reemplazar por la foto real
       escalada 2x con Upscayl.
-- [ ] ** es una captura de Google Maps** con etiquetas de
+- [ ] **`proyectos/proy-276.webp` es una captura de Google Maps** con etiquetas de
       hoteles y bancos. Reemplazar por foto o quitar la imagen de la ficha 276.
-- [ ] Duplicados:  = ;
-       = . Unificar referencias.
-- [ ]  es un mapa de vulnerabilidad (lámina A3, original de 6612 px en
-      ). Válido como imagen técnica, no como foto.
+- [ ] Duplicados: `proyecto-aereo-hospital` = `proyectos/image47`;
+      `proyecto-represa` = `proyectos/image20`. Unificar referencias.
+- [ ] `proy-218.webp` es un mapa de vulnerabilidad (lámina A3, original de 6612 px en
+      `Web_HK_material`). Válido como imagen técnica, no como foto.
 - [ ] Fotos de obra real con ≥1800 px: **solo la aérea del Hospital de Huanta**
       (1800×1125). La foto real del equipo tiene 1448 px. Todo lo demás está por
       debajo de 1 MP.
 - [ ] Para escalar con Upscayl partir de los **originales en git** (commit anterior a
-      , p. ej. ),
+      `bd437a5`, p. ej. `git show bd437a5~1:public/images/proyectos/image23.jpg`),
       no de los WebP ya reducidos.
 
 ## 5. Verificaciones que nadie ha hecho
