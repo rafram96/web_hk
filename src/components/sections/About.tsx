@@ -2,12 +2,13 @@ import Image from "next/image";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { Counter } from "@/components/ui/Counter";
-import { company, stats } from "@/lib/site";
+import { company } from "@/lib/site";
 
 /**
- * Sección "Nosotros": quiénes somos + marco normativo + banda de estadísticas.
- * Server Component. Itera sobre `stats` del site.ts (no hardcodea métricas).
+ * Sección "Nosotros": quiénes somos + marco normativo. Vive en /nosotros.
+ * La banda de cifras que antes cerraba esta sección se mudó a `Stats`, que
+ * es ahora el único sitio de la web donde se muestran métricas.
+ * Server Component.
  */
 export function About() {
   return (
@@ -60,14 +61,6 @@ export function About() {
           <div className="lg:col-span-7 lg:pl-8">
             <Reveal variant="zoom" delay={120}>
               <figure className="relative" data-parallax="54">
-                {/* Índice editorial gigante de fondo */}
-                <span
-                  aria-hidden
-                  className="display-index pointer-events-none absolute -left-4 -top-12 -z-10 hidden select-none text-[8rem] text-navy/[0.06] sm:block lg:-left-10 lg:text-[11rem]"
-                >
-                  01
-                </span>
-
                 {/* Retícula técnica de fondo (esquina superior derecha) */}
                 <div
                   aria-hidden
@@ -123,50 +116,6 @@ export function About() {
             </Reveal>
           </div>
         </div>
-
-        {/* Banda de estadísticas sobre panel navy — máxima presencia */}
-        <Reveal variant="zoom" delay={120} className="mt-24 lg:mt-32">
-          <div className="blueprint-grid relative overflow-hidden rounded-3xl bg-navy px-7 py-12 shadow-[var(--shadow-float)] sm:px-12 lg:py-16">
-            {/* Acento naranja superior */}
-            <span
-              aria-hidden
-              className="absolute left-0 top-0 h-1.5 w-28 rounded-br-lg bg-orange"
-            />
-
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-              <p className="kicker text-orange-300">HK en cifras</p>
-              <span
-                className="spec-line hidden h-px flex-1 text-white/15 sm:ml-8 sm:block"
-                aria-hidden
-              />
-            </div>
-
-            <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4 lg:gap-x-4">
-              {stats.map((stat, i) => (
-                <Reveal key={stat.label} variant="up" delay={i * 90}>
-                  <div className="relative pl-6 lg:pl-7">
-                    {/* Hairline/cota vertical de inicio de cada cifra */}
-                    <span
-                      aria-hidden
-                      className="absolute left-0 top-1 bottom-2 w-px bg-orange/70 lg:bg-white/15"
-                    />
-                    <dt className="sr-only">{stat.label}</dt>
-                    <Counter
-                      value={stat.value}
-                      prefix={stat.prefix}
-                      suffix={stat.suffix}
-                      isYear={"isYear" in stat ? stat.isYear : false}
-                      className="display-index block text-[3.4rem] text-orange tabular-nums sm:text-6xl lg:text-[4.25rem]"
-                    />
-                    <p className="mt-3 max-w-[10rem] font-mono text-[0.7rem] uppercase leading-snug tracking-[0.18em] text-navy-100">
-                      {stat.label}
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
-            </dl>
-          </div>
-        </Reveal>
       </div>
     </Section>
   );

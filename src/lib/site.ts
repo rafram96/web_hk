@@ -413,10 +413,12 @@ export const trustedEntities: TrustedEntity[] = TRUSTED_ENTITY_LABELS.map(
 );
 
 /**
- * Selección de 6 proyectos para la sección "Proyectos" de la home (teaser).
- * La lista completa de los 51 vive en /proyectos. Orden = más impactantes primero.
+ * Tres proyectos para la sección "Proyectos" de la home. Son tres y no seis
+ * porque la home se recortó a siete secciones; la lista completa está en
+ * /proyectos. Se eligen obras en ejecución con foto propia, y se evitan las
+ * dos que ya salen en el hero (220 Huanta y 285 Cusco) para no repetir foto.
  */
-const HOME_HIGHLIGHT_SLUGS = ["281", "285", "284", "279", "280", "220"];
+const HOME_HIGHLIGHT_SLUGS = ["284", "279", "281"];
 export const homeHighlights: Project[] = HOME_HIGHLIGHT_SLUGS.map(
   (slug) => projects.find((p) => p.slug === slug)!
 ).filter(Boolean);
@@ -485,11 +487,14 @@ export const certifications: Certification[] = [
   },
 ];
 
+/**
+ * Navegación principal. "Sectores" deja de ser una entrada propia: vive
+ * dentro de /nosotros junto con propósito, metodología y razones.
+ */
 export const nav = [
-  { label: "Inicio", href: "/#inicio" },
-  { label: "Nosotros", href: "/#nosotros" },
+  { label: "Inicio", href: "/" },
+  { label: "Nosotros", href: "/nosotros" },
   { label: "Servicios", href: "/servicios" },
-  { label: "Sectores", href: "/#sectores" },
   { label: "Proyectos", href: "/proyectos" },
   { label: "Contacto", href: "/#contacto" },
 ] as const;
