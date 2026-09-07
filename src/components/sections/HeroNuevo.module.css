@@ -17,9 +17,13 @@
 }
 
 /* ---------- Grano animado ---------- */
+/* inset: -8 % basta para el desplazamiento del grano. Con -150 % la capa
+   medía ~15.7 Mpx (7 veces el viewport) y, al llevar mix-blend-mode, el
+   navegador la recomponía entera en cada paso de la animación: era la causa
+   de los tirones de scroll y de la franja sin pintar en el header. */
 .grain {
   position: absolute;
-  inset: -150%;
+  inset: -8%;
   z-index: 40;
   pointer-events: none;
   opacity: 0.05;
@@ -29,9 +33,9 @@
 }
 @keyframes grainShift {
   0% { transform: translate(0, 0); }
-  33% { transform: translate(-6%, 4%); }
-  66% { transform: translate(5%, -5%); }
-  100% { transform: translate(-3%, 2%); }
+  33% { transform: translate(-2.5%, 2%); }
+  66% { transform: translate(2%, -2%); }
+  100% { transform: translate(-1%, 1%); }
 }
 
 /* ---------- Carrusel ---------- */

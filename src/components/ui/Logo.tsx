@@ -30,7 +30,7 @@ export function Logo({ tone = "dark", className = "", href = "/" }: LogoProps) {
       </svg>
       <span className="flex flex-col leading-none">
         <span
-          className={`font-display text-2xl font-extrabold tracking-tight ${textMain}`}
+          className={`font-display text-2xl font-extrabold tracking-tight transition-colors duration-300 ${textMain}`}
         >
           HK <span className="text-orange">Consulting</span>
           <span className="ml-1 align-baseline text-[0.62em] font-bold tracking-normal opacity-70">
@@ -38,7 +38,7 @@ export function Logo({ tone = "dark", className = "", href = "/" }: LogoProps) {
           </span>
         </span>
         <span
-          className={`kicker mt-1 text-[0.64rem] tracking-[0.32em] ${textSub}`}
+          className={`kicker mt-1 text-[0.64rem] tracking-[0.32em] transition-colors duration-300 ${textSub}`}
         >
           Ingeniería &amp; Consultoría
         </span>

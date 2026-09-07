@@ -18,8 +18,17 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
+  /* Umbral con histeresis: entra en modo solido a 72 px y no vuelve a
+     transparente hasta 24 px. Con un unico umbral a 24 px, el scroll fino
+     del trackpad cruzaba el limite ida y vuelta y el header alternaba entre
+     transparente y blanco: ese era el parpadeo.
+     Leer `scrollY` no fuerza layout, asi que el listener actualiza directo
+     (nada de rAF, que queda pausado si la pestana no esta visible). */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled((prev) => (prev ? y > 24 : y > 72));
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -36,14 +45,22 @@ export function Navbar() {
   const solid = scrolled || open;
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        solid
-          ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(2,30,48,0.08),0_12px_30px_-18px_rgba(2,30,48,0.4)]"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="container-hk flex h-20 items-center justify-between">
+    <header className="fixed inset-x-0 top-0 z-50">
+      {/* Fondo claro en su propia capa: solo se anima `opacity`, que el
+          compositor resuelve sin repintar la barra. Antes `transition-all`
+          animaba tambien el `backdrop-filter`, y al hacer scroll sobre el
+          hero (muy costoso de componer) la franja del header aparecia a
+          medio pintar como un parpadeo blanco. Sin backdrop-blur: detras de
+          un blanco al 95 % no se distingue y ahorra releer el fondo en cada
+          frame. */}
+      <div
+        aria-hidden
+        className={`absolute inset-0 bg-white/95 shadow-[0_1px_0_rgba(2,30,48,0.08),0_12px_30px_-18px_rgba(2,30,48,0.4)] transition-opacity duration-300 ease-out [will-change:opacity] ${
+          solid ? "opacity-100" : "opacity-0"
+        }`}
+      />
+
+      <div className="container-hk relative flex h-20 items-center justify-between">
         <Logo tone={solid ? "dark" : "light"} />
 
         {/* Navegación desktop */}
@@ -103,7 +120,7 @@ export function Navbar() {
 
       {/* Menú móvil */}
       <div
-        className={`overflow-hidden bg-white lg:hidden transition-[max-height] duration-400 ease-out ${
+        className={`relative overflow-hidden bg-white lg:hidden transition-[max-height] duration-400 ease-out ${
           open ? "max-h-[28rem] border-t border-line" : "max-h-0"
         }`}
       >
