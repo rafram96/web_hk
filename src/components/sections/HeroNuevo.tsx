@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import {
   useCallback,
   useEffect,
@@ -11,23 +11,34 @@ import {
 import { projectCounts, regionsCovered, yearsOfExperience } from "@/lib/site";
 import styles from "./HeroNuevo.module.css";
 
-type Slide = { src: string; alt: string; pos: string; mobilePos: string };
+/* Import estatico: next/image deriva ancho, alto y blurDataURL, de modo que
+   el hero muestra una version desenfocada en vez de un rectangulo negro. */
+import heroCongresoFront from "../../../public/images/hero-congreso-front.webp";
+import heroCongresoFila from "../../../public/images/hero-congreso-fila.webp";
+import heroEquipoCompleto from "../../../public/images/equipo-completo.webp";
+
+type Slide = {
+  src: StaticImageData;
+  alt: string;
+  pos: string;
+  mobilePos: string;
+};
 
 const SLIDES: Slide[] = [
   {
-    src: "/images/hero-congreso-front.jpg",
+    src: heroCongresoFront,
     alt: "Líder de HK Consulting frente al Congreso de la República",
     pos: "72% 50%",
     mobilePos: "96% 50%",
   },
   {
-    src: "/images/hero-congreso-fila.jpg",
+    src: heroCongresoFila,
     alt: "Equipo de HK Consulting en fila frente al Congreso",
     pos: "50% 52%",
     mobilePos: "52% 52%",
   },
   {
-    src: "/images/equipo-completo.jpg",
+    src: heroEquipoCompleto,
     alt: "Equipo completo de HK Consulting en la plaza del Congreso",
     pos: "46% 66%",
     mobilePos: "50% 66%",
@@ -154,7 +165,7 @@ export function HeroNuevo() {
       <div className={styles.carousel}>
         {SLIDES.map((s, idx) => (
           <div
-            key={s.src}
+            key={s.src.src}
             className={`${styles.slide} ${idx === active ? styles.slideActive : ""}`}
             style={
               {
@@ -168,6 +179,7 @@ export function HeroNuevo() {
               alt={s.alt}
               fill
               priority={idx === 0}
+              placeholder="blur"
               sizes="100vw"
               className={styles.slideImg}
             />
@@ -237,7 +249,7 @@ export function HeroNuevo() {
         <div className={styles.dots}>
           {SLIDES.map((s, idx) => (
             <button
-              key={s.src}
+              key={s.src.src}
               type="button"
               className={`${styles.dot} ${idx === active ? styles.dotActive : ""}`}
               onClick={() => goTo(idx)}

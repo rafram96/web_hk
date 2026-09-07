@@ -83,7 +83,11 @@ function FeaturedCard({
             src={project.image as string}
             alt={project.title}
             fill
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            sizes={
+              wide
+                ? "(min-width: 1024px) 55vw, 100vw"
+                : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            }
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
           {/* Overlay navy para legibilidad y profundidad */}

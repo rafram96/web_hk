@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description:
       "Estudios de preinversión, expedientes técnicos y supervisión de obras. Acompañamos todo el ciclo de inversión pública y privada del Perú.",
     images: [
-      { url: "/images/proyecto-aereo-hospital.jpg", width: 1200, height: 630 },
+      { url: "/images/proyecto-aereo-hospital.webp", width: 1200, height: 630 },
     ],
   },
 };
@@ -40,15 +40,15 @@ const serviceImages: Record<
   { src: string; alt: string }
 > = {
   "estudios-de-preinversion": {
-    src: "/images/equipo-completo.jpg",
+    src: "/images/equipo-completo.webp",
     alt: "Equipo de HK Consulting analizando estudios de preinversión",
   },
   "expedientes-tecnicos": {
-    src: "/images/proyecto-aereo-hospital.jpg",
+    src: "/images/proyecto-aereo-hospital.webp",
     alt: "Vista aérea de proyecto hospitalario con expediente técnico de HK Consulting",
   },
   "supervision-de-obras": {
-    src: "/images/proyecto-represa.jpg",
+    src: "/images/proyecto-represa.webp",
     alt: "Obra de represa supervisada por HK Consulting",
   },
 };
@@ -184,7 +184,7 @@ export default function ServiciosPage() {
         {/* Imagen de fondo + overlay */}
         <div className="absolute inset-0" aria-hidden>
           <Image
-            src="/images/hero-equipo-congreso.jpg"
+            src="/images/hero-equipo-congreso.webp"
             alt=""
             fill
             priority

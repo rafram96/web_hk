@@ -21,18 +21,18 @@ const ciclo = [
 /** Imágenes definitivas del carrusel del hero (alternan cada 10s). */
 const heroSlides: HeroSlide[] = [
   {
-    src: "/images/hero-congreso-fila.jpg",
+    src: "/images/hero-congreso-fila.webp",
     alt: "Equipo de ingenieros de HK Consulting frente al Congreso de la República del Perú",
     position: "50% 50%",
   },
   {
-    src: "/images/hero-congreso-front.jpg",
+    src: "/images/hero-congreso-front.webp",
     alt: "Ingeniero de HK Consulting frente al Congreso de la República del Perú",
     position: "50% 42%",
     fixed: true,
   },
   {
-    src: "/images/equipo-completo.jpg",
+    src: "/images/equipo-completo.webp",
     alt: "Equipo de HK Consulting frente al Palacio Legislativo del Perú en Lima",
     position: "50% 54%",
   },

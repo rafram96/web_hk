@@ -89,7 +89,7 @@ export function About() {
 
                 <div className="relative overflow-hidden rounded-3xl shadow-[var(--shadow-float)] ring-1 ring-navy-900/10">
                   <Image
-                    src="/images/equipo-completo.jpg"
+                    src="/images/equipo-completo.webp"
                     alt="Equipo de ingenieros de HK Consulting frente al Congreso del Perú"
                     width={840}
                     height={560}

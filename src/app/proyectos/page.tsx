@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: "Proyectos · HK Consulting S.A.C.",
     description: `${projectCounts.total} proyectos de ingeniería en ${regionsCovered} regiones del Perú: preinversión, expedientes técnicos y supervisión de obras.`,
     images: [
-      { url: "/images/proyecto-aereo-hospital.jpg", width: 1200, height: 630 },
+      { url: "/images/proyecto-aereo-hospital.webp", width: 1200, height: 630 },
     ],
   },
 };
