@@ -56,7 +56,7 @@ const SLIDES: Slide[] = [
   {
     src: equipoCongreso,
     alt: "Equipo de ingenieros de HK Consulting frente al Congreso de la República, Lima",
-    caption: "Equipo HK · Congreso de la República · Lima",
+    caption: "Equipo HK · Plaza Bolívar · Lima",
     pos: "62% 58%",
     mobilePos: "66% 60%",
   },
