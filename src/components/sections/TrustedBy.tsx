@@ -72,10 +72,10 @@ export function TrustedBy() {
           <ul
             className="hk-tape-track flex w-max items-stretch gap-4 pr-4 animate-marquee"
             /* Inline: la utilidad animate-marquee fija 40 s y pisaría una
-               duración declarada en CSS. Vuelta de 25 s, sin pausa al pasar el
-               cursor y también con prefers-reduced-motion (decisión del
-               cliente, 2026-09-07; ver globals.css). */
-            style={{ animationDuration: "25s" }}
+               duración declarada en CSS. Vuelta de 40 s (≈0.8 tarjetas por
+               segundo), sin pausa al pasar el cursor y también con
+               prefers-reduced-motion (decisión del cliente, 2026-09-07). */
+            style={{ animationDuration: "40s" }}
           >
             {[0, 1].map((copy) =>
               trustedEntities.map((e) => (
