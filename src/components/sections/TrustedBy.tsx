@@ -71,8 +71,8 @@ export function TrustedBy() {
           <ul
             className="hk-tape-track flex w-max items-stretch gap-4 pr-4 animate-marquee group-hover:[animation-play-state:paused]"
             /* Inline: la utilidad animate-marquee fija 40 s y pisaría una
-               duración declarada en CSS. Una vuelta lenta para 31 tarjetas. */
-            style={{ animationDuration: "140s" }}
+               duración declarada en CSS. Vuelta de 25 s (decisión del cliente). */
+            style={{ animationDuration: "25s" }}
           >
             {[0, 1].map((copy) =>
               trustedEntities.map((e) => (
