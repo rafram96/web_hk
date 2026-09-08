@@ -65,7 +65,7 @@ export function TrustedBy() {
       {/* Cinta: sangra a todo el ancho; los bordes se desvanecen. */}
       <Reveal variant="fade" delay={160}>
         <div
-          className="hk-tape group mt-10 border-y border-line/80 py-5"
+          className="hk-tape group mt-10 border-y border-line/80 py-7"
           aria-label="Entidades contratantes del portafolio de HK Consulting"
         >
           <ul className="hk-tape-track flex w-max items-stretch gap-4 pr-4 animate-marquee group-hover:[animation-play-state:paused]">
@@ -78,31 +78,31 @@ export function TrustedBy() {
                 >
                   {/* Mini tarjeta: monograma (o logo) + nombre + tipo. */}
                   <div
-                    className="flex h-full items-center gap-3 rounded-xl border border-line bg-white/80 py-3 pl-3 pr-5 shadow-[0_1px_2px_rgba(4,57,91,0.05)] transition-colors duration-300 hover:border-orange/50 hover:bg-white"
+                    className="flex h-full items-center gap-4 rounded-2xl border border-line bg-white/85 py-4 pl-4 pr-7 shadow-[0_2px_6px_rgba(4,57,91,0.06)] transition-colors duration-300 hover:border-orange/50 hover:bg-white"
                     title={`${e.entity} · ${e.count} ${e.count === 1 ? "proyecto" : "proyectos"}`}
                   >
                     {e.logo ? (
                       <Image
                         src={e.logo}
                         alt=""
-                        width={40}
-                        height={40}
-                        sizes="40px"
-                        className="h-10 w-10 rounded-lg object-contain"
+                        width={56}
+                        height={56}
+                        sizes="56px"
+                        className="h-14 w-14 rounded-xl object-contain"
                       />
                     ) : (
                       <span
                         aria-hidden
-                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-navy font-mono text-[0.62rem] font-semibold tracking-[0.12em] text-orange"
+                        className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-navy font-mono text-[0.8rem] font-semibold tracking-[0.1em] text-orange"
                       >
                         {e.monogram}
                       </span>
                     )}
                     <span className="flex flex-col">
-                      <span className="whitespace-nowrap font-sans text-[0.86rem] font-semibold leading-tight text-navy">
+                      <span className="whitespace-nowrap font-display text-[1.15rem] font-semibold leading-tight tracking-tight text-navy">
                         {e.short}
                       </span>
-                      <span className="mt-1 whitespace-nowrap font-mono text-[0.58rem] uppercase tracking-[0.16em] text-slate-soft">
+                      <span className="mt-1.5 whitespace-nowrap font-mono text-[0.68rem] uppercase tracking-[0.16em] text-slate-soft">
                         {e.kind}
                       </span>
                     </span>

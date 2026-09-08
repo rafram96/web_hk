@@ -205,7 +205,7 @@
     mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   }
-  .hk-tape-track { animation-duration: 110s; }
+  .hk-tape-track { animation-duration: 140s; }
   .container-hk {
     width: 100%;
     max-width: 80rem;
