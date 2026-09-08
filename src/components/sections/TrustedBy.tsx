@@ -9,8 +9,9 @@ import { entityStats, trustedEntities } from "@/lib/site";
  * Arriba, tres cifras agregadas (entidades, gobiernos regionales,
  * ministerios) calculadas sobre `projects`. Debajo, una cinta en movimiento
  * lento con todas las entidades contratantes del portafolio, compuesta en
- * mono como un rótulo técnico. La cinta se pausa al pasar el cursor y se
- * detiene del todo con `prefers-reduced-motion` (ver globals.css).
+ * mono como un rótulo técnico. Por decisión del cliente la cinta gira
+ * siempre: sin pausa al pasar el cursor y sin excepción para
+ * `prefers-reduced-motion`.
  *
  * Sin logotipos todavía: cuando lleguen basta con rellenar `logo` en
  * site.ts y la cinta pinta la imagen (monocromo, a color al pasar el
@@ -65,13 +66,15 @@ export function TrustedBy() {
       {/* Cinta: sangra a todo el ancho; los bordes se desvanecen. */}
       <Reveal variant="fade" delay={160}>
         <div
-          className="hk-tape group mt-10 border-y border-line/80 py-7"
+          className="hk-tape mt-10 border-y border-line/80 py-7"
           aria-label="Entidades contratantes del portafolio de HK Consulting"
         >
           <ul
-            className="hk-tape-track flex w-max items-stretch gap-4 pr-4 animate-marquee group-hover:[animation-play-state:paused]"
+            className="hk-tape-track flex w-max items-stretch gap-4 pr-4 animate-marquee"
             /* Inline: la utilidad animate-marquee fija 40 s y pisaría una
-               duración declarada en CSS. Vuelta de 25 s (decisión del cliente). */
+               duración declarada en CSS. Vuelta de 25 s, sin pausa al pasar el
+               cursor y también con prefers-reduced-motion (decisión del
+               cliente, 2026-09-07; ver globals.css). */
             style={{ animationDuration: "25s" }}
           >
             {[0, 1].map((copy) =>

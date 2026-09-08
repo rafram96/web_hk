@@ -420,10 +420,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  /* Sin movimiento: la cinta se desplaza a mano, con la barra oculta. */
-  .hk-tape { overflow-x: auto; scrollbar-width: none; }
-  .hk-tape::-webkit-scrollbar { display: none; }
-  .hk-tape-track { animation: none; }
+  /* La cinta de entidades sigue girando aunque el sistema pida reducir
+     movimiento: decisión del cliente (2026-09-07). */
   [data-reveal] { opacity: 1 !important; animation: none !important; }
   .hk-scene-sweep,
   .hk-page-progress { display: none !important; }
