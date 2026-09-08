@@ -68,7 +68,12 @@ export function TrustedBy() {
           className="hk-tape group mt-10 border-y border-line/80 py-7"
           aria-label="Entidades contratantes del portafolio de HK Consulting"
         >
-          <ul className="hk-tape-track flex w-max items-stretch gap-4 pr-4 animate-marquee group-hover:[animation-play-state:paused]">
+          <ul
+            className="hk-tape-track flex w-max items-stretch gap-4 pr-4 animate-marquee group-hover:[animation-play-state:paused]"
+            /* Inline: la utilidad animate-marquee fija 40 s y pisaría una
+               duración declarada en CSS. Una vuelta lenta para 31 tarjetas. */
+            style={{ animationDuration: "140s" }}
+          >
             {[0, 1].map((copy) =>
               trustedEntities.map((e) => (
                 <li
