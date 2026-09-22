@@ -445,6 +445,22 @@ const ENTITY_SHORT_NAMES: Record<string, string> = {
   "Autoridad para la Reconstrucción con Cambios": "Reconstrucción con Cambios",
 };
 
+/**
+ * Logotipos oficiales disponibles (public/logos). Fuente: Wikimedia Commons
+ * (dominio público / obra del Estado peruano) y el sitio oficial de SEDAPAL.
+ * Los que faltan (APN, INPE, PRONIED, Bomberos, PRONIS…) siguen con
+ * monograma hasta que el cliente los entregue.
+ */
+const ENTITY_LOGOS: Record<string, string> = {
+  "Poder Judicial": "/logos/poder-judicial.webp",
+  "Ministerio del Interior": "/logos/mininter.webp",
+  "Gobierno Regional del Cusco": "/logos/gore-cusco.webp",
+  "SEDAPAL": "/logos/sedapal.webp",
+  "EsSalud": "/logos/essalud.webp",
+  "Ministerio de Cultura": "/logos/mincul.webp",
+  "Ministerio de la Producción": "/logos/produce.webp",
+};
+
 /** Tipo de entidad a partir del nombre oficial. */
 function entityKind(entity: string): string {
   if (/^Gobierno Regional/.test(entity)) return "Gobierno regional";
@@ -506,6 +522,7 @@ export const trustedEntities: TrustedEntity[] = (() => {
         count,
         kind: entityKind(entity),
         monogram: entityMonogram(short),
+        logo: ENTITY_LOGOS[entity],
       };
     });
 })();

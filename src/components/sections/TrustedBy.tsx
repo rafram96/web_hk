@@ -90,14 +90,22 @@ export function TrustedBy() {
                     title={`${e.entity} · ${e.count} ${e.count === 1 ? "proyecto" : "proyectos"}`}
                   >
                     {e.logo ? (
-                      <Image
-                        src={e.logo}
-                        alt=""
-                        width={56}
-                        height={56}
-                        sizes="56px"
-                        className="h-14 w-14 rounded-xl object-contain"
-                      />
+                      <span
+                        aria-hidden
+                        className="flex h-14 w-auto min-w-14 max-w-[170px] shrink-0 items-center justify-center rounded-xl bg-white px-2"
+                      >
+                        <Image
+                          src={e.logo}
+                          alt=""
+                          width={170}
+                          height={44}
+                          sizes="170px"
+                          /* Eager: en una cinta en movimiento la carga
+                             perezosa deja tarjetas en blanco al entrar. */
+                          loading="eager"
+                          className="h-11 w-auto max-w-[150px] object-contain"
+                        />
+                      </span>
                     ) : (
                       <span
                         aria-hidden

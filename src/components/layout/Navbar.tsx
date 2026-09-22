@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
-import { nav, contact } from "@/lib/site";
+import { nav, contact, certifications } from "@/lib/site";
 
 /** Glifo de WhatsApp (hereda color con currentColor). */
 function WhatsAppIcon({ className = "h-4 w-4" }: { className?: string }) {
@@ -78,6 +79,35 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
+
+          {/* Sellos de certificación siempre a la vista (solo pantallas
+              anchas): lo primero que busca un funcionario. Enlazan a la
+              sección de certificaciones. */}
+          <Link
+            href="/#certificaciones"
+            aria-label={`Certificaciones: ${certifications.map((c) => c.name).join(", ")}`}
+            title={certifications.map((c) => c.name).join(" · ")}
+            className={`hidden items-center gap-1.5 border-l pl-6 xl:flex ${
+              solid ? "border-navy/15" : "border-white/25"
+            }`}
+          >
+            {certifications.map((c) =>
+              c.image ? (
+                <Image
+                  key={c.name}
+                  src={c.image}
+                  alt=""
+                  width={30}
+                  height={30}
+                  sizes="30px"
+                  className={`h-[30px] w-[30px] rounded-full bg-white object-contain ring-1 transition-transform duration-300 hover:scale-110 ${
+                    solid ? "ring-line" : "ring-white/40"
+                  }`}
+                />
+              ) : null
+            )}
+          </Link>
+
           <a
             href={`https://wa.me/${contact.whatsapp}`}
             target="_blank"

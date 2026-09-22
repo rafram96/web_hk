@@ -52,10 +52,16 @@
 
 ## 4. Material que debe entregar el cliente
 
-- [ ] Fotos de obra a buena resolución o clip de dron (el hero tiene solo dos
+- [~] (22-sep, rama mejoras) Clip de dron PROVISIONAL de archivo (Pexels 4404097, licencia libre,
+      12 s, 720p, 2.2 MB) como primera diapositiva del hero. Sigue pendiente el material real:
+      fotos de obra a buena resolución o clip de dron propio (el hero tiene solo dos
       aéreas y una se repite en la banda de inversión). Prop `videoSrc` lista
       en `HeroNuevo`.
-- [ ] Logos de las 8 entidades (campo `logo` opcional ya existe en site.ts).
+- [~] (22-sep, rama mejoras) 7 logos oficiales cargados desde Wikimedia Commons / sitio
+      oficial: Poder Judicial, Mininter, GORE Cusco, SEDAPAL, EsSalud, Mincul, Produce.
+      Faltan: APN, INPE, PRONIED, PRONIS, Bomberos, GORE Callao/Lambayeque y el resto
+      (pedir al cliente o buscar en sus sitios). ProInversión descartado: el PNG de Commons
+      está roto.
 - [ ] Montos de los 22 proyectos con `amount: "—"`: la cifra de inversión
       supervisada (hoy S/ 72 M sobre 29 contratos) sube sola al cargarlos.
 - [ ] Confirmar copy de /nosotros y /servicios; confirmar "+50 proyectos" como

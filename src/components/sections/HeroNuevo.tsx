@@ -23,28 +23,49 @@ import styles from "./HeroNuevo.module.css";
 import obraHuanta from "../../../public/images/proyecto-aereo-hospital.webp";
 import equipoFrente from "../../../public/images/hero-congreso-front.webp";
 import equipoCongreso from "../../../public/images/hero-congreso-fila.webp";
+import obraVideoPoster from "../../../public/videos/hero-obra-poster.webp";
 
 type Slide = {
+  /** Foto de la diapositiva o, si hay `video`, su póster mientras carga. */
   src: StaticImageData;
+  /** Clip en bucle (mp4, sin audio). Sustituye a la foto en esa diapositiva. */
+  video?: string;
   alt: string;
   /** Rótulo del pie: obra y lugar, tal como constan en el portafolio. */
   caption: string;
   pos: string;
   mobilePos: string;
+  /** Tiempo en pantalla antes de avanzar (ms). */
+  delay: number;
 };
 
 /**
- * Una toma aérea de obra supervisada por HK (proyecto 220) y dos fotos reales
- * del equipo frente al Congreso de la República. Son las únicas del archivo
- * con resolución y calidad suficientes para un fondo a pantalla completa.
+ * Primero un clip de obra vista desde dron; luego una toma aérea de obra
+ * supervisada por HK (proyecto 220) y dos fotos del equipo frente al Congreso
+ * de la República (hero-congreso-front es una composición hecha con Gemini a
+ * partir de hero-congreso-fila; decisión del cliente, 2026-09-07).
+ *
+ * El clip es material de archivo (Pexels, licencia libre, 12 s, 720p, 2 MB)
+ * como relleno provisional: cuando HK entregue su toma de dron basta con
+ * reemplazar public/videos/hero-obra.mp4 y su póster, y actualizar el pie.
  */
 const SLIDES: Slide[] = [
+  {
+    src: obraVideoPoster,
+    video: "/videos/hero-obra.mp4",
+    alt: "Obra en ejecución vista desde dron",
+    caption: "Obra en ejecución · toma de dron (ilustrativa)",
+    pos: "50% 50%",
+    mobilePos: "50% 50%",
+    delay: 14000,
+  },
   {
     src: obraHuanta,
     alt: "Vista aérea del Hospital de Apoyo de Huanta en ejecución, Ayacucho",
     caption: "Hospital de Huanta · Ayacucho",
     pos: "52% 46%",
     mobilePos: "56% 46%",
+    delay: 7000,
   },
   {
     src: equipoFrente,
@@ -52,6 +73,7 @@ const SLIDES: Slide[] = [
     caption: "Equipo HK · Congreso de la República · Lima",
     pos: "50% 42%",
     mobilePos: "58% 45%",
+    delay: 7000,
   },
   {
     src: equipoCongreso,
@@ -59,6 +81,7 @@ const SLIDES: Slide[] = [
     caption: "Equipo HK · Plaza Bolívar · Lima",
     pos: "62% 58%",
     mobilePos: "66% 60%",
+    delay: 7000,
   },
 ];
 
@@ -74,22 +97,12 @@ const STATS = [
   { value: yearsOfExperience, label: "Años" },
 ] as const;
 
-const DELAY = 7000;
 const fmt = (n: number) => n.toLocaleString("es-PE");
 
-type HeroNuevoProps = {
-  /**
-   * Ruta a un clip en bucle (por ejemplo, una toma de dron) para el fondo.
-   * Si se pasa, el vídeo sustituye al carrusel y la primera foto queda de
-   * póster mientras carga. Preparado para cuando el cliente entregue el
-   * material; hoy la home no lo usa.
-   */
-  videoSrc?: string;
-};
-
-export function HeroNuevo({ videoSrc }: HeroNuevoProps = {}) {
+export function HeroNuevo() {
   const heroRef = useRef<HTMLElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [active, setActive] = useState(0);
   const [shown, setShown] = useState(false);
   const [inViewport, setInViewport] = useState(true);
@@ -144,13 +157,30 @@ export function HeroNuevo({ videoSrc }: HeroNuevoProps = {}) {
     return () => cancelAnimationFrame(raf);
   }, [shown]);
 
-  /* Auto-avance por tiempo: se reinicia con cada cambio. Con vídeo de fondo
-     no hay carrusel que avanzar. */
+  /* Auto-avance por tiempo: se reinicia con cada cambio. La diapositiva de
+     vídeo dura más que las fotos. */
   useEffect(() => {
-    if (videoSrc || !inViewport) return;
-    const t = window.setTimeout(next, DELAY);
+    if (!inViewport) return;
+    const t = window.setTimeout(next, SLIDES[active].delay);
     return () => window.clearTimeout(t);
-  }, [active, inViewport, next, videoSrc]);
+  }, [active, inViewport, next]);
+
+  /* El clip solo se reproduce cuando su diapositiva está activa y el hero
+     en pantalla; el resto del tiempo se pausa para no gastar CPU ni datos.
+     Se reproduce también con prefers-reduced-motion, igual que la cinta de
+     entidades (decisión del cliente, 2026-09-07). */
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const shouldPlay = inViewport && Boolean(SLIDES[active].video);
+    if (shouldPlay) {
+      v.play().catch(() => {
+        /* autoplay bloqueado: queda el póster */
+      });
+    } else {
+      v.pause();
+    }
+  }, [active, inViewport]);
 
   /* Glow naranja con parallax de puntero. */
   useEffect(() => {
@@ -192,44 +222,45 @@ export function HeroNuevo({ videoSrc }: HeroNuevoProps = {}) {
       }`}
       aria-label="HK Consulting — donde el país se construye"
     >
-      {/* Fondo: vídeo en bucle si lo hay; si no, el carrusel de obras */}
-      {videoSrc ? (
-        <video
-          className={styles.video}
-          src={videoSrc}
-          poster={SLIDES[0].src.src}
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden
-        />
-      ) : (
-        <div className={styles.carousel}>
-          {SLIDES.map((s, idx) => (
-            <div
-              key={s.src.src}
-              className={`${styles.slide} ${idx === active ? styles.slideActive : ""}`}
-              style={
-                {
-                  "--slide-position": s.pos,
-                  "--slide-position-mobile": s.mobilePos,
-                } as CSSProperties
-              }
-            >
+      {/* Fondo: carrusel de obras; la primera diapositiva es un clip en bucle */}
+      <div className={styles.carousel}>
+        {SLIDES.map((s, idx) => (
+          <div
+            key={s.src.src}
+            className={`${styles.slide} ${idx === active ? styles.slideActive : ""}`}
+            style={
+              {
+                "--slide-position": s.pos,
+                "--slide-position-mobile": s.mobilePos,
+              } as CSSProperties
+            }
+          >
+            {s.video ? (
+              <video
+                ref={videoRef}
+                className={styles.video}
+                src={s.video}
+                poster={s.src.src}
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-hidden
+              />
+            ) : (
               <Image
                 src={s.src}
                 alt={s.alt}
                 fill
-                priority={idx === 0}
+                priority={idx <= 1}
                 placeholder="blur"
                 sizes="100vw"
                 className={styles.slideImg}
               />
-            </div>
-          ))}
-        </div>
-      )}
+            )}
+          </div>
+        ))}
+      </div>
 
       <div className={styles.glowwrap} ref={glowRef} aria-hidden>
         <div className={styles.glow} />
@@ -301,9 +332,12 @@ export function HeroNuevo({ videoSrc }: HeroNuevoProps = {}) {
         </div>
       </div>
 
-      {/* Controles del carrusel (no aplican con vídeo de fondo) */}
-      {!videoSrc && (
-        <div className={styles.controls}>
+      {/* Controles del carrusel */}
+      {
+        <div
+          className={styles.controls}
+          style={{ "--dot-ms": `${SLIDES[active].delay}ms` } as CSSProperties}
+        >
           <span className={styles.caption}>{SLIDES[active].caption}</span>
           <button
             type="button"
@@ -347,7 +381,7 @@ export function HeroNuevo({ videoSrc }: HeroNuevoProps = {}) {
             </svg>
           </button>
         </div>
-      )}
+      }
     </section>
   );
 }

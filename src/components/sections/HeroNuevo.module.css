@@ -38,7 +38,7 @@
   100% { transform: translate(-1%, 1%); }
 }
 
-/* ---------- Fondo en vídeo (opcional, prop videoSrc) ---------- */
+/* ---------- Diapositiva en vídeo (clip en bucle dentro del carrusel) ---------- */
 .video {
   position: absolute;
   inset: 0;
@@ -46,6 +46,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: var(--slide-position, 50% 50%);
 }
 
 /* ---------- Carrusel ---------- */
@@ -244,7 +245,7 @@
 }
 .dot::before { width: 100%; background: rgba(255, 255, 255, 0.25); }
 .dot::after { width: 0; background: var(--color-orange); }
-.dotActive::after { animation: dotFill 5s linear forwards paused; }
+.dotActive::after { animation: dotFill var(--dot-ms, 7s) linear forwards paused; }
 @keyframes dotFill { from { width: 0; } to { width: 100%; } }
 
 /* Pausa el trabajo continuo cuando el hero sale del viewport. */
