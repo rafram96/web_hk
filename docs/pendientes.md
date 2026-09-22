@@ -89,8 +89,9 @@
 
 ## 5. Verificaciones que nadie ha hecho
 
-- [ ] Rendimiento medido en https://pagespeed.web.dev (móvil). Si LCP > 2.5 s,
-      bajar el tamaño de la foto del hero para móvil.
+- [x] (22-sep) PageSpeed: móvil 87/93/100/100, escritorio 69/89/100/100 (LCP 0.7 s, CLS 0).
+      Pendiente investigar el 69 de escritorio: probable bloqueo por la cinta de entidades
+      siempre activa (62 tarjetas animadas) y el hero. Móvil LCP 3.8 s: foto del hero.
 - [ ] Recorrer el home con Tab: orden de foco, botones del carrusel anunciados.
 - [ ] Abrir la URL en un teléfono real (layout se midió solo por iframe a 390 px).
 - [ ] Compartir el enlace por WhatsApp y confirmar que sale la tarjeta con imagen.
