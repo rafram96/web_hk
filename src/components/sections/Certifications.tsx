@@ -42,15 +42,15 @@ export function Certifications() {
               as="li"
               className="h-full"
             >
-              <div className="group flex h-full flex-col items-center gap-4 bg-white px-4 py-8 text-center transition-colors duration-300 hover:bg-paper">
+              <div className="group flex h-full flex-col items-center gap-4 bg-white px-4 py-8 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-paper hover:shadow-[0_18px_40px_-24px_rgba(4,57,91,0.45)]">
                 {cert.image && (
-                  <div className="relative h-20 w-28 shrink-0">
+                  <div className="relative h-20 w-28 shrink-0 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-rotate-3">
                     <Image
                       src={cert.image}
                       alt={`Certificación ${cert.name} — ${cert.scope}`}
                       fill
                       sizes="112px"
-                      className="object-contain"
+                      className="object-contain drop-shadow-[0_6px_10px_rgba(4,57,91,0.18)]"
                     />
                   </div>
                 )}

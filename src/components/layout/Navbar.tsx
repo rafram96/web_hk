@@ -65,7 +65,7 @@ export function Navbar() {
         <Logo tone={solid ? "dark" : "light"} />
 
         {/* Navegación desktop */}
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-7 lg:flex">
           {nav.map((item) => (
             <Link
               key={item.href}
@@ -87,25 +87,38 @@ export function Navbar() {
             href="/#certificaciones"
             aria-label={`Certificaciones: ${certifications.map((c) => c.name).join(", ")}`}
             title={certifications.map((c) => c.name).join(" · ")}
-            className={`hidden items-center gap-1.5 border-l pl-6 xl:flex ${
+            className={`group/certs hidden items-center gap-3 border-l pl-5 xl:flex ${
               solid ? "border-navy/15" : "border-white/25"
             }`}
           >
-            {certifications.map((c) =>
-              c.image ? (
-                <Image
-                  key={c.name}
-                  src={c.image}
-                  alt=""
-                  width={30}
-                  height={30}
-                  sizes="30px"
-                  className={`h-[30px] w-[30px] rounded-full bg-white object-contain ring-1 transition-transform duration-300 hover:scale-110 ${
-                    solid ? "ring-line" : "ring-white/40"
-                  }`}
-                />
-              ) : null
-            )}
+            {/* Sellos apilados que se despliegan al pasar el cursor. */}
+            <span className="flex items-center">
+              {certifications.map((c, i) =>
+                c.image ? (
+                  <Image
+                    key={c.name}
+                    src={c.image}
+                    alt=""
+                    width={36}
+                    height={36}
+                    sizes="36px"
+                    style={{ zIndex: 10 - i }}
+                    className={`h-9 w-9 rounded-full bg-white object-contain p-[2px] shadow-[0_2px_6px_rgba(2,30,48,0.25)] ring-2 transition-[margin,transform] duration-300 ease-out group-hover/certs:scale-110 ${
+                      i > 0 ? "-ml-3 group-hover/certs:ml-0.5" : ""
+                    } ${solid ? "ring-white" : "ring-navy-950/60"}`}
+                  />
+                ) : null
+              )}
+            </span>
+            <span
+              className={`font-mono text-[0.6rem] font-medium uppercase leading-tight tracking-[0.14em] ${
+                solid ? "text-navy/70" : "text-white/80"
+              }`}
+            >
+              ISO
+              <br />
+              BPL
+            </span>
           </Link>
 
           <a

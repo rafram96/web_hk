@@ -1,11 +1,12 @@
-import Image from "next/image";
+import { BgVideo } from "@/components/ui/BgVideo";
 import { Reveal } from "@/components/ui/Reveal";
 import { supervisedInvestment } from "@/lib/site";
 
-/* Misma aérea que abre el hero. Es la única foto del archivo que muestra
-   obra a escala de ciudad; aquí va a sangre completa, con otro encuadre y
-   mucho más oscura, para leerse como fondo y no como fotografía expuesta. */
-import obraAerea from "../../../public/images/proyecto-aereo-hospital.webp";
+/* Fondo en vídeo: excavadora cargando en obra, 10 s en bucle, 720p, 2 MB.
+   Material de archivo (Pexels, licencia libre) como relleno provisional
+   hasta que HK entregue tomas propias; el póster es su primer fotograma. */
+const VIDEO = "/videos/obra-supervision.mp4";
+const POSTER = "/videos/obra-supervision-poster.webp";
 
 /**
  * Sección de respiro entre Proyectos y Cifras: una foto a pantalla completa
@@ -23,14 +24,7 @@ export function Investment() {
       aria-label="Inversión supervisada"
       className="relative isolate flex min-h-[68svh] items-center overflow-hidden bg-navy-950 text-white"
     >
-      <Image
-        src={obraAerea}
-        alt="Vista aérea del Hospital de Apoyo de Huanta en ejecución, Ayacucho"
-        fill
-        placeholder="blur"
-        sizes="100vw"
-        className="object-cover object-[50%_62%]"
-      />
+      <BgVideo src={VIDEO} poster={POSTER} position="50% 55%" />
 
       {/* Velo en tres capas, como el hero: una base uniforme, un degradado
           direccional que da contraste al texto de la izquierda y otro
