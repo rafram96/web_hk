@@ -447,18 +447,30 @@ const ENTITY_SHORT_NAMES: Record<string, string> = {
 
 /**
  * Logotipos oficiales disponibles (public/logos). Fuente: Wikimedia Commons
- * (dominio público / obra del Estado peruano) y el sitio oficial de SEDAPAL.
- * Los que faltan (APN, INPE, PRONIED, Bomberos, PRONIS…) siguen con
- * monograma hasta que el cliente los entregue.
+ * (dominio público / obra del Estado peruano) y sitios oficiales (SEDAPAL,
+ * GORE Junín). Para los gobiernos regionales sin logo institucional en
+ * Commons (Callao, Lambayeque, Apurímac, Ayacucho, Huancavelica, La
+ * Libertad, Puno) se usa el escudo del departamento, que es el emblema que
+ * esos gobiernos llevan en su identidad. Los que faltan (APN, INPE, PRONIED,
+ * Bomberos, PRONIS…) siguen con monograma hasta que el cliente los entregue.
  */
 const ENTITY_LOGOS: Record<string, string> = {
   "Poder Judicial": "/logos/poder-judicial.webp",
   "Ministerio del Interior": "/logos/mininter.webp",
-  "Gobierno Regional del Cusco": "/logos/gore-cusco.webp",
-  "SEDAPAL": "/logos/sedapal.webp",
-  "EsSalud": "/logos/essalud.webp",
   "Ministerio de Cultura": "/logos/mincul.webp",
   "Ministerio de la Producción": "/logos/produce.webp",
+  "SEDAPAL": "/logos/sedapal.webp",
+  "EsSalud": "/logos/essalud.webp",
+  "Gobierno Regional del Cusco": "/logos/gore-cusco.webp",
+  "Gobierno Regional del Callao": "/logos/gore-callao.webp",
+  "Gobierno Regional de Lambayeque": "/logos/gore-lambayeque.webp",
+  "Gobierno Regional de Apurímac": "/logos/gore-apurimac.webp",
+  "Gobierno Regional de Ayacucho": "/logos/gore-ayacucho.webp",
+  "Gobierno Regional de Huancavelica": "/logos/gore-huancavelica.webp",
+  "Gobierno Regional de Junín": "/logos/gore-junin.webp",
+  "Gobierno Regional de La Libertad": "/logos/gore-la-libertad.webp",
+  "Gobierno Regional de Loreto": "/logos/gore-loreto.webp",
+  "Gobierno Regional Puno": "/logos/gore-puno.webp",
 };
 
 /** Tipo de entidad a partir del nombre oficial. */

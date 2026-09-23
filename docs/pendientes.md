@@ -57,11 +57,12 @@
       fotos de obra a buena resolución o clip de dron propio (el hero tiene solo dos
       aéreas y una se repite en la banda de inversión). Prop `videoSrc` lista
       en `HeroNuevo`.
-- [~] (22-sep, rama mejoras) 7 logos oficiales cargados desde Wikimedia Commons / sitio
-      oficial: Poder Judicial, Mininter, GORE Cusco, SEDAPAL, EsSalud, Mincul, Produce.
-      Faltan: APN, INPE, PRONIED, PRONIS, Bomberos, GORE Callao/Lambayeque y el resto
-      (pedir al cliente o buscar en sus sitios). ProInversión descartado: el PNG de Commons
-      está roto.
+- [~] (23-sep, rama mejoras) 16 logos cargados: Poder Judicial, Mininter, Mincul, Produce, SEDAPAL,
+      EsSalud y los 10 gobiernos regionales (Cusco y Junín con logo institucional; Callao,
+      Lambayeque, Apurímac, Ayacucho, Huancavelica, La Libertad, Puno y Loreto con el escudo
+      departamental / emblema regional de Wikimedia Commons). Faltan: APN, INPE, PRONIED,
+      PRONIS, Bomberos, Poder Legislativo, Ministerio Público, municipalidades y el resto
+      (pedir al cliente). ProInversión descartado: el PNG de Commons está roto.
 - [ ] Montos de los 22 proyectos con `amount: "—"`: la cifra de inversión
       supervisada (hoy S/ 72 M sobre 29 contratos) sube sola al cargarlos.
 - [ ] Confirmar copy de /nosotros y /servicios; confirmar "+50 proyectos" como
