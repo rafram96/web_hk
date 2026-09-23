@@ -451,8 +451,9 @@ const ENTITY_SHORT_NAMES: Record<string, string> = {
  * GORE Junín). Para los gobiernos regionales sin logo institucional en
  * Commons (Callao, Lambayeque, Apurímac, Ayacucho, Huancavelica, La
  * Libertad, Puno) se usa el escudo del departamento, que es el emblema que
- * esos gobiernos llevan en su identidad. Los que faltan (APN, INPE, PRONIED,
- * Bomberos, PRONIS…) siguen con monograma hasta que el cliente los entregue.
+ * esos gobiernos llevan en su identidad. PRONIS, INPE y las municipalidades
+ * de Ventanilla y Arequipa los entregó el cliente (23-sep-2026). Los que
+ * faltan (APN, PRONIED, Bomberos, Poder Legislativo…) siguen con monograma.
  */
 const ENTITY_LOGOS: Record<string, string> = {
   "Poder Judicial": "/logos/poder-judicial.webp",
@@ -463,6 +464,10 @@ const ENTITY_LOGOS: Record<string, string> = {
   "Ministerio Público": "/logos/ministerio-publico.webp",
   "SEDAPAL": "/logos/sedapal.webp",
   "EsSalud": "/logos/essalud.webp",
+  "PRONIS": "/logos/pronis.webp",
+  "INPE": "/logos/inpe.webp",
+  "Municipalidad de Ventanilla": "/logos/muni-ventanilla.webp",
+  "Municipalidad Provincial de Arequipa": "/logos/muni-arequipa.webp",
   "Gobierno Regional del Cusco": "/logos/gore-cusco.webp",
   "Gobierno Regional del Callao": "/logos/gore-callao.webp",
   "Gobierno Regional de Lambayeque": "/logos/gore-lambayeque.webp",
