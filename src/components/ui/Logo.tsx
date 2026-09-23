@@ -4,13 +4,20 @@ type LogoProps = {
   tone?: "dark" | "light"; // dark = texto oscuro (sobre claro); light = texto claro (sobre navy)
   className?: string;
   href?: string | null;
+  /** Se pasa tal cual a <Link>; la Navbar lo apaga en la home. */
+  prefetch?: false;
 };
 
 /**
  * Lockup de marca HK Consulting: cubo isométrico (eco del logo original)
  * + wordmark. Vectorial, nítido en cualquier fondo.
  */
-export function Logo({ tone = "dark", className = "", href = "/" }: LogoProps) {
+export function Logo({
+  tone = "dark",
+  className = "",
+  href = "/",
+  prefetch,
+}: LogoProps) {
   const textMain = tone === "dark" ? "text-navy" : "text-white";
   const textSub = tone === "dark" ? "text-slate-soft" : "text-navy-200";
 
@@ -48,7 +55,12 @@ export function Logo({ tone = "dark", className = "", href = "/" }: LogoProps) {
 
   if (href === null) return inner;
   return (
-    <Link href={href} aria-label="HK Consulting — Inicio" className="inline-flex">
+    <Link
+      href={href}
+      prefetch={prefetch}
+      aria-label="HK Consulting — Inicio"
+      className="inline-flex"
+    >
       {inner}
     </Link>
   );

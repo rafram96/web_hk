@@ -107,7 +107,9 @@ export function HeroNuevo() {
   const [active, setActive] = useState(0);
   const [shown, setShown] = useState(false);
   const [inViewport, setInViewport] = useState(true);
-  const [counts, setCounts] = useState<number[]>(STATS.map(() => 0));
+  /* Las cifras se escriben directo en el DOM: con setState cada frame el
+     hero entero se re-renderizaba ~100 veces durante la carga. */
+  const countRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   const next = useCallback(() => setActive((i) => (i + 1) % SLIDES.length), []);
   const goTo = useCallback(
@@ -139,19 +141,21 @@ export function HeroNuevo() {
   /* Contadores (una vez visible). */
   useEffect(() => {
     if (!shown) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const reducedMotionFrame = requestAnimationFrame(() => {
-        setCounts(STATS.map((s) => s.value));
+    const paint = (eased: number) =>
+      STATS.forEach((st, idx) => {
+        const el = countRefs.current[idx];
+        if (el) el.textContent = fmt(Math.round(st.value * eased));
       });
-      return () => cancelAnimationFrame(reducedMotionFrame);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      paint(1);
+      return;
     }
     const dur = 1600;
     const start = performance.now();
     let raf = 0;
     const tick = (now: number) => {
       const p = Math.min((now - start) / dur, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setCounts(STATS.map((s) => Math.round(s.value * eased)));
+      paint(1 - Math.pow(1 - p, 3));
       if (p < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -242,14 +246,16 @@ export function HeroNuevo() {
               } as CSSProperties
             }
           >
-            {/* El póster va siempre como imagen optimizada y con prioridad:
-                es el LCP de la página. El vídeo se monta encima solo cuando
-                procede y se descarga al reproducirse. */}
+            {/* El póster va siempre como imagen optimizada y precargada: es
+                el LCP de la página. Las demás fotos cargan después con
+                prioridad baja para no competir con él. El vídeo se monta
+                encima solo cuando procede y se descarga al reproducirse. */}
             <Image
               src={s.src}
               alt={s.alt}
               fill
-              priority={idx <= 1}
+              preload={idx === 0}
+              fetchPriority={idx === 0 ? undefined : "low"}
               placeholder="blur"
               sizes="100vw"
               className={styles.slideImg}
@@ -306,7 +312,13 @@ export function HeroNuevo() {
                 {"prefix" in s && s.prefix ? (
                   <span className={styles.pre}>{s.prefix}</span>
                 ) : null}
-                <span>{fmt(counts[idx] ?? 0)}</span>
+                <span
+                  ref={(el) => {
+                    countRefs.current[idx] = el;
+                  }}
+                >
+                  {fmt(0)}
+                </span>
               </div>
               <div className={styles.lab}>{s.label}</div>
             </div>

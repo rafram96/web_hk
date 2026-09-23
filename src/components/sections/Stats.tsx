@@ -49,26 +49,30 @@ export function Stats() {
         {/* Las cuatro métricas de cabecera */}
         <dl className="mt-12 grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4 lg:gap-x-4">
           {stats.map((stat, i) => (
-            <Reveal key={stat.label} variant="up" delay={i * 90}>
-              <div className="relative pl-6 lg:pl-7">
-                <span
-                  aria-hidden
-                  className="absolute bottom-2 left-0 top-1 w-px bg-orange/70 lg:bg-white/15"
+            /* El Reveal es el propio grupo dt/dd: <dl> solo admite <div> con
+               dt y dd como hijos directos, así que el filete va en ::before. */
+            <Reveal
+              key={stat.label}
+              variant="up"
+              delay={i * 90}
+              className="relative pl-6 before:absolute before:bottom-2 before:left-0 before:top-1 before:w-px before:bg-orange/70 lg:pl-7 lg:before:bg-white/15"
+            >
+              <dt className="sr-only">{stat.label}</dt>
+              <dd>
+                <Counter
+                  value={stat.value}
+                  prefix={stat.prefix}
+                  suffix={stat.suffix}
+                  isYear={"isYear" in stat ? stat.isYear : false}
+                  className="display-index block text-[3.4rem] tabular-nums text-orange sm:text-6xl lg:text-[4.25rem]"
                 />
-                <dt className="sr-only">{stat.label}</dt>
-                <dd>
-                  <Counter
-                    value={stat.value}
-                    prefix={stat.prefix}
-                    suffix={stat.suffix}
-                    isYear={"isYear" in stat ? stat.isYear : false}
-                    className="display-index block text-[3.4rem] tabular-nums text-orange sm:text-6xl lg:text-[4.25rem]"
-                  />
-                  <p className="mt-3 max-w-[10rem] font-mono text-[0.7rem] uppercase leading-snug tracking-[0.18em] text-navy-100">
-                    {stat.label}
-                  </p>
-                </dd>
-              </div>
+                <p
+                  aria-hidden
+                  className="mt-3 max-w-[10rem] font-mono text-[0.7rem] uppercase leading-snug tracking-[0.18em] text-navy-100"
+                >
+                  {stat.label}
+                </p>
+              </dd>
             </Reveal>
           ))}
         </dl>

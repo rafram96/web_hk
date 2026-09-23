@@ -50,13 +50,15 @@ export function TrustedBy() {
         <Reveal variant="fade" delay={80}>
           <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-5 sm:gap-x-14">
             {stats.map((s) => (
+              /* dt antes que dd en el DOM (lo exige <dl>); el número se
+                 muestra primero con order. */
               <div key={s.label} className="flex items-baseline gap-3">
-                <dd className="order-1 font-display text-4xl font-bold leading-none tracking-tight text-navy sm:text-5xl">
-                  {s.value}
-                </dd>
                 <dt className="order-2 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-slate-soft">
                   {s.label}
                 </dt>
+                <dd className="order-1 font-display text-4xl font-bold leading-none tracking-tight text-navy sm:text-5xl">
+                  {s.value}
+                </dd>
               </div>
             ))}
           </dl>
@@ -99,10 +101,14 @@ export function TrustedBy() {
                           alt=""
                           width={170}
                           height={44}
-                          sizes="170px"
                           /* Eager: en una cinta en movimiento la carga
-                             perezosa deja tarjetas en blanco al entrar. */
+                             perezosa deja tarjetas en blanco al entrar.
+                             Prioridad baja para que React no emita un
+                             <link rel="preload"> por logo (eran 22 compitiendo
+                             con la foto del hero) y sin `sizes`, así el srcset
+                             queda en 1x/2x en vez de 16 anchos por logo. */
                           loading="eager"
+                          fetchPriority="low"
                           className="h-11 w-auto max-w-[150px] object-contain"
                         />
                       </span>

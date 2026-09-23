@@ -97,16 +97,16 @@
 }
 
 /* ---------- Reveals ---------- */
+/* Solo opacity y transform: el blur de entrada no se puede componer en la
+   GPU y obligaba a repintar seis bloques en cada frame de la carga. */
 .rv {
   opacity: 0;
   transform: translateY(24px) scale(0.985);
-  filter: blur(5px);
   transition:
     opacity 1.1s cubic-bezier(0.22, 0.68, 0.18, 1),
-    transform 1.1s cubic-bezier(0.22, 0.68, 0.18, 1),
-    filter 1.1s;
+    transform 1.1s cubic-bezier(0.22, 0.68, 0.18, 1);
 }
-.in .rv { opacity: 1; transform: none; filter: none; }
+.in .rv { opacity: 1; transform: none; }
 .d1 { transition-delay: 0.12s; }
 .d2 { transition-delay: 0.24s; }
 .d3 { transition-delay: 0.36s; }
@@ -244,9 +244,11 @@
   transform: translateY(-50%);
 }
 .dot::before { width: 100%; background: rgba(255, 255, 255, 0.25); }
-.dot::after { width: 0; background: var(--color-orange); }
+/* La barra se llena con scaleX (compuesta) y no con width, que forzaba
+   layout y pintura en cada frame mientras la diapositiva está activa. */
+.dot::after { width: 100%; background: var(--color-orange); transform: translateY(-50%) scaleX(0); transform-origin: left; }
 .dotActive::after { animation: dotFill var(--dot-ms, 7s) linear forwards paused; }
-@keyframes dotFill { from { width: 0; } to { width: 100%; } }
+@keyframes dotFill { from { transform: translateY(-50%) scaleX(0); } to { transform: translateY(-50%) scaleX(1); } }
 
 /* Pausa el trabajo continuo cuando el hero sale del viewport. */
 .motionActive .grain,
@@ -294,7 +296,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rv, .wmask > span { opacity: 1 !important; transform: none !important; filter: none !important; transition: opacity 0.4s; }
+  .rv, .wmask > span { opacity: 1 !important; transform: none !important; transition: opacity 0.4s; }
   .grain, .slideActive .slideImg, .glow, .dotActive::after { animation: none !important; }
   .slideActive .slideImg { transform: scale(1.06); }
   .ctaPrimary:hover,

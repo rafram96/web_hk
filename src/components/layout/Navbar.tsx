@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Logo } from "@/components/ui/Logo";
 import { nav, contact, certifications } from "@/lib/site";
 
@@ -18,6 +19,13 @@ function WhatsAppIcon({ className = "h-4 w-4" }: { className?: string }) {
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  /* En la home, los enlaces a "/" (Inicio, logo, sellos) prefetcheaban la
+     propia página: ~110 KB de RSC descargados y parseados durante la carga
+     para no usarse nunca. Fuera de la home se mantiene el prefetch. */
+  const onHome = usePathname() === "/";
+  const prefetchFor = (href: string) =>
+    onHome && (href === "/" || href.startsWith("/#")) ? false : undefined;
 
   /* Umbral con histeresis: entra en modo solido a 72 px y no vuelve a
      transparente hasta 24 px. Con un unico umbral a 24 px, el scroll fino
@@ -62,7 +70,7 @@ export function Navbar() {
       />
 
       <div className="container-hk relative flex h-20 items-center justify-between">
-        <Logo tone={solid ? "dark" : "light"} />
+        <Logo tone={solid ? "dark" : "light"} prefetch={prefetchFor("/")} />
 
         {/* Navegación desktop */}
         <nav className="hidden items-center gap-7 lg:flex">
@@ -70,6 +78,7 @@ export function Navbar() {
             <Link
               key={item.href}
               href={item.href}
+              prefetch={prefetchFor(item.href)}
               className={`relative text-sm font-semibold transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:bg-orange after:transition-all after:duration-300 hover:after:w-full ${
                 solid
                   ? "text-navy hover:text-orange-600"
@@ -85,6 +94,7 @@ export function Navbar() {
               sección de certificaciones. */}
           <Link
             href="/#certificaciones"
+            prefetch={prefetchFor("/#certificaciones")}
             aria-label={`Certificaciones: ${certifications.map((c) => c.name).join(", ")}`}
             title={certifications.map((c) => c.name).join(" · ")}
             className={`group/certs hidden items-center gap-3 border-l pl-5 xl:flex ${
@@ -172,6 +182,7 @@ export function Navbar() {
             <Link
               key={item.href}
               href={item.href}
+              prefetch={prefetchFor(item.href)}
               onClick={() => setOpen(false)}
               className="rounded-lg px-3 py-3 text-base font-semibold text-navy transition-colors hover:bg-mist"
             >
