@@ -15,6 +15,7 @@ import {
   regionsCovered,
   yearsOfExperience,
 } from "@/lib/site";
+import { useWantsVideo } from "@/components/ui/useWantsVideo";
 import styles from "./HeroNuevo.module.css";
 
 /* Imports estáticos: next/image deriva ancho, alto y blurDataURL, de modo
@@ -165,8 +166,14 @@ export function HeroNuevo() {
     return () => window.clearTimeout(t);
   }, [active, inViewport, next]);
 
+  /* El clip existe solo en pantallas anchas y sin ahorro de datos: en
+     celular con 4G el mp4 (2 MB) duplicaba el peso de la página y el LCP
+     subía de 3.8 s a 5 s. En móvil queda el póster, que es una foto real. */
+  const wantsVideo = useWantsVideo();
+
   /* El clip solo se reproduce cuando su diapositiva está activa y el hero
      en pantalla; el resto del tiempo se pausa para no gastar CPU ni datos.
+     Con preload="none" el mp4 no se descarga hasta la primera reproducción.
      Se reproduce también con prefers-reduced-motion, igual que la cinta de
      entidades (decisión del cliente, 2026-09-07). */
   useEffect(() => {
@@ -235,29 +242,30 @@ export function HeroNuevo() {
               } as CSSProperties
             }
           >
-            {s.video ? (
+            {/* El póster va siempre como imagen optimizada y con prioridad:
+                es el LCP de la página. El vídeo se monta encima solo cuando
+                procede y se descarga al reproducirse. */}
+            <Image
+              src={s.src}
+              alt={s.alt}
+              fill
+              priority={idx <= 1}
+              placeholder="blur"
+              sizes="100vw"
+              className={styles.slideImg}
+            />
+            {s.video && wantsVideo ? (
               <video
                 ref={videoRef}
                 className={styles.video}
                 src={s.video}
-                poster={s.src.src}
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                preload="none"
                 aria-hidden
               />
-            ) : (
-              <Image
-                src={s.src}
-                alt={s.alt}
-                fill
-                priority={idx <= 1}
-                placeholder="blur"
-                sizes="100vw"
-                className={styles.slideImg}
-              />
-            )}
+            ) : null}
           </div>
         ))}
       </div>
