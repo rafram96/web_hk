@@ -154,7 +154,9 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Grano sutil global para textura (no intercepta clics). */
+  /* Grano sutil global para textura (no intercepta clics). Es una
+     imagen ya rasterizada: el SVG con feTurbulence que había antes se
+     calculaba en el hilo principal durante el primer pintado. */
   body::before {
     content: "";
     position: fixed;
@@ -162,7 +164,7 @@
     z-index: 60;
     pointer-events: none;
     opacity: 0.4;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+    background-image: url("/textures/grain-body.webp");
     background-size: 180px 180px;
   }
 
@@ -292,6 +294,17 @@
 
 [data-reveal].is-visible[data-reveal="wipe"] {
   animation: hk-reveal-wipe 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Secciones de la home bajo el hero: el navegador no calcula su layout
+   ni las pinta hasta que se acercan al viewport. El primer layout de la
+   página completa era la tarea larga que PageSpeed marcaba (~680 ms).
+   Solo en la home: content-visibility crea bloque contenedor para
+   elementos fixed y rompería el Lightbox de las galerías de otras
+   páginas. */
+.hk-defer > section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 /* ---------- Dirección de scroll: barrido, profundidad y progreso ---------- */

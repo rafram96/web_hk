@@ -20,7 +20,9 @@
 /* inset: -8 % basta para el desplazamiento del grano. Con -150 % la capa
    medía ~15.7 Mpx (7 veces el viewport) y, al llevar mix-blend-mode, el
    navegador la recomponía entera en cada paso de la animación: era la causa
-   de los tirones de scroll y de la franja sin pintar en el header. */
+   de los tirones de scroll y de la franja sin pintar en el header.
+   La textura es un WebP ya rasterizado (antes, SVG con feTurbulence
+   calculado en el hilo principal durante el primer pintado). */
 .grain {
   position: absolute;
   inset: -8%;
@@ -28,7 +30,7 @@
   pointer-events: none;
   opacity: 0.05;
   mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("/textures/grain-hero.webp");
   animation: grainShift 0.9s steps(3) infinite paused;
 }
 @keyframes grainShift {

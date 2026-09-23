@@ -25,13 +25,16 @@ export default function Home() {
     <>
       <ScrollDirector />
       <HeroNuevo />
-      <TrustedBy />
-      <Services />
-      <Projects />
-      <Investment />
-      <Stats />
-      <Certifications />
-      <Contact />
+      {/* hk-defer: content-visibility en las secciones bajo el hero (ver globals.css). */}
+      <div className="hk-defer">
+        <TrustedBy />
+        <Services />
+        <Projects />
+        <Investment />
+        <Stats />
+        <Certifications />
+        <Contact />
+      </div>
     </>
   );
 }
