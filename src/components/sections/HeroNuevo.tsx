@@ -57,7 +57,7 @@ const SLIDES: Slide[] = [
     caption: "Obra en ejecución · toma de dron (ilustrativa)",
     pos: "50% 50%",
     mobilePos: "50% 50%",
-    delay: 14000,
+    delay: 18200,
   },
   {
     src: obraHuanta,
@@ -65,7 +65,7 @@ const SLIDES: Slide[] = [
     caption: "Hospital de Huanta · Ayacucho",
     pos: "52% 46%",
     mobilePos: "56% 46%",
-    delay: 7000,
+    delay: 9100,
   },
   {
     src: equipoFrente,
@@ -73,7 +73,7 @@ const SLIDES: Slide[] = [
     caption: "Equipo HK · Congreso de la República · Lima",
     pos: "50% 42%",
     mobilePos: "58% 45%",
-    delay: 7000,
+    delay: 9100,
   },
   {
     src: equipoCongreso,
@@ -81,7 +81,7 @@ const SLIDES: Slide[] = [
     caption: "Equipo HK · Plaza Bolívar · Lima",
     pos: "62% 58%",
     mobilePos: "66% 60%",
-    delay: 7000,
+    delay: 9100,
   },
 ];
 

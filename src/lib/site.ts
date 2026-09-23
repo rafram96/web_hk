@@ -459,6 +459,8 @@ const ENTITY_LOGOS: Record<string, string> = {
   "Ministerio del Interior": "/logos/mininter.webp",
   "Ministerio de Cultura": "/logos/mincul.webp",
   "Ministerio de la Producción": "/logos/produce.webp",
+  "Ministerio de Vivienda, Construcción y Saneamiento": "/logos/vivienda.webp",
+  "Ministerio Público": "/logos/ministerio-publico.webp",
   "SEDAPAL": "/logos/sedapal.webp",
   "EsSalud": "/logos/essalud.webp",
   "Gobierno Regional del Cusco": "/logos/gore-cusco.webp",
