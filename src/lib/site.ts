@@ -9,7 +9,7 @@
  * editar esta línea (o definir NEXT_PUBLIC_SITE_URL en el entorno).
  */
 export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://hkconsulting.pe";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.hkconsulting.com.pe";
 
 export const company = {
   legalName: "HK Consulting S.A.C.",
