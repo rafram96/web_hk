@@ -13,7 +13,6 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
     // Local tooling and generated design-system artifacts:
-    ".claude/**",
     ".storybook/**",
     ".design-sync/**",
     ".ds-sync/**",
