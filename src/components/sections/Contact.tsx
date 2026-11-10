@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
+import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
@@ -380,6 +381,18 @@ export function Contact() {
                     <path d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
                 </button>
+
+                <p className="text-xs leading-relaxed text-navy-200">
+                  Usaremos sus datos solo para responder su consulta. Más
+                  información en nuestra{" "}
+                  <Link
+                    href="/privacidad"
+                    className="text-orange-200 underline underline-offset-2 hover:text-orange-100"
+                  >
+                    Política de privacidad
+                  </Link>
+                  .
+                </p>
 
                 {status === "success" && (
                   <p

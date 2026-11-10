@@ -85,6 +85,13 @@ export function Footer() {
         <div className="container-hk flex flex-col items-center justify-between gap-3 py-6 text-xs text-navy-300 sm:flex-row">
           <p>
             © {year} {company.legalName}. Todos los derechos reservados.
+            <span aria-hidden className="mx-2 text-navy-400">·</span>
+            <Link
+              href="/privacidad"
+              className="transition-colors hover:text-orange-300"
+            >
+              Política de privacidad
+            </Link>
           </p>
           <p className="kicker text-navy-300">
             {company.subtitle}
